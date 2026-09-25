@@ -1,0 +1,6 @@
+{
+  "name": "OUR STORY",
+  "description": "A map of the moments that became our story — an interactive cinematic memory scrapbook and adventure map.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

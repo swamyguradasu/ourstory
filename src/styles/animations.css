@@ -1,0 +1,232 @@
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes petalDrift {
+  0% {
+    transform: translate(0, -10px) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(80px, 100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmerText {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes mapDashFlow {
+  from {
+    stroke-dashoffset: 48;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes floatHeartUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -14px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -36px) scale(1.15);
+  }
+}
+
+@keyframes softHalo {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes progressLineGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(216, 180, 106, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(232, 154, 175, 0.8));
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.animate-star-twinkle {
+  animation: starTwinkle 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmerText 6s linear infinite;
+}
+
+.animate-map-dash {
+  animation: mapDashFlow 1.6s linear infinite;
+}
+
+.animate-float-heart {
+  animation: floatHeartUp 1.2s ease-out forwards;
+}
+
+.animate-soft-halo {
+  animation: softHalo 3.5s ease-in-out infinite;
+}
+
+.animate-progress-glow {
+  animation: progressLineGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(0px) rotate(0deg) translateX(0px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(35px);
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes dustFloat {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-25px) translateX(15px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-45px) translateX(-10px);
+    opacity: 0.3;
+  }
+}
+
+@keyframes heartAscend {
+  0% {
+    transform: translateY(0) scale(0.6) rotate(-5deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.1) rotate(15deg);
+    opacity: 0;
+  }
+}
+
+@keyframes gradientAtmosphere {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-slow {
+  background-size: 200% 200%;
+  animation: gradientAtmosphere 20s ease-in-out infinite;
+}
+
+/* Custom cursor body state */
+body.custom-cursor-active,
+body.custom-cursor-active a,
+body.custom-cursor-active button,
+body.custom-cursor-active [role="button"],
+body.custom-cursor-active .cursor-pointer {
+  cursor: none !important;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-float-slow,
+  .animate-pulse-glow,
+  .animate-star-twinkle,
+  .animate-shimmer,
+  .animate-map-dash,
+  .animate-float-heart,
+  .animate-soft-halo,
+  .animate-progress-glow,
+  .animate-gradient-slow {
+    animation: none !important;
+  }
+}
