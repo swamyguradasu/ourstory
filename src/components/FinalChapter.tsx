@@ -173,7 +173,7 @@ export const FinalChapter: React.FC<FinalChapterProps> = ({ onExploreMap, onOpen
             </p>
 
             <p className="font-cormorant text-sm sm:text-base text-[#F7D7DF]/90 max-w-lg mx-auto">
-              All twenty-five moments on our parchment have been unlocked and remembered.
+              All thirty-two moments on our parchment have been unlocked and remembered.
               Yet the true map does not end here—every tomorrow is waiting to be written.
             </p>
 
@@ -226,7 +226,7 @@ export const FinalChapter: React.FC<FinalChapterProps> = ({ onExploreMap, onOpen
                   </span>
                 </div>
                 <p className="text-xs text-[#E89AAF] font-cormorant italic mt-0.5">
-                  Open and explore all 25 memories across the map to unveil the completed seal.
+                  Open and explore all {TOTAL_MEMORIES} memories across the map to unveil the completed seal.
                 </p>
               </div>
             </div>
@@ -257,7 +257,7 @@ export const FinalChapter: React.FC<FinalChapterProps> = ({ onExploreMap, onOpen
             {!imgError ? (
               <img
                 src={masterwork.image}
-                alt="Scene 25 — Our Story Canonical Artwork"
+                alt={`Scene ${masterwork.level} — Our Story Canonical Artwork`}
                 loading="lazy"
                 referrerPolicy="no-referrer"
                 onError={() => setImgError(true)}
@@ -276,7 +276,7 @@ export const FinalChapter: React.FC<FinalChapterProps> = ({ onExploreMap, onOpen
             )}
             <div className="p-3 text-center">
               <div className="text-[11px] font-cinzel text-[#D8B46A] tracking-widest uppercase">
-                SCENE 25 · THE MASTERWORK
+                SCENE {masterwork.level} · THE MASTERWORK
               </div>
               <div className="font-cormorant italic text-sm text-[#F7D7DF] mt-0.5">
                 “A map of the moments that became our story.”

@@ -11,25 +11,29 @@ interface EditorialMemoryGalleryProps {
   onSelectMemory: (memory: Memory) => void;
 }
 
-type GalleryFilterType =
+export type GalleryFilterType =
   | 'ALL'
   | 'BEGINNING'
   | 'COLLEGE'
+  | 'GIFTS'
   | 'JOURNEYS'
   | 'FAMILY'
   | 'MILESTONES'
   | 'DISTANCE'
-  | 'REUNION';
+  | 'REUNION'
+  | 'FINAL';
 
-const FILTER_TAGS: { id: GalleryFilterType; label: string; count: number }[] = [
-  { id: 'ALL', label: 'ALL', count: 25 },
-  { id: 'BEGINNING', label: 'BEGINNING', count: 5 },
-  { id: 'COLLEGE', label: 'COLLEGE', count: 9 },
-  { id: 'JOURNEYS', label: 'JOURNEYS', count: 4 },
-  { id: 'FAMILY', label: 'FAMILY', count: 3 },
-  { id: 'MILESTONES', label: 'MILESTONES', count: 7 },
-  { id: 'DISTANCE', label: 'DISTANCE', count: 4 },
-  { id: 'REUNION', label: 'REUNION', count: 4 },
+const FILTER_TAGS: { id: GalleryFilterType; label: string }[] = [
+  { id: 'ALL', label: 'ALL' },
+  { id: 'BEGINNING', label: 'BEGINNING' },
+  { id: 'COLLEGE', label: 'COLLEGE' },
+  { id: 'GIFTS', label: 'GIFTS' },
+  { id: 'JOURNEYS', label: 'JOURNEYS' },
+  { id: 'FAMILY', label: 'FAMILY' },
+  { id: 'MILESTONES', label: 'MILESTONES' },
+  { id: 'DISTANCE', label: 'DISTANCE' },
+  { id: 'REUNION', label: 'REUNION' },
+  { id: 'FINAL', label: 'FINAL' },
 ];
 
 export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ onSelectMemory }) => {
@@ -49,22 +53,28 @@ export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ 
           matchesFilter = lvl >= 1 && lvl <= 5;
           break;
         case 'COLLEGE':
-          matchesFilter = lvl >= 1 && lvl <= 9;
+          matchesFilter = [1, 2, 3, 4, 5, 9, 17, 23].includes(lvl);
+          break;
+        case 'GIFTS':
+          matchesFilter = [8, 10, 29, 31].includes(lvl);
           break;
         case 'JOURNEYS':
-          matchesFilter = [11, 12, 13, 15].includes(lvl);
+          matchesFilter = [13, 14, 15, 18, 22].includes(lvl);
           break;
         case 'FAMILY':
-          matchesFilter = [9, 10, 16].includes(lvl);
+          matchesFilter = [12, 26].includes(lvl);
           break;
         case 'MILESTONES':
-          matchesFilter = [4, 8, 10, 14, 16, 17, 20].includes(lvl);
+          matchesFilter = [8, 10, 11, 12, 16, 19, 20, 21, 25, 27, 29, 31].includes(lvl);
           break;
         case 'DISTANCE':
-          matchesFilter = [6, 19, 22, 23].includes(lvl);
+          matchesFilter = [6, 24, 28].includes(lvl);
           break;
         case 'REUNION':
-          matchesFilter = [7, 21, 24, 25].includes(lvl);
+          matchesFilter = [7, 30, 32].includes(lvl);
+          break;
+        case 'FINAL':
+          matchesFilter = lvl === 32;
           break;
         case 'ALL':
         default:
@@ -100,22 +110,21 @@ export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ 
     onSelectMemory(randomMem);
   };
 
-  // Determine card layout size (Feature, Medium, or Small tile) while maintaining strict chronological order
+  // Determine card layout size while maintaining strict chronological order
   const getCardLayoutClass = (level: number, totalFiltered: number) => {
-    // If user filtered down to only a few items, keep balanced grid
     if (totalFiltered <= 4) {
       return 'col-span-1 h-[360px] xs:h-[400px] sm:h-[440px]';
     }
 
-    // Key iconic milestones as Grand Feature Cards (2 cols on tablet/desktop, 1 col on mobile)
-    if (level === 1 || level === 8 || level === 17 || level === 25) {
+    // Key iconic milestones as Grand Feature Cards
+    if (level === 1 || level === 8 || level === 11 || level === 20 || level === 32) {
       return 'col-span-1 sm:col-span-2 h-[380px] xs:h-[420px] sm:h-[480px] lg:h-[520px]';
     }
-    if (level === 11 || level === 24) {
+    if (level === 10 || level === 17 || level === 22 || level === 29 || level === 30 || level === 31) {
       return 'col-span-1 sm:col-span-2 h-[360px] xs:h-[400px] sm:h-[460px]';
     }
     // Medium Cards
-    if ([2, 4, 6, 9, 12, 14, 16, 18, 20].includes(level)) {
+    if ([2, 4, 6, 9, 12, 13, 14, 16, 18, 19, 23, 25, 27].includes(level)) {
       return 'col-span-1 h-[360px] xs:h-[390px] sm:h-[440px]';
     }
     // Small Memory Tiles
@@ -153,7 +162,7 @@ export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ 
           </p>
 
           <div className="mt-3 flex items-center justify-center gap-3 text-xs sm:text-sm font-cinzel tracking-[0.2em] text-[#D8B46A]">
-            <span>25 CANONICAL SCENES</span>
+            <span>{MEMORIES.length} CANONICAL SCENES</span>
             <span className="text-[#E89AAF]">·</span>
             <span>CHRONOLOGICAL FOLIO</span>
           </div>
@@ -217,8 +226,7 @@ export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ 
         {/* GALLERY COUNTER STRIP */}
         <div className="mb-6 sm:mb-8 flex items-center justify-between text-xs text-[#E89AAF] border-b border-[#7A1838]/40 pb-3">
           <div className="font-cinzel tracking-wider text-[#D8B46A] text-[11px] sm:text-xs">
-            SHOWING <span className="font-bold text-[#FFF4F1]">{filteredMemories.length}</span> OF 25
-            CHRONOLOGICAL MEMORIES
+            SHOWING <span className="font-bold text-[#FFF4F1]">{filteredMemories.length}</span> OF {MEMORIES.length} CHRONOLOGICAL MEMORIES
           </div>
           <div className="font-cormorant italic text-sm text-[#F7D7DF]/70 hidden sm:block">
             September 2024 — September 2026
@@ -339,7 +347,7 @@ export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ 
               }}
               className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#7A1838] to-[#5B1028] hover:from-[#921E44] hover:to-[#7A1838] border border-[#D8B46A]/60 text-xs font-cinzel font-bold text-[#FFF4F1] tracking-widest uppercase transition-all shadow-[0_0_15px_rgba(122,24,56,0.5)] cursor-pointer"
             >
-              SHOW ALL 25 MEMORIES
+              SHOW ALL {MEMORIES.length} MEMORIES
             </button>
           </div>
         )}

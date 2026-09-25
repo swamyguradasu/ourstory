@@ -20,12 +20,13 @@ export const ThenNowComparison: React.FC<ThenNowComparisonProps> = ({
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  // Scene 1 and Scene 25 details
+  // Scene 1 and Final Scene details
   const scene01 = MEMORIES[0]; // First Morning — September 2024
-  const scene25 = MEMORIES[24]; // Our Story — September 2026
+  const sceneFinal = MEMORIES[MEMORIES.length - 1]; // Our Story — September 2026
 
   const scene01Image = scene01?.image || '/scean 1.png';
-  const scene25Image = scene25?.image || '/scean 25.png';
+  const sceneFinalImage = sceneFinal?.image || '/scean 25.png';
+  const finalLevel = sceneFinal?.level || 32;
 
   // Calculate position from mouse or touch event
   const updatePosition = useCallback((clientX: number) => {
@@ -176,13 +177,12 @@ export const ThenNowComparison: React.FC<ThenNowComparisonProps> = ({
               : 'bg-[#1a081c]/60 border-[#7A1838]/40 text-[#E89AAF] hover:text-[#FFF4F1]'
           }`}
         >
-          Scene 25 (Now)
+          Scene {finalLevel} (Now)
         </button>
       </div>
 
       {/* ============================================================== */}
       {/* COMPARISON SLIDER FRAME                                        */}
-      {/* Neither image is distorted; object-cover fills full frame      */}
       {/* ============================================================== */}
       <div className="relative group">
         <RoseCornerAccent position="top-left" className="z-30" />
@@ -205,11 +205,11 @@ export const ThenNowComparison: React.FC<ThenNowComparisonProps> = ({
           aria-label="Drag slider horizontally to compare Then and Now"
           className="relative w-full h-[320px] xs:h-[380px] sm:h-[480px] md:h-[540px] rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D8B46A]/60 shadow-[0_25px_70px_rgba(0,0,0,0.95),inset_0_0_50px_rgba(0,0,0,0.8)] cursor-ew-resize select-none focus:outline-none focus:ring-2 focus:ring-[#D8B46A] touch-none"
         >
-          {/* 1. RIGHT SIDE IMAGE: NOW (Scene 25) */}
+          {/* 1. RIGHT SIDE IMAGE: NOW (Final Scene) */}
           <div className="absolute inset-0 w-full h-full bg-[#180a19] overflow-hidden select-none">
             <img
-              src={scene25Image}
-              alt="Now — Scene 25: Our Story, September 2026"
+              src={sceneFinalImage}
+              alt={`Now — Scene ${finalLevel}: Our Story, September 2026`}
               className="w-full h-full object-cover object-center pointer-events-none select-none"
               loading="eager"
             />
@@ -223,7 +223,7 @@ export const ThenNowComparison: React.FC<ThenNowComparisonProps> = ({
                   NOW
                 </span>
                 <span className="font-cinzel text-[11px] sm:text-sm font-bold text-[#FFF4F1]">
-                  Scene 25 · Our Story
+                  Scene {finalLevel} · Our Story
                 </span>
                 <span className="block text-[9px] sm:text-[10px] font-mono text-[#D8B46A]">
                   September 2026
@@ -233,7 +233,6 @@ export const ThenNowComparison: React.FC<ThenNowComparisonProps> = ({
           </div>
 
           {/* 2. LEFT SIDE IMAGE: THE BEGINNING / THEN (Scene 01) */}
-          {/* Clipped dynamically via clip-path inset so image preserves pristine aspect ratio without distortion */}
           <div
             className="absolute inset-0 w-full h-full bg-[#180a19] overflow-hidden select-none pointer-events-none"
             style={{
@@ -289,7 +288,7 @@ export const ThenNowComparison: React.FC<ThenNowComparisonProps> = ({
             </div>
           </div>
 
-          {/* 5. INTERACTION INSTRUCTION WATERMARK (Disappears on first interaction) */}
+          {/* 5. INTERACTION INSTRUCTION WATERMARK */}
           {!hasInteracted && (
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 pointer-events-none animate-bounce">
               <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#120812]/90 border border-[#D8B46A]/50 text-xs font-cinzel text-[#FFF4F1] shadow-2xl backdrop-blur-md">
@@ -305,7 +304,6 @@ export const ThenNowComparison: React.FC<ThenNowComparisonProps> = ({
       {/* BELOW SECTION: POETIC CAPTION & METRICS                        */}
       {/* ============================================================== */}
       <div className="mt-8 sm:mt-10 text-center max-w-xl mx-auto">
-        {/* The Requested Small Caption */}
         <p className="font-cormorant italic text-xl sm:text-2xl text-[#FFF4F1] font-medium leading-relaxed mb-3">
           “Two points on a map.
           <br />
@@ -315,7 +313,7 @@ export const ThenNowComparison: React.FC<ThenNowComparisonProps> = ({
         <div className="inline-flex items-center gap-3 text-xs font-cinzel text-[#D8B46A]">
           <span>730 DAYS</span>
           <span className="text-[#7A1838]">✦</span>
-          <span>25 CANONICAL CHAPTERS</span>
+          <span>{MEMORIES.length} CANONICAL CHAPTERS</span>
           <span className="text-[#7A1838]">✦</span>
           <span>1,840 MILES</span>
         </div>
@@ -326,7 +324,7 @@ export const ThenNowComparison: React.FC<ThenNowComparisonProps> = ({
               onClick={onExploreStory}
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-[#7A1838] to-[#5B1028] hover:from-[#8d1d42] hover:to-[#6a1330] border border-[#D8B46A]/60 text-xs font-cinzel font-bold text-[#FFF4F1] tracking-widest uppercase shadow-lg transition-all"
             >
-              <span>Walk Through The 25 Moments</span>
+              <span>Walk Through The {MEMORIES.length} Moments</span>
               <ChevronRight className="w-4 h-4 text-[#D8B46A]" />
             </button>
           </div>

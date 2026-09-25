@@ -46,27 +46,34 @@ const AVAILABLE_TRACKS: AudioTrack[] = [
   },
 ];
 
+const PREFERENCE_KEY = 'our_story_music_preference';
+const MUTED_KEY = 'our_story_audio_muted';
+const VOLUME_KEY = 'our_story_audio_volume';
+const TRACK_KEY = 'our_story_audio_track_idx';
+
 export const AmbientMusicPlayer: React.FC = () => {
-  // Persistence in localStorage
+  // Persistence in localStorage: default volume is gentle (0.3)
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(() => {
     try {
-      return localStorage.getItem('our_story_audio_muted') === 'true';
+      return localStorage.getItem(MUTED_KEY) === 'true';
     } catch {
       return false;
     }
   });
+
   const [volume, setVolume] = useState<number>(() => {
     try {
-      const saved = localStorage.getItem('our_story_audio_volume');
-      return saved !== null ? Math.min(Math.max(parseFloat(saved), 0), 1) : 0.4;
+      const saved = localStorage.getItem(VOLUME_KEY);
+      return saved !== null ? Math.min(Math.max(parseFloat(saved), 0), 1) : 0.3;
     } catch {
-      return 0.4;
+      return 0.3;
     }
   });
+
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(() => {
     try {
-      const saved = localStorage.getItem('our_story_audio_track_idx');
+      const saved = localStorage.getItem(TRACK_KEY);
       const idx = saved !== null ? parseInt(saved, 10) : 0;
       return idx >= 0 && idx < AVAILABLE_TRACKS.length ? idx : 0;
     } catch {
@@ -75,24 +82,89 @@ export const AmbientMusicPlayer: React.FC = () => {
   });
 
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [hasUserInteracted, setHasUserInteracted] = useState<boolean>(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const userDisabledRef = useRef<boolean>(false);
   const currentTrack = AVAILABLE_TRACKS[currentTrackIndex];
 
-  // Initialize audio instance
+  // Initialize audio instance & attempt autoplay safely on page load
   useEffect(() => {
-    const audio = new Audio();
+    // 1. Check if user previously explicitly disabled music
+    let userPref: string | null = null;
+    try {
+      userPref = localStorage.getItem(PREFERENCE_KEY);
+    } catch {
+      // Ignore
+    }
+
+    if (userPref === 'off') {
+      userDisabledRef.current = true;
+    }
+
+    const audio = new Audio(`/audio/${currentTrack.filename}`);
     audio.loop = true;
     audio.volume = isMuted ? 0 : volume;
     audioRef.current = audio;
 
-    // Gracefully handle missing files without error alerts or console noise
     audio.onerror = () => {
-      // Gracefully remain silent as requested
+      // Gracefully remain silent if audio file cannot be loaded
     };
 
+    // If user previously turned off music, do not attempt automatic play
+    if (userDisabledRef.current) {
+      return () => {
+        audio.pause();
+        audio.src = '';
+        audioRef.current = null;
+      };
+    }
+
+    // 2. Attempt immediate autoplay
+    let interactionListenerCleanups: (() => void) | null = null;
+
+    const startAudioOnFirstInteraction = () => {
+      if (userDisabledRef.current || !audioRef.current) return;
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {
+          // Gracefully ignore
+        });
+    };
+
+    // Attempt direct play
+    audio
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch(() => {
+        // 3. Browser blocked audible autoplay — wait for first user interaction
+        const events = ['click', 'pointerdown', 'keydown', 'touchstart', 'scroll'];
+        const onUserInteraction = () => {
+          startAudioOnFirstInteraction();
+          events.forEach((evt) => {
+            window.removeEventListener(evt, onUserInteraction);
+          });
+        };
+
+        events.forEach((evt) => {
+          window.addEventListener(evt, onUserInteraction, { once: true, passive: true });
+        });
+
+        interactionListenerCleanups = () => {
+          events.forEach((evt) => {
+            window.removeEventListener(evt, onUserInteraction);
+          });
+        };
+      });
+
     return () => {
+      if (interactionListenerCleanups) {
+        interactionListenerCleanups();
+      }
       audio.pause();
       audio.src = '';
       audioRef.current = null;
@@ -108,14 +180,14 @@ export const AmbientMusicPlayer: React.FC = () => {
     audio.src = `/audio/${currentTrack.filename}`;
     audio.load();
 
-    if (wasPlaying && hasUserInteracted) {
+    if (wasPlaying && !userDisabledRef.current) {
       audio.play().catch(() => {
-        // Gracefully remain silent if file is missing or autoplay policy blocks
+        // Gracefully remain silent if file is missing or blocked
       });
     }
 
     try {
-      localStorage.setItem('our_story_audio_track_idx', currentTrackIndex.toString());
+      localStorage.setItem(TRACK_KEY, currentTrackIndex.toString());
     } catch {
       // Ignore localStorage quotas
     }
@@ -126,8 +198,8 @@ export const AmbientMusicPlayer: React.FC = () => {
     if (!audioRef.current) return;
     audioRef.current.volume = isMuted ? 0 : volume;
     try {
-      localStorage.setItem('our_story_audio_volume', volume.toString());
-      localStorage.setItem('our_story_audio_muted', isMuted.toString());
+      localStorage.setItem(VOLUME_KEY, volume.toString());
+      localStorage.setItem(MUTED_KEY, isMuted.toString());
     } catch {
       // Ignore
     }
@@ -135,26 +207,27 @@ export const AmbientMusicPlayer: React.FC = () => {
 
   // Play / Pause handling
   const togglePlay = () => {
-    setHasUserInteracted(true);
     if (!audioRef.current) return;
 
     if (isPlaying) {
+      userDisabledRef.current = true;
       audioRef.current.pause();
       setIsPlaying(false);
       try {
-        localStorage.setItem('our_story_music_preference', 'off');
+        localStorage.setItem(PREFERENCE_KEY, 'off');
       } catch {
         // Ignore
       }
     } else {
+      userDisabledRef.current = false;
       setIsPlaying(true);
       try {
-        localStorage.setItem('our_story_music_preference', 'on');
+        localStorage.setItem(PREFERENCE_KEY, 'on');
       } catch {
         // Ignore
       }
       audioRef.current.play().catch(() => {
-        // Gracefully remain silent if file is not found
+        // Gracefully handle if file error occurs
       });
     }
   };

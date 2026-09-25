@@ -4,6 +4,8 @@ export interface MemoryArtifact {
   type: 'ticket' | 'letter' | 'photo' | 'keepsake' | 'audio';
 }
 
+export type MemoryCategory = 'college' | 'friendship' | 'milestones' | 'journey' | 'commitments' | 'family' | 'distance' | 'reunion';
+
 export interface Memory {
   id: string;
   level: number;
@@ -22,7 +24,7 @@ export interface Memory {
   mapLocationName?: string;
   mapIcon?: string;
   // Extended fields for rich modal & map rendering
-  category: 'college' | 'friendship' | 'milestones' | 'journey' | 'commitments' | 'family' | 'distance' | 'reunion';
+  category: MemoryCategory;
   categoryLabel: string;
   realm: string;
   coordinates: {
@@ -44,29 +46,30 @@ export interface Memory {
 }
 
 export const MEMORIES: Memory[] = [
+  // 01 — September 9, 2024: The First Morning
   {
     id: 'first-morning',
     level: 1,
-    title: 'First Morning — September 2024',
+    title: 'The First Morning',
     shortTitle: 'A Stolen Glance in Class',
-    date: 'September 2024',
-    chapter: 'Chapter I: College Days',
-    description: 'Morning sunlight poured through the wide classroom windows, illuminating the quiet hum of a new semester. As the lecture hall door swung open, she walked in holding her notebooks—calm, studious, wearing glasses and a blue dupatta. Sitting at a front desk, he turned around. That quiet, unintentional first glance was the unwritten prologue to a lifetime.',
-    caption: '“I didn\'t know it that morning… but somehow, I had just met someone who would become a huge part of my life.”',
+    date: 'September 9, 2024',
+    chapter: 'Chapter I: The Beginning',
+    description: 'Morning sunlight poured through the wide classroom windows on September 9, 2024, illuminating the quiet hum of a new semester. As the lecture hall door swung open, she walked in holding her notebooks—calm, studious, wearing glasses and a blue dupatta. Sitting at a front desk, he turned around. That quiet, unintentional first glance was the prologue to our story.',
+    caption: '“I didn\'t know it that morning… but somehow, I had just met someone who would become my entire world.”',
     image: '/scean 1.png',
     icon: 'BookOpen',
     location: 'Engineering College Lecture Hall',
     isUnlocked: true,
     colorAccent: '#D8B46A',
     category: 'college',
-    categoryLabel: 'College Days',
+    categoryLabel: 'Beginning',
     realm: 'The Scholarly Spires',
     mapLocationName: 'THE FIRST MORNING',
     mapIcon: 'college',
     timelineTitle: 'The First Morning',
-    coordinates: { x: 7, y: 24 },
+    coordinates: { x: 5, y: 24 },
     narrativeParagraphs: [
-      'Morning sunlight poured through the wide classroom windows, illuminating the quiet hum of a new semester.',
+      'Morning sunlight poured through the wide classroom windows on September 9, 2024, illuminating the quiet hum of a new semester.',
       'As the lecture hall door swung open, she walked in holding her notebooks—calm, studious, wearing glasses and a blue dupatta. Sitting at a front desk, he turned around.',
       'That quiet, unintentional first glance was the unwritten prologue to a lifetime.'
     ],
@@ -77,6 +80,7 @@ export const MEMORIES: Memory[] = [
       mood: 'Tender, inquisitive, gentle'
     },
     details: [
+      { label: 'Date', value: 'September 9, 2024' },
       { label: 'Time of Day', value: '9:15 AM Morning Lecture' },
       { label: 'Room', value: 'Block C, Hall 103' },
       { label: 'First Impression', value: 'Calm grace and gentle eyes' },
@@ -90,924 +94,1289 @@ export const MEMORIES: Memory[] = [
       }
     ]
   },
+
+  // 02 — Date not specified: The Introduction
   {
     id: 'the-introduction',
     level: 2,
     title: 'The Introduction',
     shortTitle: 'Corridor Crossroads',
-    date: 'September 2024',
-    chapter: 'Chapter I: College Days',
-    description: 'Walking through the sunlit college corridor between classes, a mutual friend in a green shirt introduced them. A tentative smile, shy hellos, and identity cards swaying with every step. What seemed like a casual two-minute exchange between lectures soon bloomed into hours of shared laughter along those very arches.',
-    caption: '“Two strangers walking the same college corridor, unaware that their paths had just merged forever.”',
+    date: 'Date not specified',
+    chapter: 'Chapter I: The Beginning',
+    description: 'Walking through the sunlit college corridor between classes, a mutual friend introduced them. A tentative smile, shy hellos, and identity cards swaying with every step. What seemed like a casual two-minute exchange between lectures soon bloomed into hours of shared laughter along those very arches.',
+    caption: '“Two strangers meeting in the middle of a crowded hallway, unaware that destiny had just clicked into place.”',
     image: '/scean 2.png',
-    icon: 'Users',
-    location: 'Main Academic Corridor C-103',
+    icon: 'MessageSquare',
+    location: 'Main Academic Corridor',
     isUnlocked: true,
     colorAccent: '#E89AAF',
     category: 'college',
-    categoryLabel: 'College Days',
+    categoryLabel: 'Beginning',
     realm: 'The Scholarly Spires',
     mapLocationName: 'THE INTRODUCTION',
     mapIcon: 'conversation',
     timelineTitle: 'The Introduction',
-    coordinates: { x: 14, y: 16 },
+    coordinates: { x: 10, y: 15 },
     narrativeParagraphs: [
-      'Walking through the sunlit college corridor between classes, a mutual friend in a green shirt introduced them.',
+      'Walking through the sunlit college corridor between classes, a mutual friend introduced them.',
       'A tentative smile, shy hellos, and identity cards swaying with every step.',
       'What seemed like a casual two-minute exchange between lectures soon bloomed into hours of shared laughter along those very arches.'
     ],
-    handwrittenNote: 'You adjusted your glasses and smiled. That was the exact second my heart chose its direction.',
+    handwrittenNote: 'You adjusted your glasses while saying hello. I tried so hard not to look as flustered as I was.',
     musicTrack: {
       title: 'Corridor Echoes',
-      artist: 'Soft Rhodes & String Quartet',
-      mood: 'Lighthearted, sweet, nostalgic'
+      artist: 'Acoustic Guitar & Warm Strings',
+      mood: 'Warm, hesitant, blossoming'
     },
     details: [
-      { label: 'Introduced By', value: 'Mutual College Friend' },
-      { label: 'Location', value: 'Outside Room C-103' },
-      { label: 'First Words', value: '“Hi, nice to meet you!”' },
-      { label: 'Atmosphere', value: 'Sunlit corridor and rustling trees' }
+      { label: 'Location', value: 'Academic Block Corridor' },
+      { label: 'Atmosphere', value: 'Sunlight filtering through stone arches' },
+      { label: 'The Greeting', value: 'A polite smile that changed everything' }
     ]
   },
+
+  // 03 — Date not specified: Cleaning Day
   {
     id: 'cleaning-day',
     level: 3,
     title: 'Cleaning Day',
-    shortTitle: 'A Bottle of Water',
-    date: 'October 2024',
-    chapter: 'Chapter I: College Days',
-    description: 'Under the warm afternoon sun during the campus cleanliness drive, desks were washed and courtyards swept. Amidst the hard work, she was sweeping with protective gloves when he walked over holding out a cold bottle of water with a warm, caring smile. A simple gesture that spoke louder than any words.',
-    caption: '“Love isn’t found in grand speeches; it lives in a quiet bottle of water when you’re tired.”',
+    shortTitle: 'Dust & Laughter',
+    date: 'Date not specified',
+    chapter: 'Chapter I: The Beginning',
+    description: 'Armed with brooms, duster cloths, and boundless enthusiasm during the college cleaning drive. Sweeping dusty classroom floors quickly turned into playful banter, hiding behind whiteboards, and sharing water bottles amid breathless giggles.',
+    caption: '“Who knew that dusty classroom desks and shared water bottles could make an ordinary chore feel like magic?”',
     image: '/scean 3.png',
-    icon: 'HeartHandshake',
-    location: 'Campus Courtyard & Grounds',
+    icon: 'Sparkles',
+    location: 'College Activity Hall',
     isUnlocked: true,
-    colorAccent: '#D8B46A',
+    colorAccent: '#F5C77E',
     category: 'college',
     categoryLabel: 'College Days',
     realm: 'The Scholarly Spires',
     mapLocationName: 'CLEANING DAY',
     mapIcon: 'water',
     timelineTitle: 'Cleaning Day',
-    coordinates: { x: 21, y: 22 },
+    coordinates: { x: 16, y: 22 },
     narrativeParagraphs: [
-      'Under the warm afternoon sun during the campus cleanliness drive, desks were washed and courtyards swept.',
-      'Amidst the hard work, she was sweeping with protective gloves when he walked over holding out a cold bottle of water with a warm, caring smile.',
-      'A simple gesture that spoke louder than any words.'
+      'Armed with brooms, duster cloths, and boundless enthusiasm during the college cleaning drive.',
+      'Sweeping dusty classroom floors quickly turned into playful banter, hiding behind whiteboards, and sharing water bottles amid breathless giggles.'
     ],
-    handwrittenNote: 'You looked up, wiped your brow, and laughed. We drank from the same bottle under the neem tree.',
+    handwrittenNote: 'You threw chalk dust at me when I wasn\'t looking. I still owe you for that.',
     musicTrack: {
-      title: 'Water Under the Afternoon Sun',
-      artist: 'Fingerstyle Acoustic Guitar',
-      mood: 'Warm, caring, humble'
+      title: 'Playful Sunlight',
+      artist: 'Ukelele & Glitch Piano',
+      mood: 'Playful, cheerful, youthful'
     },
     details: [
-      { label: 'Event', value: 'Campus Cleanliness Drive' },
-      { label: 'Weather', value: 'Clear October Sun' },
-      { label: 'Gesture', value: 'Cold water bottle shared' },
-      { label: 'Result', value: 'A bond beyond ordinary friendship' }
+      { label: 'Event', value: 'Department Cleaning Drive' },
+      { label: 'Weapon of Choice', value: 'Feather dusters & chalkboard erasers' },
+      { label: 'Secret Memory', value: 'Passing the cold steel water flask back and forth' }
     ]
   },
+
+  // 04 — Date not specified: The First Picture
   {
     id: 'first-picture',
     level: 4,
-    title: 'First Picture',
-    shortTitle: 'The Group Selfie',
-    date: 'November 2024',
-    chapter: 'Chapter I: College Days',
-    description: 'Surrounded by college friends with bright smiles and peace signs, sunlight filtering through the campus canopy. He held his phone out to take the group selfie, but in every captured frame, their eyes carried a distinct warmth. The very first photograph together—tucked safely into memories that would last forever.',
-    caption: '“Our first picture among friends—the start of a million frames together.”',
+    title: 'The First Picture',
+    shortTitle: 'Captured In Amber',
+    date: 'Date not specified',
+    chapter: 'Chapter I: The Beginning',
+    description: 'The very first photograph ever taken together. Standing side by side in the college quadrangle under the gentle afternoon sun, slightly awkward yet grinning with genuine delight. That first small photo frame became the anchor of a thousand cherished memories.',
+    caption: '“A shy smile, two people leaning in just a fraction closer, and a shutter click that preserved our youth forever.”',
     image: '/scean 4.png',
     icon: 'Camera',
-    location: 'Engineering Quad Lawn',
+    location: 'College Quadrangle',
     isUnlocked: true,
-    colorAccent: '#7A1838',
+    colorAccent: '#E89AAF',
     category: 'college',
     categoryLabel: 'College Days',
-    realm: 'The Scholarly Spires',
-    mapLocationName: 'OUR FIRST PICTURE',
+    realm: 'The Garden of Firsts',
+    mapLocationName: 'THE FIRST PICTURE',
     mapIcon: 'camera',
-    timelineTitle: 'Our First Picture',
-    coordinates: { x: 18, y: 38 },
+    timelineTitle: 'The First Picture',
+    coordinates: { x: 14, y: 38 },
     narrativeParagraphs: [
-      'Surrounded by college friends with bright smiles and peace signs, sunlight filtering through the campus canopy.',
-      'He held his phone out to take the group selfie, but in every captured frame, their eyes carried a distinct warmth.',
-      'The very first photograph together—tucked safely into memories that would last forever.'
+      'The very first photograph ever taken together.',
+      'Standing side by side in the college quadrangle under the gentle afternoon sun, slightly awkward yet grinning with genuine delight.',
+      'That first small photo frame became the anchor of a thousand cherished memories.'
     ],
-    handwrittenNote: 'There were six people in that photo, but whenever I look at it, I only see you smiling beside me.',
+    handwrittenNote: 'Look how far apart we were standing! Neither of us had the courage to put an arm around the other yet.',
     musicTrack: {
-      title: 'First Shutter Click',
-      artist: 'Upbeat Acoustic & Ukulele',
-      mood: 'Playful, vibrant, cherished'
+      title: 'Polaroid Memory',
+      artist: 'Solo Cello & Felt Piano',
+      mood: 'Nostalgic, sweet, unforgettable'
     },
     details: [
-      { label: 'Camera Used', value: 'Front-facing phone camera' },
-      { label: 'Friends in Frame', value: 'Six close classmates' },
-      { label: 'Preservation', value: 'Framed on the digital wall' }
+      { label: 'Camera Used', value: 'Phone Camera (Unfiltered)' },
+      { label: 'Time of Day', value: 'Golden Hour Quadrangle' },
+      { label: 'The Photo', value: 'Saved in favorites folder forever' }
     ],
     artifacts: [
       {
-        title: 'Original Campus Selfie',
-        description: 'First digital frame captured on the quad grass.',
+        title: 'Original JPEG Metadata',
+        description: 'Stored in the private favorites album.',
         type: 'photo'
       }
     ]
   },
+
+  // 05 — Date not specified: Besties
   {
     id: 'besties',
     level: 5,
     title: 'Besties',
-    shortTitle: 'Inseparable Days',
-    date: 'December 2024',
+    shortTitle: 'Inseparable Duos',
+    date: 'Date not specified',
     chapter: 'Chapter II: Deepening Bond',
-    description: 'Late-night phone calls that lasted until 2 AM, whispered inside jokes during lectures, sharing desks in the library, and walking side-by-side with heavy backpacks. Everyone on campus knew that wherever one went, the other was never more than a heartbeat away.',
-    caption: '“Before we were anything else, we were each other’s favorite human and safe harbor.”',
+    description: 'Somewhere between endless lecture notes, shared canteen snacks, and walking to the bus bay together every evening, acquaintances became best friends. An unspoken understanding where a single glance across a crowded room was enough to spark unstoppable laughter.',
+    caption: '“From sharing canteen dosas to walking side by side down every lane, we became an inseparable sanctuary.”',
     image: '/scean 5.png',
-    icon: 'Sparkles',
-    location: 'Library, Benches & Tree Canopy',
+    icon: 'Users',
+    location: 'Library Steps & Canteen Corner',
     isUnlocked: true,
-    colorAccent: '#E89AAF',
+    colorAccent: '#D8B46A',
     category: 'friendship',
-    categoryLabel: 'Deepening Bond',
-    realm: 'The Starlit Ridge',
+    categoryLabel: 'Friendship',
+    realm: 'The Garden of Firsts',
     mapLocationName: 'BESTIES',
     mapIcon: 'heart',
     timelineTitle: 'Besties',
-    coordinates: { x: 11, y: 48 },
+    coordinates: { x: 8, y: 48 },
     narrativeParagraphs: [
-      'Late-night phone calls that lasted until 2 AM, whispered inside jokes during lectures, sharing desks in the library, and walking side-by-side with heavy backpacks.',
-      'Everyone on campus knew that wherever one went, the other was never more than a heartbeat away.'
+      'Somewhere between endless lecture notes, shared canteen snacks, and walking to the bus bay together every evening, acquaintances became best friends.',
+      'An unspoken understanding where a single glance across a crowded room was enough to spark unstoppable laughter.'
     ],
-    handwrittenNote: 'We studied together, shared tiffins, and talked for hours until our phone batteries died.',
+    handwrittenNote: 'Everyone in our class knew: wherever you were, I wouldn\'t be more than five feet away.',
     musicTrack: {
-      title: 'Inseparable Melodies',
-      artist: 'Gentle Flute & Marimba',
-      mood: 'Joyful, comforting, deep friendship'
+      title: 'Golden Companionship',
+      artist: 'Acoustic Guitar & Flute Duet',
+      mood: 'Carefree, comforting, loyal'
     },
     details: [
-      { label: 'Longest Call', value: '3 hours, 42 minutes' },
-      { label: 'Shared Spot', value: 'Library Corner Desk #4' },
-      { label: 'Status', value: 'Best friends & confidants' }
+      { label: 'Spot', value: 'Corner Table by the Banyan Tree' },
+      { label: 'Shared Ritual', value: 'Evening tea and samosas before buses left' },
+      { label: 'Inside Jokes', value: 'Too numerous to write down' }
     ]
   },
+
+  // 06 — Date not specified: Twenty Days Apart
   {
     id: 'twenty-days-apart',
     level: 6,
     title: 'Twenty Days Apart',
-    shortTitle: 'Under the Same Moon',
-    date: 'January 2025',
+    shortTitle: 'Quiet Corridors',
+    date: 'Date not specified',
     chapter: 'Chapter II: Deepening Bond',
-    description: 'The semester break created a silence neither of them anticipated. Sitting in separate bedrooms miles apart, staring at glowing phone screens while the full moon hung high in the indigo sky. Twenty days felt like an eternity, teaching both of them just how deeply their hearts had intertwined.',
-    caption: '“Miles between our windows, but only one moon watching over both our restless hearts.”',
+    description: 'Twenty long days of college break and physical separation. The familiar corridors felt unusually quiet and grey without her laughter echoing down the hallway. It was during those silent twenty days that both realized how irreplaceable their presence had become.',
+    caption: '“Distance is not measured in miles, but in the quiet spaces between conversations where you miss someone dearly.”',
     image: '/scean 6.png',
     icon: 'Moon',
-    location: 'Separate Hometown Bedrooms',
+    location: 'Vacation Silence',
     isUnlocked: true,
-    colorAccent: '#4B1D5A',
+    colorAccent: '#A37081',
     category: 'distance',
-    categoryLabel: 'Distance & Longing',
-    realm: 'The Bridge of Longing',
-    mapLocationName: 'TWENTY DAYS',
+    categoryLabel: 'Distance',
+    realm: 'The Silent Shores',
+    mapLocationName: 'TWENTY DAYS APART',
     mapIcon: 'moon',
     timelineTitle: 'Twenty Days Apart',
-    coordinates: { x: 15, y: 64 },
+    coordinates: { x: 11, y: 64 },
     narrativeParagraphs: [
-      'The semester break created a silence neither of them anticipated.',
-      'Sitting in separate bedrooms miles apart, staring at glowing phone screens while the full moon hung high in the indigo sky.',
-      'Twenty days felt like an eternity, teaching both of them just how deeply their hearts had intertwined.'
+      'Twenty long days of college break and physical separation.',
+      'The familiar corridors felt unusually quiet and grey without her laughter echoing down the hallway.',
+      'It was during those silent twenty days that both realized how irreplaceable their presence had become.'
     ],
-    handwrittenNote: 'Every night during the break, I looked at the moon and wondered if you were looking at it too.',
+    handwrittenNote: 'I checked my phone every ten minutes. Twenty days had never felt so much like twenty years.',
     musicTrack: {
-      title: 'Moonlit Distance',
-      artist: 'Solo Cello & Rain Texture',
-      mood: 'Pensive, longing, devoted'
+      title: 'Quiet Rooms',
+      artist: 'Ambient Piano & Distant Rain',
+      mood: 'Yearning, introspective, quiet'
     },
     details: [
-      { label: 'Duration Apart', value: '20 Days of Vacation' },
-      { label: 'Night Routine', value: 'Checking for messages at 11 PM' },
-      { label: 'Lesson Learned', value: 'Life is empty without each other' }
+      { label: 'Duration', value: '20 Complete Days' },
+      { label: 'Communication', value: 'Nightly texts and unspoken thoughts' },
+      { label: 'Realization', value: 'Some people become essential to your day' }
     ]
   },
+
+  // 07 — Date not specified: Finding Our Way Back
   {
     id: 'finding-our-way-back',
     level: 7,
     title: 'Finding Our Way Back',
-    shortTitle: 'The Warmth of Return',
-    date: 'January 2025',
+    shortTitle: 'The Return',
+    date: 'Date not specified',
     chapter: 'Chapter II: Deepening Bond',
-    description: 'The college reopened, and that morning in the corridor had an entirely new atmosphere. The quiet apprehension melted into radiant smiles the instant their eyes met again. Walking side by side under the golden sunbeams, every spoken word confirmed that the distance had only made the bond unbreakable.',
-    caption: '“Coming back to you felt like exhaling after holding my breath for twenty days.”',
+    description: 'The break ended, and the campus awoke with vibrant life. Catching sight of each other again near the college gate—that first bright, relieving smile that melted away twenty days of quiet longing in a single heartbeat.',
+    caption: '“The moment our eyes met across the campus lawn, every ounce of quiet distance evaporated into pure joy.”',
     image: '/scean 7.png',
-    icon: 'Sun',
-    location: 'College First Floor Gallery',
+    icon: 'Compass',
+    location: 'College Main Gate',
     isUnlocked: true,
-    colorAccent: '#D8B46A',
-    category: 'friendship',
-    categoryLabel: 'Deepening Bond',
-    realm: 'The Starlit Ridge',
+    colorAccent: '#F5C77E',
+    category: 'reunion',
+    categoryLabel: 'Reunion',
+    realm: 'The Silent Shores',
     mapLocationName: 'FINDING OUR WAY BACK',
     mapIcon: 'bridge',
     timelineTitle: 'Finding Our Way Back',
-    coordinates: { x: 23, y: 72 },
+    coordinates: { x: 18, y: 74 },
     narrativeParagraphs: [
-      'The college reopened, and that morning in the corridor had an entirely new atmosphere.',
-      'The quiet apprehension melted into radiant smiles the instant their eyes met again.',
-      'Walking side by side under the golden sunbeams, every spoken word confirmed that the distance had only made the bond unbreakable.'
+      'The break ended, and the campus awoke with vibrant life.',
+      'Catching sight of each other again near the college gate—that first bright, relieving smile that melted away twenty days of quiet longing in a single heartbeat.'
     ],
-    handwrittenNote: 'You wore that blue dupatta again. The moment you smiled, all the longing turned to gold.',
+    handwrittenNote: 'You ran up the steps shouting my name. I knew then that we would never let distance win.',
     musicTrack: {
-      title: 'Corridor Reunion',
-      artist: 'Acoustic Guitar & Violins',
-      mood: 'Radiant, triumphant, heartfelt'
+      title: 'The Bridge of Return',
+      artist: 'Orchestral Strings & Upbeat Harp',
+      mood: 'Joyous, triumphant, reconnected'
     },
     details: [
-      { label: 'First Words on Return', value: '“I missed you so much.”' },
-      { label: 'Setting', value: 'Sunny Morning Corridor' },
-      { label: 'Realization', value: 'We belong together' }
+      { label: 'Location', value: 'College North Arch Gate' },
+      { label: 'Reunion Hour', value: '8:45 AM First Day Back' },
+      { label: 'Shared Feeling', value: 'Warm relief and endless conversation' }
     ]
   },
+
+  // 08 — January 29, 2025: The Bangles
   {
     id: 'the-bangles',
     level: 8,
-    title: 'The Bangles — January 31, 2025',
-    shortTitle: 'January 31, 2025',
-    date: 'January 31, 2025',
-    chapter: 'Chapter III: Milestones & Treasures',
-    description: 'Beside the courtyard pillar marked with the date, he pulled out a small purple box and opened it. Inside were vibrant glass bangles of crimson and gold. Her hands flew to her mouth in pure joy and disbelief. The gentle clinking of those glass bangles became the sweetest song of their college memories.',
-    caption: '“A small velvet box, glowing glass bangles, and a smile that lit up my entire universe.”',
+    title: 'The Bangles',
+    shortTitle: 'Glass & Gold',
+    date: 'January 29, 2025',
+    chapter: 'Chapter III: Gifts & Milestones',
+    description: 'On January 29, 2025, a small velvet box was handed over beside the quiet campus greenery. Delicate glass bangles catching the sunlight, shimmering in hues of rose and gold. As she slipped them over her wrists with a shy, radiant smile, their gentle chime sounded like a melody written just for two.',
+    caption: '“Glass bangles that softly chimed with every step, carrying a warmth that words could not yet speak.”',
     image: '/scean 8.png',
     icon: 'Gift',
-    location: 'Courtyard Monument Pillar',
+    location: 'College Garden Bench',
     isUnlocked: true,
-    colorAccent: '#7A1838',
+    colorAccent: '#D8B46A',
     category: 'milestones',
-    categoryLabel: 'Milestones',
+    categoryLabel: 'Gifts',
     realm: 'The Waters of Reflection',
     mapLocationName: 'THE BANGLES',
     mapIcon: 'gift',
     timelineTitle: 'The Bangles',
-    coordinates: { x: 30, y: 65 },
+    coordinates: { x: 25, y: 68 },
     narrativeParagraphs: [
-      'Beside the courtyard pillar marked with the date, he pulled out a small purple box and opened it.',
-      'Inside were vibrant glass bangles of crimson and gold. Her hands flew to her mouth in pure joy and disbelief.',
-      'The gentle clinking of those glass bangles became the sweetest song of their college memories.'
+      'On January 29, 2025, a small velvet box was handed over beside the quiet campus greenery.',
+      'Delicate glass bangles catching the sunlight, shimmering in hues of rose and gold.',
+      'As she slipped them over her wrists with a shy, radiant smile, their gentle chime sounded like a melody written just for two.'
     ],
-    handwrittenNote: 'You wore those bangles every single day after that. Their chime was my favorite music.',
+    handwrittenNote: 'You turned your wrist to hear them chime. That sound will stay with me forever.',
     musicTrack: {
-      title: 'The Chime of Glass Bangles',
-      artist: 'Santoor & Soft Strings',
-      mood: 'Romantic, joyful, unforgettable'
+      title: 'Chimes of Glass & Rose',
+      artist: 'Glockenspiel & Solo Violin',
+      mood: 'Delicate, romantic, precious'
     },
     details: [
-      { label: 'Milestone Date', value: 'January 31, 2025' },
-      { label: 'Gift', value: 'Crimson & Gold Glass Bangles' },
-      { label: 'Her Reaction', value: 'Hands over mouth in pure delight' }
+      { label: 'Milestone Date', value: 'January 29, 2025' },
+      { label: 'Gift', value: 'Handcrafted Glass Bangles' },
+      { label: 'Color Palette', value: 'Rose Pink & Warm Gold' },
+      { label: 'Memory Note', value: 'Worn with gentle pride all through the semester' }
     ],
     artifacts: [
       {
-        title: 'Bangle Keepsake Box Fragment',
-        description: 'Deep plum velvet box embossed with golden floral motifs.',
+        title: 'Velvet Keepsake Box',
+        description: 'The small box that held the bangles on January 29, 2025.',
         type: 'keepsake'
       }
     ]
   },
+
+  // 09 — January 31, 2025: Fest Day
   {
     id: 'fest-day',
     level: 9,
     title: 'Fest Day',
-    shortTitle: 'Lights, Music & Carnival',
-    date: 'February 2025',
-    chapter: 'Chapter III: Milestones & Treasures',
-    description: 'The campus was transformed into a glowing carnival of fairy lights, colorful pennants, street food stalls, and pounding concert bass. Dressed up for the cultural fest, navigating the bustling crowd together, sharing snacks, and taking selfies under the glowing festival arches.',
-    caption: '“Amid thousands of carnival lights and festival music, my focus never left you.”',
+    shortTitle: 'Festival Carnival Lights',
+    date: 'January 31, 2025',
+    chapter: 'Chapter III: Gifts & Milestones',
+    description: 'The annual college cultural fest day on January 31, 2025—stage lights flashing against the evening sky, music vibrating through the campus, stalls glowing in festive fairy lights, and walking shoulder to shoulder through the celebration together.',
+    caption: '“Surrounded by music, festival stalls, and fairy lights, the only spotlight that mattered was right beside me.”',
     image: '/scean 9.png',
     icon: 'Music',
-    location: 'Campus Cultural Fest Grounds',
+    location: 'College Grounds & Open Air Stage',
     isUnlocked: true,
-    colorAccent: '#D8B46A',
-    category: 'milestones',
-    categoryLabel: 'Milestones',
+    colorAccent: '#F5C77E',
+    category: 'college',
+    categoryLabel: 'College Fest',
     realm: 'The Waters of Reflection',
     mapLocationName: 'FEST DAY',
     mapIcon: 'celebration',
     timelineTitle: 'Fest Day',
-    coordinates: { x: 34, y: 48 },
+    coordinates: { x: 28, y: 52 },
     narrativeParagraphs: [
-      'The campus was transformed into a glowing carnival of fairy lights, colorful pennants, street food stalls, and pounding concert bass.',
-      'Dressed up for the cultural fest, navigating the bustling crowd together, sharing snacks, and taking selfies under the glowing festival arches.'
+      'The annual college cultural fest day on January 31, 2025.',
+      'Stage lights flashing against the evening sky, music vibrating through the campus, stalls glowing in festive fairy lights, and walking shoulder to shoulder through the celebration together.'
     ],
-    handwrittenNote: 'Your silver jhumkas danced in the stage lighting. We stayed until the very last song.',
+    handwrittenNote: 'We stood at the back of the auditorium so we could talk while the bands played.',
     musicTrack: {
       title: 'Festival Carnival Lights',
       artist: 'Ensemble Strings & Percussion',
       mood: 'Vibrant, celebratory, romantic'
     },
     details: [
+      { label: 'Date', value: 'January 31, 2025' },
       { label: 'Event', value: 'Annual College Cultural Fest' },
       { label: 'Fest Attire', value: 'Black Kurta & Embroidered Anarkali' },
       { label: 'Shared Food', value: 'Chaat & Hot Jalebis' }
     ]
   },
+
+  // 10 — June 9, 2025: The Handmade Shivling (NEW!)
   {
-    id: 'october-31-2025',
+    id: 'handmade-shivling',
     level: 10,
-    title: 'October 31, 2025',
-    shortTitle: 'Twilight Market Stroll',
-    date: 'October 31, 2025',
-    chapter: 'Chapter III: Milestones & Treasures',
-    description: 'An evening walk through the vibrant market streets as dusk turned the sky into a tapestry of tangerine and plum. Street vendors lighting amber bulbs, the scent of evening treats, and hours of conversation where neither wanted to reach the end of the road.',
-    caption: '“Sunset painted the streets in gold, but nothing shone brighter than your laughter.”',
-    image: '/scean 10.png',
-    icon: 'Sunset',
-    location: 'Town Bazaar at Twilight',
+    title: 'The Handmade Shivling',
+    shortTitle: 'Folded In Devotion',
+    date: 'June 9, 2025',
+    chapter: 'Chapter III: Gifts & Milestones',
+    description: 'On June 9, 2025, he crafted a delicate Lord Shiva lingam entirely from paper with quiet patience and devotion, presenting it to Bharavi/Ammu. Seeing the intricate handmade gift, her face lit up with radiant joy and profound happiness, holding it close as a treasure beyond measure.',
+    caption: '“Crafted gently by hand from paper—a small sacred symbol given with pure reverence and boundless care.”',
+    image: '/handmade shivling.png',
+    icon: 'Sparkles',
+    location: 'Quiet Study Corner',
     isUnlocked: true,
-    colorAccent: '#E89AAF',
+    colorAccent: '#D8B46A',
     category: 'milestones',
-    categoryLabel: 'Milestones',
+    categoryLabel: 'Gifts',
     realm: 'The Waters of Reflection',
-    mapLocationName: 'OCTOBER 31',
-    mapIcon: 'star',
-    timelineTitle: 'A Special Day',
-    coordinates: { x: 28, y: 34 },
-    narrativeParagraphs: [
-      'An evening walk through the vibrant market streets as dusk turned the sky into a tapestry of tangerine and plum.',
-      'Street vendors lighting amber bulbs, the scent of evening treats, and hours of conversation where neither wanted to reach the end of the road.'
-    ],
-    handwrittenNote: 'You wore bright magenta that evening. The sunset had nothing on you.',
-    musicTrack: {
-      title: 'Dusk on Bazaar Lane',
-      artist: 'Fender Rhodes & Ambient City Evening',
-      mood: 'Warm, enchanting, peaceful'
-    },
-    details: [
-      { label: 'Date', value: 'October 31, 2025' },
-      { label: 'Weather', value: 'Cool Autumn Breeze' },
-      { label: 'Walk Distance', value: '4 Kilometers without noticing' }
-    ]
-  },
-  {
-    id: 'vijayawada-hackathon',
-    level: 11,
-    title: 'Vijayawada Hackathon — December 10, 2025',
-    shortTitle: 'Platform 4 Arrival',
-    date: 'December 10, 2025',
-    chapter: 'Chapter IV: Journeys & The Hackathon',
-    description: 'Stepping onto Platform 4 at Vijayawada Junction with rolling suitcases, laptop bags, and college ID badges. The yellow station sign glowed against a dramatic pink twilight sky. The excitement of their first major trip together for the hackathon had begun.',
-    caption: '“Our first big adventure together—wheels rolling on Platform 4 towards Vijayawada.”',
-    image: '/scean 11.png',
-    icon: 'Train',
-    location: 'Vijayawada Junction Platform 4',
-    isUnlocked: true,
-    colorAccent: '#D8B46A',
-    category: 'journey',
-    categoryLabel: 'Travel & Hackathon',
-    realm: 'The Whispering Cliffs',
-    mapLocationName: 'VIJAYAWADA',
-    mapIcon: 'train',
-    timelineTitle: 'Vijayawada Hackathon',
-    coordinates: { x: 36, y: 20 },
-    narrativeParagraphs: [
-      'Stepping onto Platform 4 at Vijayawada Junction with rolling suitcases, laptop bags, and college ID badges.',
-      'The yellow station sign glowed against a dramatic pink twilight sky.',
-      'The excitement of their first major trip together for the hackathon had begun.'
-    ],
-    handwrittenNote: 'The train had just pulled in. We looked at each other with our trolley bags and grinned: “We actually made it!”',
-    musicTrack: {
-      title: 'Arrival on Platform 4',
-      artist: 'Acoustic Guitar & Train Whistle Motif',
-      mood: 'Adventurous, buoyant, exciting'
-    },
-    details: [
-      { label: 'Destination', value: 'Vijayawada Junction' },
-      { label: 'Platform', value: 'Platform 4 at Dusk' },
-      { label: 'Mission', value: '3-Day State Hackathon' }
-    ],
-    artifacts: [
-      {
-        title: 'Vijayawada Train Ticket',
-        description: 'Express train pass marked with departure stamp.',
-        type: 'ticket'
-      }
-    ]
-  },
-  {
-    id: 'three-days-together',
-    level: 12,
-    title: 'Three Days Together',
-    shortTitle: '3 Days · 1 Team · 1 Dream',
-    date: 'December 11–13, 2025',
-    chapter: 'Chapter IV: Journeys & The Hackathon',
-    description: 'Seventy-two hours of shared coding marathons, debugging side-by-side with stickers on laptops, walks by the Krishna River with temple spires in the backdrop, steaming chai on concrete steps, rooftop night cityscapes, and authentic South Indian meals on banana leaves.',
-    caption: '“Three days of code, chai, river breezes, and realizing we are the ultimate team.”',
-    image: '/scean 12.png',
-    icon: 'Laptop',
-    location: 'Hackathon Arena & Krishna River Ghats',
-    isUnlocked: true,
-    colorAccent: '#7A1838',
-    category: 'journey',
-    categoryLabel: 'Travel & Hackathon',
-    realm: 'The Whispering Cliffs',
-    mapLocationName: 'THREE DAYS',
-    mapIcon: 'calendar',
-    timelineTitle: 'Three Days Together',
-    coordinates: { x: 44, y: 28 },
-    narrativeParagraphs: [
-      'Seventy-two hours of shared coding marathons, debugging side-by-side with stickers on laptops.',
-      'Walks by the Krishna River with temple spires in the backdrop, steaming chai on concrete steps, rooftop night cityscapes, and authentic South Indian meals on banana leaves.'
-    ],
-    handwrittenNote: 'You fell asleep on my shoulder for twenty minutes at 4 AM while the code was building.',
-    musicTrack: {
-      title: 'Midnight Code & River Breeze',
-      artist: 'Lo-Fi Piano & Vinyl Rain',
-      mood: 'Cozy, focused, unbreakable teamwork'
-    },
-    details: [
-      { label: 'Hackathon Motto', value: '3 Days · 1 Team · 1 Dream' },
-      { label: 'Chai Count', value: '18 Cups of cutting chai' },
-      { label: 'River Strolls', value: 'Prakasam Barrage at Sunset' }
-    ]
-  },
-  {
-    id: 'train-home',
-    level: 13,
-    title: 'Train Home',
-    shortTitle: 'Moonlit Rails',
-    date: 'December 14, 2025',
-    chapter: 'Chapter IV: Journeys & The Hackathon',
-    description: 'Sitting beside the train window as the express car rocked gently on the tracks. Outside, the night sky was stippled with clouds and a radiant moon mirrored across distant river waters. Inside the warm cabin, tired from three days of hackathon triumph, sitting close and speaking in hushed whispers.',
-    caption: '“The rhythmic clack of the rails, cold night glass, and peaceful warmth beside you.”',
-    image: '/scean 13.png',
-    icon: 'Compass',
-    location: 'Southbound Express Sleeper Car',
-    isUnlocked: true,
-    colorAccent: '#4B1D5A',
-    category: 'journey',
-    categoryLabel: 'Travel & Hackathon',
-    realm: 'The Whispering Cliffs',
-    mapLocationName: 'TRAIN HOME',
-    mapIcon: 'train',
-    timelineTitle: 'Train Home',
-    coordinates: { x: 42, y: 46 },
-    narrativeParagraphs: [
-      'Sitting beside the train window as the express car rocked gently on the tracks.',
-      'Outside, the night sky was stippled with clouds and a radiant moon mirrored across distant river waters.',
-      'Inside the warm cabin, tired from three days of hackathon triumph, sitting close and speaking in hushed whispers.'
-    ],
-    handwrittenNote: 'The reflection on the glass showed both of us looking out at the river. I wished that train ride would never end.',
-    musicTrack: {
-      title: 'Moonlit Sleeper Berth',
-      artist: 'Ambient Strings & Soft Acoustic Bass',
-      mood: 'Intimate, soothing, peaceful'
-    },
-    details: [
-      { label: 'Train', value: 'Secunderabad Express (Berth 33)' },
-      { label: 'View', value: 'River Krishna under Moonlight' },
-      { label: 'Feeling', value: 'Complete peace and contentment' }
-    ]
-  },
-  {
-    id: 'january-5-2026',
-    level: 14,
-    title: 'January 5, 2026',
-    shortTitle: 'Sunset Conversations',
-    date: 'January 5, 2026',
-    chapter: 'Chapter V: Deeper Commitments',
-    description: 'Sitting at the stone table beneath the campus trees as the winter sun set in blazing orange behind the college buildings. With laptops and notebooks pushed aside, they talked about life after graduation, family hopes, and the dreams they would chase side by side.',
-    caption: '“The sky caught fire, and our plans for the future became quiet, sacred promises.”',
-    image: '/scean 14.png',
-    icon: 'Feather',
-    location: 'Campus Garden Stone Table',
-    isUnlocked: true,
-    colorAccent: '#D8B46A',
-    category: 'commitments',
-    categoryLabel: 'Deeper Commitments',
-    realm: 'The Warm Hearth',
-    mapLocationName: 'JANUARY 5',
-    mapIcon: 'promise',
-    timelineTitle: 'A New Chapter',
-    coordinates: { x: 48, y: 62 },
-    narrativeParagraphs: [
-      'Sitting at the stone table beneath the campus trees as the winter sun set in blazing orange behind the college buildings.',
-      'With laptops and notebooks pushed aside, they talked about life after graduation, family hopes, and the dreams they would chase side by side.'
-    ],
-    handwrittenNote: 'Banner on the campus read “Learn Build Grow Together”. We looked at each other and said: “Together.”',
-    musicTrack: {
-      title: 'Golden Sunset Vows',
-      artist: 'Solo Cello & Acoustic Arpeggio',
-      mood: 'Reflective, mature, devoted'
-    },
-    details: [
-      { label: 'Date', value: 'January 5, 2026' },
-      { label: 'Topic', value: 'Careers, Families & Lifelong Future' },
-      { label: 'Sunset Hue', value: 'Deep Amber and Gold' }
-    ]
-  },
-  {
-    id: 'antarvedi',
-    level: 15,
-    title: 'Antarvedi — January 31, 2026',
-    shortTitle: 'January 31, 2026',
-    date: 'January 31, 2026',
-    chapter: 'Chapter V: Deeper Commitments',
-    description: 'At the ancient coastal temple of Antarvedi where the river meets the ocean. She was breathtaking in a traditional cream and gold saree with jasmine in her hair; he wore a crisp white dhoti with golden borders. Together beneath the towering temple gopuram and golden dhwajasthambham, seeking blessings for their journey.',
-    caption: '“Where the sacred river meets the sea, we prayed for our love to flow forever.”',
-    image: '/scean 15.png',
-    icon: 'Flame',
-    location: 'Antarvedi Sri Lakshmi Narasimha Temple',
-    isUnlocked: true,
-    colorAccent: '#D8B46A',
-    category: 'commitments',
-    categoryLabel: 'Deeper Commitments',
-    realm: 'The Warm Hearth',
-    mapLocationName: 'ANTARVEDI',
+    mapLocationName: 'THE HANDMADE SHIVLING',
     mapIcon: 'temple',
-    timelineTitle: 'Antarvedi',
-    coordinates: { x: 55, y: 76 },
+    timelineTitle: 'The Handmade Shivling',
+    coordinates: { x: 23, y: 38 },
     narrativeParagraphs: [
-      'At the ancient coastal temple of Antarvedi where the river meets the ocean.',
-      'She was breathtaking in a traditional cream and gold saree with jasmine in her hair; he wore a crisp white dhoti with golden borders.',
-      'Together beneath the towering temple gopuram and golden dhwajasthambham, seeking blessings for their journey.'
+      'On June 9, 2025, he crafted a delicate Lord Shiva lingam entirely from paper with quiet patience and devotion, presenting it to Bharavi/Ammu.',
+      'Seeing the intricate handmade gift, her face lit up with radiant joy and profound happiness, holding it close as a treasure beyond measure.',
+      'A sacred handmade keepsake expressing pure dedication and spiritual tenderness.'
     ],
-    handwrittenNote: 'Exactly one year after the bangles. Standing beside you in that saree took my breath away completely.',
+    handwrittenNote: 'Every fold was a quiet prayer for your happiness. Seeing your smile that afternoon was my greatest blessing.',
     musicTrack: {
-      title: 'Antarvedi Sanctum',
-      artist: 'Veena, Flute & Temple Bells',
-      mood: 'Sacred, transcendent, divine'
+      title: 'Sanctified Paper & Devotion',
+      artist: 'Bansuri Flute & Ambient Sitar',
+      mood: 'Sacred, peaceful, heartfelt'
     },
     details: [
-      { label: 'Sacred Location', value: 'Antarvedi Coastal Temple' },
-      { label: 'Significance', value: '1 Year Bangle Anniversary' },
-      { label: 'Traditional Attire', value: 'Cream & Gold Silk Saree and Dhoti' }
+      { label: 'Date', value: 'June 9, 2025' },
+      { label: 'Gift Type', value: 'Handmade Origami Paper Shivling' },
+      { label: 'Her Reaction', value: 'Pure joy, wide radiant smile, held as a treasure' },
+      { label: 'Significance', value: 'A spiritual keepsake made with boundless love' }
     ],
     artifacts: [
       {
-        title: 'Temple Prasad Knot',
-        description: 'Tied with golden sacred thread from Antarvedi.',
+        title: 'The Sacred Paper Shivling',
+        description: 'Delicately folded paper emblem of Lord Shiva presented on June 9, 2025.',
         type: 'keepsake'
       }
     ]
   },
+
+  // 11 — September 6, 2025: The First “I Love You” (NEW!)
   {
-    id: 'seven-steps',
-    level: 16,
-    title: 'Seven Steps',
-    shortTitle: 'Sacred Petals',
-    date: 'February 2026',
-    chapter: 'Chapter V: Deeper Commitments',
-    description: 'Deep inside the sanctum pillars draped with marigold and rose garlands, glowing brass oil lamps illuminating the carved stone. Adorned with sacred floral garlands, taking deliberate steps over scattered flower petals, feeling the profound sanctity of a bond made in the presence of divinity.',
-    caption: '“Every step on sacred petals was a silent vow to walk every milestone as one.”',
-    image: '/scean 16.png',
+    id: 'first-i-love-you',
+    level: 11,
+    title: 'The First “I Love You”',
+    shortTitle: 'Three Unspoken Words',
+    date: 'September 6, 2025',
+    chapter: 'Chapter IV: Sacred Milestones',
+    description: 'On September 6, 2025, Bharavi/Ammu softly said those three sacred words for the very first time: “I love you.” It was an overwhelmingly joyful, unforgettable day—filled with wide-eyed surprise, pure happiness, playful teasing, and the tender fear of ever becoming distant. Those words echoed again and again in happy whispers moments later, sealing their hearts together.',
+    caption: '“The moment the words finally found their voice: three simple words that changed our whole universe.”',
+    image: '/the fisrt i love you.png',
     icon: 'Heart',
-    location: 'Temple Inner Mandapam',
-    isUnlocked: true,
-    colorAccent: '#7A1838',
-    category: 'commitments',
-    categoryLabel: 'Deeper Commitments',
-    realm: 'The Warm Hearth',
-    mapLocationName: 'SEVEN STEPS',
-    mapIcon: 'footprints',
-    timelineTitle: 'Seven Steps',
-    coordinates: { x: 63, y: 70 },
-    narrativeParagraphs: [
-      'Deep inside the sanctum pillars draped with marigold and rose garlands, glowing brass oil lamps illuminating the carved stone.',
-      'Adorned with sacred floral garlands, taking deliberate steps over scattered flower petals, feeling the profound sanctity of a bond made in the presence of divinity.'
-    ],
-    handwrittenNote: 'We looked down at our feet among the marigolds, then looked up into each other’s eyes. We knew.',
-    musicTrack: {
-      title: 'The Seven Sacred Steps',
-      artist: 'Classical Carnatic Strings & Mridangam',
-      mood: 'Solemn, beautiful, eternal'
-    },
-    details: [
-      { label: 'Sanctum', value: 'Inner Mandapam of Carved Pillars' },
-      { label: 'Garlands', value: 'Jasmine, Rose & Marigold' },
-      { label: 'Vow', value: 'Seven lifetimes together' }
-    ]
-  },
-  {
-    id: 'our-chosen-day',
-    level: 17,
-    title: 'Our Chosen Day — February 16, 2026',
-    shortTitle: 'February 16, 2026',
-    date: 'February 16, 2026',
-    chapter: 'Chapter V: Deeper Commitments',
-    description: 'A quiet sunset room with jasmine in her hair and their handwritten journal open: “Not a date from the past... But a date we chose... Because our story matters ♡”. He showed the calendar lockscreen with February 16 circled in red. An anniversary chosen not by accident, but by conscious, deliberate love.',
-    caption: '“Not a date from the past, but a date we chose—because our story matters.”',
-    image: '/scean 17.png',
-    icon: 'Calendar',
-    location: 'Study Room at Golden Hour',
+    location: 'Sunlit Campus Walkway',
     isUnlocked: true,
     colorAccent: '#E89AAF',
-    category: 'commitments',
-    categoryLabel: 'Deeper Commitments',
-    realm: 'The Warm Hearth',
-    mapLocationName: 'FEBRUARY 16',
-    mapIcon: 'calendar-heart',
-    timelineTitle: 'Our Chosen Day',
-    coordinates: { x: 67, y: 52 },
+    category: 'milestones',
+    categoryLabel: 'Milestones',
+    realm: 'The Garden of Firsts',
+    mapLocationName: 'THE FIRST “I LOVE YOU”',
+    mapIcon: 'heart',
+    timelineTitle: 'The First “I Love You”',
+    coordinates: { x: 26, y: 22 },
     narrativeParagraphs: [
-      'A quiet sunset room with jasmine in her hair and their handwritten journal open: “Not a date from the past... But a date we chose... Because our story matters ♡”.',
-      'He showed the calendar lockscreen with February 16 circled in red.',
-      'An anniversary chosen not by accident, but by conscious, deliberate love.'
+      'On September 6, 2025, Bharavi/Ammu softly said those three sacred words for the very first time: “I love you.”',
+      'It was an overwhelmingly joyful, unforgettable day—filled with wide-eyed surprise, pure happiness, playful teasing, and the tender fear of ever becoming distant.',
+      'Those words echoed again and again in happy whispers moments later, sealing their hearts together in a bond that would never fade.'
     ],
-    handwrittenNote: 'February 16 is ours forever. We wrote it into our calendars, our notebooks, and our hearts.',
+    handwrittenNote: 'You paused, teased me gently, and then said it. My heart skipped five beats. And then you said it again.',
     musicTrack: {
-      title: 'Chosen in the Quiet Hour',
-      artist: 'Solo Piano & Soft French Horn',
-      mood: 'Deeply romantic, tender, steadfast'
+      title: 'Three Whispered Words',
+      artist: 'Acoustic Piano & Tender Strings',
+      mood: 'Blissful, emotional, tenderly playful'
     },
     details: [
-      { label: 'Chosen Anniversary', value: 'February 16, 2026' },
-      { label: 'Inscription', value: '“Because our story matters ♡”' },
-      { label: 'Notebook Title', value: 'Future Us · Same Dreams' }
+      { label: 'Date', value: 'September 6, 2025' },
+      { label: 'Spoken By', value: 'Bharavi / Ammu' },
+      { label: 'The Emotion', value: 'Surprise, pure happiness, playful teasing' },
+      { label: 'Echoes', value: 'Repeated again moments later with gentle laughter' }
+    ]
+  },
+
+  // 12 — October 31, 2025: The Temple Day
+  {
+    id: 'the-temple-day',
+    level: 12,
+    title: 'The Temple Day',
+    shortTitle: 'Sacred Prayers & Prasadam',
+    date: 'October 31, 2025',
+    chapter: 'Chapter IV: Sacred Milestones',
+    description: 'On October 31, 2025, they visited a temple together for the very first time. Surrounded by the gentle glow of brass oil lamps and chanting, he quietly prayed with all his heart that they would walk into this temple together again in the future. With gentle reverence, Bharavi/Ammu placed sacred prasadam into his hands for the first time—a spiritual moment forever etched in eternity.',
+    caption: '“Standing side by side before the deity, quietly praying that we would return to this sacred temple together again in the future.”',
+    image: '/temple day.png',
+    icon: 'Sparkles',
+    location: 'Ancient Sanctum Shrine',
+    isUnlocked: true,
+    colorAccent: '#D8B46A',
+    category: 'milestones',
+    categoryLabel: 'Milestones',
+    realm: 'The Waters of Reflection',
+    mapLocationName: 'THE TEMPLE DAY',
+    mapIcon: 'temple',
+    timelineTitle: 'The Temple Day',
+    coordinates: { x: 33, y: 16 },
+    narrativeParagraphs: [
+      'On October 31, 2025, they visited a temple together for the very first time.',
+      'Surrounded by the gentle glow of brass oil lamps and chanting, he quietly prayed with all his heart that they would walk into this temple together again in the future.',
+      'With gentle reverence, Bharavi/Ammu placed sacred prasadam into his hands for the first time—a spiritual moment forever etched in eternity.'
+    ],
+    handwrittenNote: 'The temple bells were ringing when you handed me the prasadam. I closed my eyes and prayed we would always walk these steps together.',
+    musicTrack: {
+      title: 'Sanctum Bells & Prayers',
+      artist: 'Veena & Temple Bells',
+      mood: 'Devotional, reverent, serene'
+    },
+    details: [
+      { label: 'Date', value: 'October 31, 2025' },
+      { label: 'First Occurrence', value: 'First time visiting a temple together' },
+      { label: 'The Prasadam', value: 'Given by Bharavi/Ammu for the first time' },
+      { label: 'Silent Prayer', value: 'To return to this temple together for a lifetime' }
     ],
     artifacts: [
       {
-        title: 'Pencil-Sketched Calendar Leaf',
-        description: 'February 2026 page with the 16th circled in red ink.',
-        type: 'letter'
+        title: 'Temple Sacred Thread',
+        description: 'Tied on October 31, 2025, carrying a silent prayer for our future.',
+        type: 'keepsake'
       }
     ]
   },
+
+  // 13 — December 10, 2025: Vijayawada Hackathon
   {
-    id: 'a-new-chapter',
-    level: 18,
-    title: 'A New Chapter — February 18, 2026',
-    shortTitle: 'February 18, 2026',
-    date: 'February 18, 2026',
-    chapter: 'Chapter VI: Milestones & Family',
-    description: 'On the train journey as morning sunlight kissed the palm trees outside the window, holding a small golden wrapped blessing together with white jasmine flowers. Two pairs of hands cradling a sacred token that marked the commencement of a new life chapter.',
-    caption: '“Holding our future gently in our hands as the morning train raced towards tomorrow.”',
-    image: '/scean 18.png',
-    icon: 'Sparkle',
-    location: 'Morning Train Express',
+    id: 'vijayawada-hackathon',
+    level: 13,
+    title: 'Vijayawada Hackathon',
+    shortTitle: 'Hackathon Journey',
+    date: 'December 10, 2025',
+    chapter: 'Chapter V: Journeys & Hackathons',
+    description: 'Stepping out beyond familiar grounds for the inter-college hackathon in Vijayawada on December 10, 2025. Rows of glowing laptops, brainstorming algorithms, typing code late into the night, and realizing what an unbeatable team they made side by side.',
+    caption: '“Lines of code on the screen, coffee cups piling up, and the realization that we make the best team in the world.”',
+    image: '/scean 11.png',
+    icon: 'Laptop',
+    location: 'Vijayawada Tech Campus Arena',
     isUnlocked: true,
     colorAccent: '#D8B46A',
-    category: 'family',
-    categoryLabel: 'Family & Milestones',
-    realm: 'The Gateway of Return',
-    mapLocationName: 'A NEW CHAPTER',
-    mapIcon: 'ribbon',
-    timelineTitle: 'A New Chapter',
-    coordinates: { x: 61, y: 36 },
+    category: 'journey',
+    categoryLabel: 'Journeys',
+    realm: 'The Grand Odyssey',
+    mapLocationName: 'VIJAYAWADA HACKATHON',
+    mapIcon: 'train',
+    timelineTitle: 'Vijayawada Hackathon',
+    coordinates: { x: 39, y: 26 },
     narrativeParagraphs: [
-      'On the train journey as morning sunlight kissed the palm trees outside the window, holding a small golden wrapped blessing together with white jasmine flowers.',
-      'Two pairs of hands cradling a sacred token that marked the commencement of a new life chapter.'
+      'Stepping out beyond familiar grounds for the inter-college hackathon in Vijayawada on December 10, 2025.',
+      'Rows of glowing laptops, brainstorming algorithms, typing code late into the night, and realizing what an unbeatable team they made side by side.'
     ],
-    handwrittenNote: 'The gold parcel was tiny, but it felt as heavy as our entire future. We held it together the whole ride.',
+    handwrittenNote: 'You debugged my code while I was panicking at 2 AM. We won before the judges even announced the results.',
     musicTrack: {
-      title: 'Sunrise Across the Fields',
-      artist: 'Acoustic Guitar & Warm Pad',
-      mood: 'Hopeful, serene, bright'
+      title: 'Midnight Hackathon Sprint',
+      artist: 'Synthwave & Electronic Ambient',
+      mood: 'Focused, collaborative, electric'
     },
     details: [
-      { label: 'Date', value: 'February 18, 2026' },
-      { label: 'Keepsake', value: 'Golden wrapped temple blessing' },
-      { label: 'Scenery', value: 'Morning paddy fields and rising sun' }
-    ]
-  },
-  {
-    id: 'march-26-2026',
-    level: 19,
-    title: 'March 26, 2026',
-    shortTitle: 'The Ridge at Sunset',
-    date: 'March 26, 2026',
-    chapter: 'Chapter VI: Milestones & Family',
-    description: 'Walking along the stone parapet overlooking the river valley and town below as a fiery golden sun dipped beneath the mountains. He looked back with an affectionate smile as she walked beside him with a shy, radiant grace. The eve of a day they would celebrate together.',
-    caption: '“Walking into the sunset together, knowing tomorrow would bring our biggest celebration.”',
-    image: '/scean 19.png',
-    icon: 'Mountain',
-    location: 'Hilltop Overlook Road',
-    isUnlocked: true,
-    colorAccent: '#7A1838',
-    category: 'family',
-    categoryLabel: 'Family & Milestones',
-    realm: 'The Gateway of Return',
-    mapLocationName: 'MARCH 26',
-    mapIcon: 'sunset',
-    timelineTitle: 'A Difficult Evening',
-    coordinates: { x: 68, y: 22 },
-    narrativeParagraphs: [
-      'Walking along the stone parapet overlooking the river valley and town below as a fiery golden sun dipped beneath the mountains.',
-      'He looked back with an affectionate smile as she walked beside him with a shy, radiant grace.',
-      'The eve of a day they would celebrate together.'
-    ],
-    handwrittenNote: 'You had a secret smile the whole walk. Neither of us said it out loud, but tomorrow was going to be magic.',
-    musicTrack: {
-      title: 'Eve on the Ridge',
-      artist: 'Orchestral Cello & Soft Flute',
-      mood: 'Anticipatory, loving, expansive'
-    },
-    details: [
-      { label: 'Date', value: 'March 26, 2026' },
-      { label: 'Setting', value: 'Hilltop stone walkway at dusk' },
-      { label: 'View', value: 'River Krishna gleaming below' }
-    ]
-  },
-  {
-    id: 'birthday-march-27-2026',
-    level: 20,
-    title: 'Birthday — March 27, 2026',
-    shortTitle: 'March 27, 2026',
-    date: 'March 27, 2026',
-    chapter: 'Chapter VI: Milestones & Family',
-    description: 'The front door opened and he walked in holding a surprise chocolate birthday cake with burning candles. Her eyes widened, covering her mouth in pure joy and astonishment. Standing behind in the dining room, her parents and sister smiled with glowing pride—welcoming him into the heart of the home.',
-    caption: '“Candlelight, a sweet chocolate surprise, and the joy of being celebrated by the ones we love.”',
-    image: '/scean 20.png',
-    icon: 'Cake',
-    location: 'Family Dining Room',
-    isUnlocked: true,
-    colorAccent: '#D8B46A',
-    category: 'family',
-    categoryLabel: 'Family & Milestones',
-    realm: 'The Gateway of Return',
-    mapLocationName: 'BIRTHDAY',
-    mapIcon: 'cake',
-    timelineTitle: 'Birthday',
-    coordinates: { x: 76, y: 28 },
-    narrativeParagraphs: [
-      'The front door opened and he walked in holding a surprise chocolate birthday cake with burning candles.',
-      'Her eyes widened, covering her mouth in pure joy and astonishment.',
-      'Standing behind in the dining room, her parents and sister smiled with glowing pride—welcoming him into the heart of the home.'
-    ],
-    handwrittenNote: 'The look on your face when I walked in with the candles was the best gift I could ever receive.',
-    musicTrack: {
-      title: 'Birthday by Candlelight',
-      artist: 'Acoustic Guitar, Piano & Family Laughter',
-      mood: 'Pure happiness, heartwarming, festive'
-    },
-    details: [
-      { label: 'Milestone', value: 'Her Birthday — March 27, 2026' },
-      { label: 'Surprise Cake', value: 'Double Dutch Chocolate with Cherries' },
-      { label: 'Company', value: 'Parents, Sister, and Somu' }
-    ]
-  },
-  {
-    id: 'april-1-2026',
-    level: 21,
-    title: 'April 1, 2026',
-    shortTitle: 'The Family Circle',
-    date: 'April 1, 2026',
-    chapter: 'Chapter VI: Milestones & Family',
-    description: 'An evening filled with meaningful family conversations: gathered around the dining table discussing future plans, reviewing documents and schedules together, walking the quiet night streets with a flashlight, and laughing openly as the families bonded into one unified circle.',
-    caption: '“When families meet in trust and laughter, two separate worlds become one solid foundation.”',
-    image: '/scean 21.png',
-    icon: 'Home',
-    location: 'Family Living Room & Night Walk',
-    isUnlocked: true,
-    colorAccent: '#E89AAF',
-    category: 'family',
-    categoryLabel: 'Family & Milestones',
-    realm: 'The Gateway of Return',
-    mapLocationName: 'APRIL 1',
-    mapIcon: 'home',
-    timelineTitle: 'Being There',
-    coordinates: { x: 73, y: 46 },
-    narrativeParagraphs: [
-      'An evening filled with meaningful family conversations.',
-      'Gathered around the dining table discussing future plans, reviewing documents and schedules together, walking the quiet night streets with a flashlight, and laughing openly as the families bonded into one unified circle.'
-    ],
-    handwrittenNote: 'Dad patted my shoulder on the night walk. Hearing him tell stories felt like being officially welcomed home.',
-    musicTrack: {
-      title: 'Hearthside Wisdom',
-      artist: 'Mandolin, Guitar & Gentle Whistle',
-      mood: 'Warm, reassuring, grounded'
-    },
-    details: [
-      { label: 'Date', value: 'April 1, 2026' },
-      { label: 'Significance', value: 'Family discussions and blessing' },
-      { label: 'Evening Walk', value: 'Starlit lane with flashlight' }
-    ]
-  },
-  {
-    id: 'thirty-three-days',
-    level: 22,
-    title: 'Thirty Three Days',
-    shortTitle: 'The Golden Month',
-    date: 'April 2026',
-    chapter: 'Chapter VII: Trials & Distance',
-    description: 'Thirty-three days of pure bliss: sharing South Indian meals on banana leaves, doing dishes together side by side, traveling on trains, visiting ancient temples with parents and siblings, rooftop sunsets in Vijayawada, and creating memories in every corner of their shared world.',
-    caption: '“Thirty-three days where every second felt timeless, sacred, and infinitely precious.”',
-    image: '/scean 22.png',
-    icon: 'Clock',
-    location: 'Home, Temples & Railway Trails',
-    isUnlocked: true,
-    colorAccent: '#D8B46A',
-    category: 'family',
-    categoryLabel: 'Family & Milestones',
-    realm: 'The Gateway of Return',
-    mapLocationName: 'THIRTY THREE DAYS',
-    mapIcon: 'house',
-    timelineTitle: 'Thirty Three Days',
-    coordinates: { x: 78, y: 64 },
-    narrativeParagraphs: [
-      'Thirty-three days of pure bliss.',
-      'Sharing South Indian meals on banana leaves, doing dishes together side by side, traveling on trains, visiting ancient temples with parents and siblings, rooftop sunsets in Vijayawada, and creating memories in every corner of their shared world.'
-    ],
-    handwrittenNote: 'Thirty-three days went by in what felt like one single heartbeat. We lived a lifetime in that month.',
-    musicTrack: {
-      title: 'Thirty-Three Golden Sunrises',
-      artist: 'Full Chamber Strings & Acoustic Guitar',
-      mood: 'Nostalgic, joyful, deeply touching'
-    },
-    details: [
-      { label: 'Total Duration', value: '33 Days of Continuous Togetherness' },
-      { label: 'Memories Made', value: 'Cooking, temples, trains, family dinners' },
-      { label: 'Bond Level', value: 'Inseparable for life' }
-    ]
-  },
-  {
-    id: 'two-months-apart',
-    level: 23,
-    title: 'Two Months Apart',
-    shortTitle: 'Keepsakes Across Miles',
-    date: 'May–July 2026',
-    chapter: 'Chapter VII: Trials & Distance',
-    description: 'Sixty long days separated by physical distance. In his room at twilight, he scrolled through pictures on his phone surrounded by train tickets and memories. In her room, she turned the pages of their photo album with tear-brimmed eyes, reading the note: “Some memories never fade... Even when we are apart.”',
-    caption: '“Some memories never fade... Even when we are apart, our hearts beat in the exact same rhythm.”',
-    image: '/scean 23.png',
-    icon: 'Mail',
-    location: 'Two Distant Desks at Twilight',
-    isUnlocked: true,
-    colorAccent: '#4B1D5A',
-    category: 'distance',
-    categoryLabel: 'Distance & Longing',
-    realm: 'The Bridge of Longing',
-    mapLocationName: 'TWO MONTHS APART',
-    mapIcon: 'moon-cloud',
-    timelineTitle: 'Two Months Apart',
-    coordinates: { x: 86, y: 72 },
-    narrativeParagraphs: [
-      'Sixty long days separated by physical distance.',
-      'In his room at twilight, he scrolled through pictures on his phone surrounded by train tickets and memories.',
-      'In her room, she turned the pages of their photo album with tear-brimmed eyes, reading the note: “Some memories never fade... Even when we are apart.”'
-    ],
-    handwrittenNote: 'I laid out every train ticket, every ID badge, and every Polaroid on my bed. Distance couldn’t touch what we built.',
-    musicTrack: {
-      title: 'Tickets on the Bedspread',
-      artist: 'Solo Cello & Distant Piano',
-      mood: 'Longing, resilient, deeply moving'
-    },
-    details: [
-      { label: 'Time Apart', value: '60 Days' },
-      { label: 'Album Inscription', value: '“Some memories never fade...”' },
-      { label: 'Tickets Preserved', value: 'Vijayawada, Visakhapatnam, Eluru' }
+      { label: 'Date', value: 'December 10, 2025' },
+      { label: 'Destination', value: 'Vijayawada Tech Campus' },
+      { label: 'Hackathon Duration', value: '36 Hours of Code & Coffee' },
+      { label: 'Project', value: 'Built together with shared pride' }
     ],
     artifacts: [
       {
-        title: 'Preserved Indian Railways Tickets',
-        description: 'Vijayawada to Visakhapatnam stubs kept in desk drawer.',
+        title: 'Hackathon Participant Badge',
+        description: 'Laminated badge from the Vijayawada competition hall.',
         type: 'ticket'
       }
     ]
   },
+
+  // 14 — December 10, 2025: Three Days Together
   {
-    id: 'september-19-2026',
-    level: 24,
-    title: 'September 19, 2026',
-    shortTitle: 'The Twilight Reunion',
-    date: 'September 19, 2026',
-    chapter: 'Chapter VIII: Reunion & The Forever Horizon',
-    description: 'Standing together once again on the hilltop stone pavilion as sunset set the river valley ablaze. Distance had ended. Laughing together along the ancient stone pathway, watching the city lights flicker to life below, holding each other close under the twilight sky.',
-    caption: '“The sweetest reunion—standing above the city lights, knowing we will never part again.”',
-    image: '/scean 24.png',
-    icon: 'ShieldCheck',
-    location: 'Hilltop Pavilion Overlook',
+    id: 'three-days-together',
+    level: 14,
+    title: 'Three Days Together',
+    shortTitle: 'Shared Horizons',
+    date: 'December 10, 2025',
+    chapter: 'Chapter V: Journeys & Hackathons',
+    description: 'Three continuous, golden days spent entirely in each other\'s presence in Vijayawada. Exploring new streets, walking along the Krishna riverfront at dusk, sharing every meal, and feeling the natural, effortless harmony of living life as a pair.',
+    caption: '“Three uninterrupted days away from routine, where every hour felt like an effortless chapter in paradise.”',
+    image: '/scean 12.png',
+    icon: 'Calendar',
+    location: 'Vijayawada Riverside & City Promenade',
     isUnlocked: true,
     colorAccent: '#E89AAF',
-    category: 'reunion',
-    categoryLabel: 'The Reunion',
-    realm: 'The Endless Horizon',
-    mapLocationName: 'SEPTEMBER 19',
-    mapIcon: 'sunrise',
-    timelineTitle: 'Finding Each Other Again',
-    coordinates: { x: 89, y: 48 },
+    category: 'journey',
+    categoryLabel: 'Journeys',
+    realm: 'The Grand Odyssey',
+    mapLocationName: 'THREE DAYS TOGETHER',
+    mapIcon: 'calendar',
+    timelineTitle: 'Three Days Together',
+    coordinates: { x: 36, y: 44 },
     narrativeParagraphs: [
-      'Standing together once again on the hilltop stone pavilion as sunset set the river valley ablaze.',
-      'Distance had ended.',
-      'Laughing together along the ancient stone pathway, watching the city lights flicker to life below, holding each other close under the twilight sky.'
+      'Three continuous, golden days spent entirely in each other\'s presence.',
+      'Exploring new streets, walking along the Krishna riverfront at dusk, sharing every meal, and feeling the natural, effortless harmony of living life as a pair.'
     ],
-    handwrittenNote: 'September 19. When you walked up the stone stairs and looked at me, two months of distance vanished into the wind.',
+    handwrittenNote: 'We walked by the river until the streetlights switched on. Three days felt both like three seconds and a whole lifetime.',
     musicTrack: {
-      title: 'Reunion at Sunset Pavilion',
-      artist: 'Orchestral Strings & French Horn',
-      mood: 'Triumphant, overwhelming joy, reunited'
+      title: 'Riverside Twilight',
+      artist: 'Acoustic Guitar & Ambient Waves',
+      mood: 'Warm, peaceful, deeply romantic'
+    },
+    details: [
+      { label: 'Date', value: 'December 10, 2025' },
+      { label: 'Days Together', value: '3 Continuous Days' },
+      { label: 'River Walk', value: 'Prakasam Barrage & Krishna Riverfront' },
+      { label: 'Shared Moments', value: 'Breakfast, evening tea, and long strolls' }
+    ]
+  },
+
+  // 15 — Date not specified: Train Home
+  {
+    id: 'train-home',
+    level: 15,
+    title: 'Train Home',
+    shortTitle: 'Rhythmic Rails',
+    date: 'Date not specified',
+    chapter: 'Chapter V: Journeys & Hackathons',
+    description: 'The rhythmic clatter of iron rails heading back home. Misty dawn windows, cold breeze sweeping through the coach doors, passing lush green paddy fields, and sharing earphones with a head gently resting against the compartment window.',
+    caption: '“The steady hum of train tracks beneath us, green fields flashing past, and the quiet comfort of being near.”',
+    image: '/scean 13.png',
+    icon: 'Train',
+    location: 'Express Train Carriage',
+    isUnlocked: true,
+    colorAccent: '#F5C77E',
+    category: 'journey',
+    categoryLabel: 'Journeys',
+    realm: 'The Grand Odyssey',
+    mapLocationName: 'TRAIN HOME',
+    mapIcon: 'train',
+    timelineTitle: 'Train Home',
+    coordinates: { x: 41, y: 58 },
+    narrativeParagraphs: [
+      'The rhythmic clatter of iron rails heading back home.',
+      'Misty dawn windows, cold breeze sweeping through the coach doors, passing lush green paddy fields, and sharing earphones with a head gently resting against the compartment window.'
+    ],
+    handwrittenNote: 'One earphone for you, one for me. The train was cold, but sitting beside you made everything warm.',
+    musicTrack: {
+      title: 'Tracks in the Morning Mist',
+      artist: 'Felt Piano & Train Rhythm',
+      mood: 'Gentle, meditative, sweet journey'
+    },
+    details: [
+      { label: 'Journey', value: 'Vijayawada Express Train' },
+      { label: 'View', value: 'Coastal green paddy fields & delta bridges' },
+      { label: 'Soundtrack', value: 'Shared playlist on looped acoustic tracks' }
+    ],
+    artifacts: [
+      {
+        title: 'Train Journey Ticket',
+        description: 'Reserved window seat ticket from the return journey.',
+        type: 'ticket'
+      }
+    ]
+  },
+
+  // 16 — January 5, 2026: A New Chapter
+  {
+    id: 'a-new-chapter',
+    level: 16,
+    title: 'A New Chapter',
+    shortTitle: 'New Year Threshold',
+    date: 'January 5, 2026',
+    chapter: 'Chapter VI: The New Horizon',
+    description: 'Stepping into the new year of 2026 side by side on January 5. A campus banner read “Learn, Build, Grow Together”—they looked at each other and whispered “Together.” A fresh page turned with boundless hope for everything awaiting them.',
+    caption: '“A brand new year, an open journal of possibilities, and the quiet certainty that we would write every page side by side.”',
+    image: '/scean 14.png',
+    icon: 'Sparkles',
+    location: 'Campus Central Plaza',
+    isUnlocked: true,
+    colorAccent: '#D8B46A',
+    category: 'milestones',
+    categoryLabel: 'Milestones',
+    realm: 'The Temple of Vows',
+    mapLocationName: 'A NEW CHAPTER',
+    mapIcon: 'ribbon',
+    timelineTitle: 'A New Chapter',
+    coordinates: { x: 47, y: 72 },
+    narrativeParagraphs: [
+      'Stepping into the new year of 2026 side by side on January 5.',
+      'A campus banner read “Learn, Build, Grow Together”—they looked at each other and whispered “Together.”',
+      'A fresh page turned with boundless hope for everything awaiting them.'
+    ],
+    handwrittenNote: 'Banner on the campus read “Learn Build Grow Together”. We looked at each other and said: “Together.”',
+    musicTrack: {
+      title: 'Dawn of a New Year',
+      artist: 'Orchestral Overture & Celesta',
+      mood: 'Uplifting, hopeful, luminous'
+    },
+    details: [
+      { label: 'Date', value: 'January 5, 2026' },
+      { label: 'Milestone', value: 'Beginning of the 2026 Academic Year' },
+      { label: 'Campus Motto', value: '“Learn, Build, Grow Together”' }
+    ]
+  },
+
+  // 17 — January 11, 2026: The CLH Day (NEW!)
+  {
+    id: 'clh-day',
+    level: 17,
+    title: 'The CLH Day',
+    shortTitle: 'Tradition & Photography',
+    date: 'January 11, 2026',
+    chapter: 'Chapter VI: The New Horizon',
+    description: 'On January 11, 2026, they spent a magnificent day walking around CLH together. He wore traditional pancha/dhoti attire, while Bharavi/Ammu looked ethereal in her saree. Looking like a proud, radiant young traditional couple enjoying their special day, they took dozens of beautiful photographs with their camera, capturing memories that will shine forever.',
+    caption: '“Dressed in traditional dhoti and elegant saree, walking around CLH like a young couple lost in a picture-perfect dream.”',
+    image: '/clh day.png',
+    icon: 'Camera',
+    location: 'CLH Campus Grounds',
+    isUnlocked: true,
+    colorAccent: '#E89AAF',
+    category: 'college',
+    categoryLabel: 'College Days',
+    realm: 'The Temple of Vows',
+    mapLocationName: 'THE CLH DAY',
+    mapIcon: 'camera',
+    timelineTitle: 'The CLH Day',
+    coordinates: { x: 54, y: 76 },
+    narrativeParagraphs: [
+      'On January 11, 2026, they spent a magnificent day walking around CLH together.',
+      'He wore traditional pancha/dhoti attire, while Bharavi/Ammu looked ethereal in her saree. Looking like a proud, radiant young traditional couple enjoying their special day, they took dozens of beautiful photographs with their camera.',
+      'Every corner of CLH became a stage for laughter, posing, and timeless portraits.'
+    ],
+    handwrittenNote: 'You in your saree and me in my traditional pancha—everyone said we looked like a married couple. We couldn\'t stop smiling.',
+    musicTrack: {
+      title: 'Traditional Grace & Camera Clicks',
+      artist: 'Sitar, Acoustic Guitar & Warm Strings',
+      mood: 'Elegant, joyful, picturesque'
+    },
+    details: [
+      { label: 'Date', value: 'January 11, 2026' },
+      { label: 'Location', value: 'CLH Campus Grounds' },
+      { label: 'Attire', value: 'Traditional Pancha/Dhoti & Elegant Saree' },
+      { label: 'Activities', value: 'Campus walk, photo shoot with camera, countless poses' }
+    ],
+    artifacts: [
+      {
+        title: 'CLH Traditional Photo Album',
+        description: 'Camera roll of traditional couple portraits taken across CLH on January 11, 2026.',
+        type: 'photo'
+      }
+    ]
+  },
+
+  // 18 — January 31, 2026: Antarvedi
+  {
+    id: 'antarvedi',
+    level: 18,
+    title: 'Antarvedi',
+    shortTitle: 'Where River Meets Sea',
+    date: 'January 31, 2026',
+    chapter: 'Chapter VI: The New Horizon',
+    description: 'Standing at the sacred confluence where the mighty Godavari river merges peacefully into the Bay of Bengal on January 31, 2026. Temple bells chiming in the coastal wind, damp ocean sands beneath their feet, and silent prayers offered to the boundless ocean.',
+    caption: '“Where the sacred river silently surrenders to the ocean, our vows were spoken directly to the tides of eternity.”',
+    image: '/scean 15.png',
+    icon: 'Compass',
+    location: 'Antarvedi Sagara Sangamam',
+    isUnlocked: true,
+    colorAccent: '#D8B46A',
+    category: 'journey',
+    categoryLabel: 'Journeys',
+    realm: 'The Temple of Vows',
+    mapLocationName: 'ANTARVEDI',
+    mapIcon: 'temple',
+    timelineTitle: 'Antarvedi',
+    coordinates: { x: 60, y: 66 },
+    narrativeParagraphs: [
+      'Standing at the sacred confluence where the mighty Godavari river merges peacefully into the Bay of Bengal on January 31, 2026.',
+      'Temple bells chiming in the coastal wind, damp ocean sands beneath their feet, and silent prayers offered to the boundless ocean.'
+    ],
+    handwrittenNote: 'The ocean wind was so loud, but when you whispered beside me, it was the only sound in the world.',
+    musicTrack: {
+      title: 'Confluence of Holy Tides',
+      artist: 'Santoor & Oceanic Ambient',
+      mood: 'Spiritual, profound, sacred'
+    },
+    details: [
+      { label: 'Date', value: 'January 31, 2026' },
+      { label: 'Sacred Site', value: 'Antarvedi Sagara Sangamam' },
+      { label: 'Confluence', value: 'Godavari River & Bay of Bengal' },
+      { label: 'Atmosphere', value: 'Temple bells in the sea breeze' }
+    ],
+    artifacts: [
+      {
+        title: 'Antarvedi Sea Shell Keepsake',
+        description: 'Found at the shore where river meets sea.',
+        type: 'keepsake'
+      }
+    ]
+  },
+
+  // 19 — January 31, 2026: Seven Steps
+  {
+    id: 'seven-steps',
+    level: 19,
+    title: 'Seven Steps',
+    shortTitle: 'Sacred Vows by the Waves',
+    date: 'January 31, 2026',
+    chapter: 'Chapter VI: The New Horizon',
+    description: 'Walking seven deliberate, sacred steps together along the shoreline of Antarvedi on January 31, 2026 as twilight descended. Seven quiet promises whispered to the sea: of trust, patience, loyalty, laughter, devotion, family, and lifelong companionship.',
+    caption: '“Seven steps walked hand in hand on the damp shoreline sand, each one a lifetime covenant under the evening sky.”',
+    image: '/scean 16.png',
+    icon: 'Heart',
+    location: 'Antarvedi Shoreline',
+    isUnlocked: true,
+    colorAccent: '#E89AAF',
+    category: 'commitments',
+    categoryLabel: 'Sacred Vows',
+    realm: 'The Temple of Vows',
+    mapLocationName: 'SEVEN STEPS',
+    mapIcon: 'footprints',
+    timelineTitle: 'Seven Steps',
+    coordinates: { x: 56, y: 48 },
+    narrativeParagraphs: [
+      'Walking seven deliberate, sacred steps together along the shoreline of Antarvedi on January 31, 2026 as twilight descended.',
+      'Seven quiet promises whispered to the sea: of trust, patience, loyalty, laughter, devotion, family, and lifelong companionship.'
+    ],
+    handwrittenNote: 'Step 1 for friendship. Step 2 for courage. Step 7 for forever. I meant every single word.',
+    musicTrack: {
+      title: 'Seven Steps by the Tide',
+      artist: 'Solo Cello & Ocean Chorus',
+      mood: 'Reverent, eternal, monumental'
+    },
+    details: [
+      { label: 'Date', value: 'January 31, 2026' },
+      { label: 'The Seven Vows', value: 'Truth, Patience, Laughter, Devotion, Strength, Honor, Eternity' },
+      { label: 'Witness', value: 'The Eternal Tide & Sky' }
+    ]
+  },
+
+  // 20 — February 15, 2026: Our Chosen Day
+  {
+    id: 'our-chosen-day',
+    level: 20,
+    title: 'Our Chosen Day',
+    shortTitle: 'The Love Anniversary',
+    date: 'February 15, 2026',
+    chapter: 'Chapter VII: Chosen Promises',
+    description: 'February 15, 2026: Our chosen love anniversary. Under a sky washed in deep wine and golden twilight, a mutual pledge was reaffirmed. Not a fleeting feeling, but a mature, deeply rooted commitment to stand as one through all seasons of life.',
+    caption: '“February 15, 2026 — The day chosen by our hearts, sanctified by our promises, and cherished for eternity.”',
+    image: '/scean 17.png',
+    icon: 'Star',
+    location: 'Twilight Terrace Horizon',
+    isUnlocked: true,
+    colorAccent: '#D8B46A',
+    category: 'commitments',
+    categoryLabel: 'Sacred Vows',
+    realm: 'The Sanctuary of Solace',
+    mapLocationName: 'OUR CHOSEN DAY',
+    mapIcon: 'calendar-heart',
+    timelineTitle: 'Our Chosen Day',
+    coordinates: { x: 52, y: 32 },
+    narrativeParagraphs: [
+      'February 15, 2026: Our chosen love anniversary.',
+      'Under a sky washed in deep wine and golden twilight, a mutual pledge was reaffirmed.',
+      'Not a fleeting feeling, but a mature, deeply rooted commitment to stand as one through all seasons of life.'
+    ],
+    handwrittenNote: 'February 15th will always be our sacred date. The day our two paths permanently merged into one single line.',
+    musicTrack: {
+      title: 'Covenant of February 15',
+      artist: 'Acoustic Piano & Golden Strings',
+      mood: 'Devotional, golden, unwavering'
+    },
+    details: [
+      { label: 'Anniversary Date', value: 'February 15, 2026' },
+      { label: 'Significance', value: 'Our Chosen Love Anniversary' },
+      { label: 'Vow Sealed', value: 'Mutual pledge of unconditional devotion' }
+    ]
+  },
+
+  // 21 — February 18, 2026: New Chapter
+  {
+    id: 'new-chapter',
+    level: 21,
+    title: 'New Chapter',
+    shortTitle: 'Turning The Page',
+    date: 'February 18, 2026',
+    chapter: 'Chapter VII: Chosen Promises',
+    description: 'February 18, 2026: Stepping forward into an even deeper chapter of companionship. New routines, shared dreams, studying together for upcoming exams, and supporting each other\'s aspirations with unwavering belief.',
+    caption: '“Every sunrise brings a new page, and every page is sweeter because it is shared with you.”',
+    image: '/scean 18.png',
+    icon: 'BookOpen',
+    location: 'College Walkway & Study Hall',
+    isUnlocked: true,
+    colorAccent: '#F5C77E',
+    category: 'milestones',
+    categoryLabel: 'Milestones',
+    realm: 'The Sanctuary of Solace',
+    mapLocationName: 'NEW CHAPTER',
+    mapIcon: 'ribbon',
+    timelineTitle: 'New Chapter',
+    coordinates: { x: 59, y: 18 },
+    narrativeParagraphs: [
+      'February 18, 2026: Stepping forward into an even deeper chapter of companionship.',
+      'New routines, shared dreams, studying together for upcoming exams, and supporting each other\'s aspirations with unwavering belief.'
+    ],
+    handwrittenNote: 'We sat in the library making notes for exams, but mostly drawing tiny smiling faces in the margins.',
+    musicTrack: {
+      title: 'Pages in Motion',
+      artist: 'Light Percussion & Harp Melody',
+      mood: 'Gentle, focused, cheerful'
+    },
+    details: [
+      { label: 'Date', value: 'February 18, 2026' },
+      { label: 'Focus', value: 'Shared academic dreams & daily support' },
+      { label: 'Atmosphere', value: 'Quiet study sessions & shared notes' }
+    ]
+  },
+
+  // 22 — March 2, 2026: The First Long Drive (NEW!)
+  {
+    id: 'first-long-drive',
+    level: 22,
+    title: 'The First Long Drive',
+    shortTitle: 'Two Wheels & Open Roads',
+    date: 'March 2, 2026',
+    chapter: 'Chapter VII: Chosen Promises',
+    description: 'On March 2, 2026, they took their very first long motorcycle ride together, travelling to college through the refreshing morning air as Bharavi/Ammu sat safely behind him. They spent that entire joyful day together walking around campus, giving college announcements, and sharing nonstop laughter on one of their happiest days.',
+    caption: '“Our first long motorcycle ride together—cool morning breeze, Bharavi sitting safely behind, and a day full of campus announcements and smiles.”',
+    image: '/first long drive.png',
+    icon: 'Compass',
+    location: 'Highway to College & Campus Grounds',
+    isUnlocked: true,
+    colorAccent: '#D8B46A',
+    category: 'journey',
+    categoryLabel: 'Journeys',
+    realm: 'The Sanctuary of Solace',
+    mapLocationName: 'THE FIRST LONG DRIVE',
+    mapIcon: 'bridge',
+    timelineTitle: 'The First Long Drive',
+    coordinates: { x: 66, y: 22 },
+    narrativeParagraphs: [
+      'On March 2, 2026, they took their very first long motorcycle ride together, travelling to college through the refreshing morning air as Bharavi/Ammu sat safely behind him.',
+      'They spent that entire joyful day together walking around campus, giving college announcements, and sharing nonstop laughter.',
+      'A remarkably happy milestone filled with freedom, trust, and shared excitement.'
+    ],
+    handwrittenNote: 'You held onto my jacket as we took the turns on the highway. Travelling together to college that morning felt like flying.',
+    musicTrack: {
+      title: 'Morning Breeze & Open Highways',
+      artist: 'Acoustic Guitar & Gentle Percussion',
+      mood: 'Exhilarating, joyful, breezy romance'
+    },
+    details: [
+      { label: 'Date', value: 'March 2, 2026' },
+      { label: 'Milestone', value: 'First long motorcycle ride together' },
+      { label: 'Destination', value: 'College Campus via Highway' },
+      { label: 'Campus Activity', value: 'Giving college announcements & campus walk' }
+    ]
+  },
+
+  // 23 — March 2026: Freshers Days (NEW!)
+  {
+    id: 'freshers-days',
+    level: 23,
+    title: 'Freshers Days',
+    shortTitle: 'College Festivities & Poses',
+    date: 'March 2026',
+    chapter: 'Chapter VII: Chosen Promises',
+    description: 'During March 2026, the college came alive for the Freshers festivities. Walking hand in hand through the decorated campus, striking memorable poses for the camera, sharing sweet snacks, and soaking in the joyful energy of the college crowd together.',
+    caption: '“Vibrant college celebrations, striking fun poses, walking the grounds together, and making every second of Freshers unforgettable.”',
+    image: '/freshersd days.png',
+    icon: 'Camera',
+    location: 'College Auditorium & Quadrangle',
+    isUnlocked: true,
+    colorAccent: '#F5C77E',
+    category: 'college',
+    categoryLabel: 'College Days',
+    realm: 'The Scholarly Spires',
+    mapLocationName: 'FRESHERS DAYS',
+    mapIcon: 'celebration',
+    timelineTitle: 'Freshers Days',
+    coordinates: { x: 70, y: 36 },
+    narrativeParagraphs: [
+      'During March 2026, the college came alive for the Freshers festivities.',
+      'Walking hand in hand through the decorated campus, striking memorable poses for the camera, sharing sweet snacks, and soaking in the joyful energy of the college crowd together.',
+      'Laughter echoed everywhere as they celebrated youth and shared moments that would never fade.'
+    ],
+    handwrittenNote: 'All those funny poses we made for the camera during Freshers! We were laughing so hard we almost dropped the camera.',
+    musicTrack: {
+      title: 'Freshers Day Melodies',
+      artist: 'Brass, Piano & Upbeat Strings',
+      mood: 'Celebratory, lively, bright'
+    },
+    details: [
+      { label: 'Timeframe', value: 'March 2026' },
+      { label: 'Event', value: 'College Freshers Festivities' },
+      { label: 'Memories', value: 'Campus walk, photo poses, music, and celebration' }
+    ],
+    artifacts: [
+      {
+        title: 'Freshers Day Photo Reel',
+        description: 'Collection of joyful camera poses from Freshers 2026.',
+        type: 'photo'
+      }
+    ]
+  },
+
+  // 24 — March 26, 2026: The Last Date Before the Gap
+  {
+    id: 'last-date-before-gap',
+    level: 24,
+    title: 'The Last Date Before the Gap',
+    shortTitle: 'The Quiet Afternoon',
+    date: 'March 26, 2026',
+    chapter: 'Chapter VIII: Trials & Distance',
+    description: 'March 26, 2026: The final afternoon spent together before the upcoming period of distance. Sitting across the table, hands intertwined, drinking slow sips of tea while speaking brave words of encouragement to brace for the days ahead.',
+    caption: '“Holding onto each second as the afternoon slipped by, promising that no distance could ever weaken what we built.”',
+    image: '/scean 19.png',
+    icon: 'Clock',
+    location: 'Corner Cafe by the Lake',
+    isUnlocked: true,
+    colorAccent: '#A37081',
+    category: 'milestones',
+    categoryLabel: 'Milestones',
+    realm: 'The Desert of Patience',
+    mapLocationName: 'LAST DATE BEFORE GAP',
+    mapIcon: 'sunset',
+    timelineTitle: 'The Last Date Before the Gap',
+    coordinates: { x: 65, y: 52 },
+    narrativeParagraphs: [
+      'March 26, 2026: The final afternoon spent together before the upcoming period of distance.',
+      'Sitting across the table, hands intertwined, drinking slow sips of tea while speaking brave words of encouragement to brace for the days ahead.'
+    ],
+    handwrittenNote: 'Neither of us wanted to look at the clock. We just held hands tighter with every minute.',
+    musicTrack: {
+      title: 'Amber Afternoon Tea',
+      artist: 'Acoustic Cello & Rhodes Piano',
+      mood: 'Bittersweet, poignant, deep'
+    },
+    details: [
+      { label: 'Date', value: 'March 26, 2026' },
+      { label: 'Atmosphere', value: 'Quiet cafe table overlooking the water' },
+      { label: 'The Promise', value: 'To stay resilient through every mile of separation' }
+    ]
+  },
+
+  // 25 — March 27, 2026: Birthday
+  {
+    id: 'birthday',
+    level: 25,
+    title: 'Birthday',
+    shortTitle: 'Candles & Wishes',
+    date: 'March 27, 2026',
+    chapter: 'Chapter VIII: Trials & Distance',
+    description: 'March 27, 2026: A warm birthday celebration filled with heartfelt wishes, a small glowing cake, and gratitude for another year of life spent in each other\'s warmth.',
+    caption: '“Blowing out birthday candles with the sweetest wish of all: to celebrate every single birthday together for life.”',
+    image: '/scean 20.png',
+    icon: 'Gift',
+    location: 'Celebration Hearth',
+    isUnlocked: true,
+    colorAccent: '#D8B46A',
+    category: 'milestones',
+    categoryLabel: 'Milestones',
+    realm: 'The Desert of Patience',
+    mapLocationName: 'BIRTHDAY',
+    mapIcon: 'cake',
+    timelineTitle: 'Birthday',
+    coordinates: { x: 69, y: 68 },
+    narrativeParagraphs: [
+      'March 27, 2026: A warm birthday celebration filled with heartfelt wishes, a small glowing cake, and gratitude for another year of life spent in each other\'s warmth.'
+    ],
+    handwrittenNote: 'When you blew out the candles, I made a wish too. I think our wishes were the exact same thing.',
+    musicTrack: {
+      title: 'Birthday Candlelight Waltz',
+      artist: 'Solo Music Box & Strings',
+      mood: 'Warm, celebratory, intimate'
+    },
+    details: [
+      { label: 'Date', value: 'March 27, 2026' },
+      { label: 'Event', value: 'Heartfelt Birthday Celebration' },
+      { label: 'The Wish', value: 'To share every tomorrow together' }
+    ]
+  },
+
+  // 26 — April 1, 2026: Family Support
+  {
+    id: 'family-support',
+    level: 26,
+    title: 'Family Support',
+    shortTitle: 'The Pillars of Home',
+    date: 'April 1, 2026',
+    chapter: 'Chapter VIII: Trials & Distance',
+    description: 'April 1, 2026: Receiving the quiet blessings, love, and understanding of family. Discovering that love is made stronger when held up by the pillars of home, tradition, and mutual respect.',
+    caption: '“When family stands beside you with warmth and blessing, the path ahead shines with golden confidence.”',
+    image: '/scean 21.png',
+    icon: 'Shield',
+    location: 'Family Living Room',
+    isUnlocked: true,
+    colorAccent: '#E89AAF',
+    category: 'family',
+    categoryLabel: 'Family',
+    realm: 'The Desert of Patience',
+    mapLocationName: 'FAMILY SUPPORT',
+    mapIcon: 'home',
+    timelineTitle: 'Family Support',
+    coordinates: { x: 76, y: 76 },
+    narrativeParagraphs: [
+      'April 1, 2026: Receiving the quiet blessings, love, and understanding of family.',
+      'Discovering that love is made stronger when held up by the pillars of home, tradition, and mutual respect.'
+    ],
+    handwrittenNote: 'The warmth in the room that day washed away every doubt. Having family beside us is the greatest strength.',
+    musicTrack: {
+      title: 'Pillars of the Hearth',
+      artist: 'Acoustic Guitar & Soft Woodwinds',
+      mood: 'Comforting, reassuring, grounded'
+    },
+    details: [
+      { label: 'Date', value: 'April 1, 2026' },
+      { label: 'Event', value: 'Family blessings & shared dinner' },
+      { label: 'Foundation', value: 'Respect, family harmony, lifelong support' }
+    ]
+  },
+
+  // 27 — Date not specified: Thirty Three Days
+  {
+    id: 'thirty-three-days',
+    level: 27,
+    title: 'Thirty Three Days',
+    shortTitle: 'Thirty-Three Golden Days',
+    date: 'Date not specified',
+    chapter: 'Chapter VIII: Trials & Distance',
+    description: 'Thirty-three uninterrupted, domestic days spent living in close companionship. Cooking meals, doing chores side by side, solving daily problems together, and understanding that true love lives in the ordinary, quiet moments.',
+    caption: '“Thirty-three continuous days of quiet routines, shared meals, and knowing that everyday life with you is pure paradise.”',
+    image: '/scean 22.png',
+    icon: 'Home',
+    location: 'Shared Sanctuary & Kitchen',
+    isUnlocked: true,
+    colorAccent: '#D8B46A',
+    category: 'milestones',
+    categoryLabel: 'Milestones',
+    realm: 'The Desert of Patience',
+    mapLocationName: 'THIRTY THREE DAYS',
+    mapIcon: 'house',
+    timelineTitle: 'Thirty Three Days',
+    coordinates: { x: 82, y: 64 },
+    narrativeParagraphs: [
+      'Thirty-three uninterrupted, domestic days spent living in close companionship.',
+      'Cooking meals, doing chores side by side, solving daily problems together, and understanding that true love lives in the ordinary, quiet moments.'
+    ],
+    handwrittenNote: 'Thirty-three days went by in a blink. We learned how to live as one without ever getting tired of each other.',
+    musicTrack: {
+      title: 'Thirty Three Golden Mornings',
+      artist: 'Acoustic Piano & Morning Chimes',
+      mood: 'Domestic bliss, peaceful, everlasting'
+    },
+    details: [
+      { label: 'Duration', value: '33 Full Days Together' },
+      { label: 'Shared Routines', value: 'Cooking, tea times, grocery runs, evening walks' },
+      { label: 'Revelation', value: 'Ordinary days are the most sacred of all' }
+    ]
+  },
+
+  // 28 — Date not specified: Two Months Apart
+  {
+    id: 'two-months-apart',
+    level: 28,
+    title: 'Two Months Apart',
+    shortTitle: 'Silence Across The Screen',
+    date: 'Date not specified',
+    chapter: 'Chapter VIII: Trials & Distance',
+    description: 'Two whole months of silence and physical separation across distance. No words could cross the divide, but the memories built over two years held strong like an anchor in deep waters.',
+    caption: '“Two months of silence, sixty days of waiting, and a heart that never stopped believing in our reunion.”',
+    image: '/scean 23.png',
+    icon: 'Moon',
+    location: 'Miles of Longing',
+    isUnlocked: true,
+    colorAccent: '#7A1838',
+    category: 'distance',
+    categoryLabel: 'Distance',
+    realm: 'The Silent Shores',
+    mapLocationName: 'TWO MONTHS APART',
+    mapIcon: 'moon-cloud',
+    timelineTitle: 'Two Months Apart',
+    coordinates: { x: 78, y: 46 },
+    narrativeParagraphs: [
+      'Two whole months of silence and physical separation across distance.',
+      'No words could cross the divide, but the memories built over two years held strong like an anchor in deep waters.'
+    ],
+    handwrittenNote: 'Sixty days. Every time the phone lit up, my heart jumped. But I kept holding onto our promises.',
+    musicTrack: {
+      title: 'Sixty Nights of Moonlight',
+      artist: 'Solo Cello & Cold Wind Ambient',
+      mood: 'Resilient, patient, deep longing'
+    },
+    details: [
+      { label: 'Duration', value: '60 Long Days of Separation' },
+      { label: 'The Test', value: 'Patience, loyalty, unwavering commitment' },
+      { label: 'Anchor', value: 'Antarvedi vows & the promise of tomorrow' }
+    ]
+  },
+
+  // 29 — September 15, 2026: Flowers, Bangles & That Day (NEW!)
+  {
+    id: 'flowers-bangles-and-that-day',
+    level: 29,
+    title: 'Flowers, Bangles & That Day',
+    shortTitle: 'Surprise & Fragrance',
+    date: 'September 15, 2026',
+    chapter: 'Chapter IX: The Reunion & Beyond',
+    description: 'On September 15, 2026, he surprised Bharavi/Ammu with fresh fragrant flowers and three sets of gorgeous bangles. She was genuinely overjoyed and deeply touched by the heartfelt gifts. They spent the entire day together, working closely side by side during a hackathon, sharing both productivity and unspoken romance.',
+    caption: '“A surprise of fresh flowers and three sets of sparkling bangles—her smile outshone everything as we worked side by side.”',
+    image: '/flowers bangles and that day.png',
+    icon: 'Gift',
+    location: 'Hackathon Hall & Campus Bench',
+    isUnlocked: true,
+    colorAccent: '#E89AAF',
+    category: 'milestones',
+    categoryLabel: 'Gifts',
+    realm: 'The Endless Horizon',
+    mapLocationName: 'FLOWERS & BANGLES',
+    mapIcon: 'gift',
+    timelineTitle: 'Flowers, Bangles & That Day',
+    coordinates: { x: 83, y: 30 },
+    narrativeParagraphs: [
+      'On September 15, 2026, he surprised Bharavi/Ammu with fresh fragrant flowers and three sets of gorgeous bangles.',
+      'She was genuinely overjoyed and deeply touched by the heartfelt gifts. They spent the entire day together, working closely side by side during a hackathon.',
+      'The fragrance of flowers mingled with code and shared smiles in one of the most unforgettable days of September.'
+    ],
+    handwrittenNote: 'You opened the box and your eyes went wide. Three sets of bangles and fresh blooms—you deserved all the flowers in the world.',
+    musicTrack: {
+      title: 'Fragrance & Glass Chimes',
+      artist: 'Acoustic Guitar & Gentle Strings',
+      mood: 'Joyful, romantic, glowing warmth'
+    },
+    details: [
+      { label: 'Date', value: 'September 15, 2026' },
+      { label: 'The Surprise', value: 'Fresh floral bouquet & three sets of bangles' },
+      { label: 'Her Reaction', value: 'Genuinely surprised, overjoyed, and touched' },
+      { label: 'The Day', value: 'Full day spent together working during a hackathon' }
+    ],
+    artifacts: [
+      {
+        title: 'Three Sets of Bangles',
+        description: 'Gifted alongside fresh flowers on September 15, 2026.',
+        type: 'keepsake'
+      }
+    ]
+  },
+
+  // 30 — September 19, 2026: The Reunion
+  {
+    id: 'september-19-2026',
+    level: 30,
+    title: 'The Reunion',
+    shortTitle: 'Finding Each Other Again',
+    date: 'September 19, 2026',
+    chapter: 'Chapter IX: The Reunion & Beyond',
+    description: 'September 19, 2026: The bridge across distance is crossed at last. Meeting again after months of longing—the rush of relief, the familiar laugh, and holding hands knowing that the bond survived every test of time and space.',
+    caption: '“After months of distance and silent waiting, stepping back into each other\'s presence felt like coming home.”',
+    image: '/scean 24.png',
+    icon: 'Sparkles',
+    location: 'The Arrival Platform',
+    isUnlocked: true,
+    colorAccent: '#D8B46A',
+    category: 'reunion',
+    categoryLabel: 'Reunion',
+    realm: 'The Endless Horizon',
+    mapLocationName: 'THE REUNION',
+    mapIcon: 'sunrise',
+    timelineTitle: 'The Reunion',
+    coordinates: { x: 88, y: 20 },
+    narrativeParagraphs: [
+      'September 19, 2026: The bridge across distance is crossed at last.',
+      'Meeting again after months of longing—the rush of relief, the familiar laugh, and holding hands knowing that the bond survived every test of time and space.'
+    ],
+    handwrittenNote: 'When you ran toward me, the entire universe snapped back into focus. We made it.',
+    musicTrack: {
+      title: 'The Great Golden Dawn',
+      artist: 'Full String Symphony & Piano Crescendo',
+      mood: 'Ecstatic, cathartic, deeply triumphant'
     },
     details: [
       { label: 'Date', value: 'September 19, 2026' },
-      { label: 'Location', value: 'Hilltop Stone Pavilion' },
-      { label: 'Days Apart Ended', value: 'Zero days left — together for good' }
+      { label: 'The Moment', value: 'The Great Reunion after two months' },
+      { label: 'The Feeling', value: 'Coming home to where you belong' }
     ]
   },
+
+  // 31 — September 26, 2026: The Gifts for Our Story (NEW!)
+  {
+    id: 'the-gifts-for-our-story',
+    level: 31,
+    title: 'The Gifts for Our Story',
+    shortTitle: 'Three Prepared Treasures',
+    date: 'September 26, 2026',
+    chapter: 'Chapter IX: The Reunion & Beyond',
+    description: 'Prepared with tender care for September 26, 2026: three special gifts waiting to be given—a pair of elegant earrings, a lovingly handmade flower bouquet, and the interactive OUR STORY website itself. A heartfelt tribute ready to celebrate every step of our journey.',
+    caption: '“Three prepared gifts for tomorrow: delicate earrings, a handmade flower bouquet, and the OUR STORY journal itself.”',
+    image: '/the gifts of our story.png',
+    icon: 'Gift',
+    location: 'The Sanctuary of Tomorrow',
+    isUnlocked: true,
+    colorAccent: '#E89AAF',
+    category: 'milestones',
+    categoryLabel: 'Gifts',
+    realm: 'The Endless Horizon',
+    mapLocationName: 'THE GIFTS FOR OUR STORY',
+    mapIcon: 'gift',
+    timelineTitle: 'The Gifts for Our Story',
+    coordinates: { x: 91, y: 42 },
+    narrativeParagraphs: [
+      'Prepared with tender care for September 26, 2026: three special gifts waiting to be given.',
+      'A pair of sparkling earrings, a lovingly handmade flower bouquet, and this very interactive digital journal—OUR STORY.',
+      'An upcoming milestone prepared from the depths of love to celebrate two unforgettable years.'
+    ],
+    handwrittenNote: 'Every petal in the bouquet, every line in this website was made thinking of you. Tomorrow is waiting for us.',
+    musicTrack: {
+      title: 'Treasures for Tomorrow',
+      artist: 'Acoustic Harp & Celesta',
+      mood: 'Anticipatory, tender, deeply devoted'
+    },
+    details: [
+      { label: 'Status', value: 'Upcoming / Prepared with love' },
+      { label: 'Gift 01', value: 'Pair of elegant earrings' },
+      { label: 'Gift 02', value: 'Handmade flower bouquet' },
+      { label: 'Gift 03', value: 'The OUR STORY interactive website' }
+    ],
+    artifacts: [
+      {
+        title: 'The Three Prepared Gifts',
+        description: 'Earrings, handmade bouquet, and the digital story journal.',
+        type: 'keepsake'
+      }
+    ]
+  },
+
+  // 32 — Final Chapter: Our Story
   {
     id: 'our-story',
-    level: 25,
+    level: 32,
     title: 'Our Story',
     shortTitle: 'A Map of Moments',
     date: 'September 2026',
-    chapter: 'Chapter VIII: Reunion & The Forever Horizon',
-    description: 'The grand masterwork holding two years of life: from that accidental glance in the lecture hall, cleaning days, group selfies, glass bangles, night festivals, Vijayawada hackathons, train journeys under the moon, Antarvedi temple vows, birthday cakes, family dinners, miles of longing, to standing united today. Our story has only just begun.',
-    caption: '“A map of the moments that became our story. Two years written in gold, and forever to go.”',
+    chapter: 'Chapter X: Our Story',
+    description: '32 moments. Countless little memories. One story. From that accidental glance in the lecture hall on September 9, 2024, to paper shivlings, glass bangles, temple vows, hackathons, motorcycle rides, long separations, and joyful reunions. THIS IS OUR STORY. THE MAP CONTINUES…',
+    caption: '“32 moments. Countless little memories. One story.”',
     image: '/scean 25.png',
     icon: 'Crown',
     location: 'The Entire Tapestry of Us',
@@ -1019,12 +1388,13 @@ export const MEMORIES: Memory[] = [
     mapLocationName: 'OUR STORY',
     mapIcon: 'heart-star',
     timelineTitle: 'Our Story',
-    coordinates: { x: 94, y: 28 },
+    coordinates: { x: 95, y: 62 },
     narrativeParagraphs: [
-      'The grand masterwork holding two years of life: from that accidental glance in the lecture hall, cleaning days, group selfies, glass bangles, night festivals, Vijayawada hackathons, train journeys under the moon, Antarvedi temple vows, birthday cakes, family dinners, miles of longing, to standing united today.',
-      'Our story has only just begun.'
+      '32 moments. Countless little memories. One story.',
+      'From that accidental glance in the lecture hall on September 9, 2024, to paper shivlings, glass bangles, temple vows, hackathons, motorcycle rides, long separations, and joyful reunions.',
+      'THIS IS OUR STORY. THE MAP CONTINUES…'
     ],
-    handwrittenNote: 'To my best friend, my soulmate, my forever home: here is our story, written in gold.',
+    handwrittenNote: 'To my best friend, my soulmate, my forever home: here is our story, written in gold. The map continues…',
     musicTrack: {
       title: 'Our Story Forever',
       artist: 'Full Cinematic Orchestra & Harp',
@@ -1032,13 +1402,13 @@ export const MEMORIES: Memory[] = [
     },
     details: [
       { label: 'Anniversary Milestone', value: '2 Full Years (September 2024 — 2026)' },
-      { label: 'Total Memories', value: '25 Masterpiece Chapters' },
+      { label: 'Total Memories', value: '32 Masterpiece Chapters' },
       { label: 'Next Destination', value: 'A Lifetime Together' }
     ],
     artifacts: [
       {
         title: 'The Masterpiece Collage',
-        description: 'Framing all 25 moments into one eternal memory.',
+        description: 'Framing all 32 moments into one eternal memory.',
         type: 'photo'
       }
     ]
@@ -1047,7 +1417,7 @@ export const MEMORIES: Memory[] = [
 
 export const TIMELINE_STATS = {
   totalDays: 730,
-  chaptersCount: 25,
+  chaptersCount: 32,
   citiesVisited: 9,
   startDate: 'September 2024',
   currentDate: 'September 2026',
@@ -1084,7 +1454,7 @@ export const VAULT_SECRETS: VaultSecret[] = [
     title: 'Vows Whispered Beside the Antarvedi Waves',
     date: 'January 31, 2026',
     unlockedContent: {
-      letter: `To My Heart,\n\nWhen we stood at Antarvedi where the river quietly surrenders to the ocean, you turned to me with salt spray in your hair and smiled that smile that undoes every doubt in my soul.\n\nUnder that vast sanctified sky, seven steps became twenty-five scenes, and twenty-five scenes will become an unbroken lifetime. I will honor you, protect your dreams, celebrate your triumphs as my own, and hold your hand with the exact same reverence fifty years from now.`,
+      letter: `To My Heart,\n\nWhen we stood at Antarvedi where the river quietly surrenders to the ocean, you turned to me with salt spray in your hair and smiled that smile that undoes every doubt in my soul.\n\nUnder that vast sanctified sky, seven steps became thirty-two scenes, and thirty-two scenes will become an unbroken lifetime. I will honor you, protect your dreams, celebrate your triumphs as my own, and hold your hand with the exact same reverence fifty years from now.`,
       signature: 'Forever your sanctuary',
       hiddenVow: '“Seven steps taken beside the temple bells: one for truth, one for courage, one for laughter, one for devotion, one for family, one for peace, and one for forever.”'
     }
@@ -1101,4 +1471,3 @@ export const VAULT_SECRETS: VaultSecret[] = [
     }
   }
 ];
-

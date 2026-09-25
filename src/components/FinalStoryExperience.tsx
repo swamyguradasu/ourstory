@@ -21,9 +21,9 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
   // 0: Deep darkness
   // 1: First point appears
   // 2: Second point appears
-  // 3: All 25 points illuminate sequentially
+  // 3: All 32 points illuminate sequentially
   // 4: Full map & routes glow, camera zooms out
-  // 5: Crossfade to Scene 25 artwork & Title / Subtitle
+  // 5: Crossfade to Scene 32 artwork & Title / Subtitle
   // 6: Lines 1 & 2 appear
   // 7: Lines 3 & 4 appear
   // 8: Line 5 appears
@@ -33,8 +33,9 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
   const [artworkLoaded, setArtworkLoaded] = useState<boolean>(false);
   const [imgError, setImgError] = useState<boolean>(false);
 
-  // Master Scene 25
-  const scene25 = MEMORIES.find((m) => m.level === 25) || MEMORIES[24];
+  const totalPoints = MEMORIES.length; // 32
+  // Master Final Scene
+  const sceneFinal = MEMORIES[MEMORIES.length - 1];
 
   // Start sequence on mount
   useEffect(() => {
@@ -52,23 +53,23 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
       setIlluminatedPoints(2);
     }, 1500);
 
-    // Phase 3: Sequentially illuminate points 3 to 25
+    // Phase 3: Sequentially illuminate points 3 to totalPoints
     const t3 = setTimeout(() => {
       setPhase(3);
       let count = 2;
       const pointInterval = setInterval(() => {
         count++;
         setIlluminatedPoints(count);
-        if (count >= 25) {
+        if (count >= totalPoints) {
           clearInterval(pointInterval);
         }
-      }, 90);
+      }, 70);
     }, 2400);
 
     // Phase 4: Full map glow & camera zoom out
     const t4 = setTimeout(() => setPhase(4), 5000);
 
-    // Phase 5: Transition to Scene 25 Artwork & Title
+    // Phase 5: Transition to Final Artwork & Title
     const t5 = setTimeout(() => setPhase(5), 7200);
 
     // Phase 6: Line 1 & Line 2
@@ -94,7 +95,7 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
       clearTimeout(t8);
       clearTimeout(t9);
     };
-  }, []);
+  }, [totalPoints]);
 
   const handleRestart = (e: React.MouseEvent) => {
     triggerRomanticHearts(e.clientX, e.clientY);
@@ -112,7 +113,7 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
     onBackToMap();
   };
 
-  // SVG route path connecting all 25 memories
+  // SVG route path connecting all memories
   const pathD = MEMORIES.map((m, idx) => {
     const cmd = idx === 0 ? 'M' : 'L';
     return `${cmd} ${m.coordinates.x * 10} ${m.coordinates.y * 5}`;
@@ -201,11 +202,12 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
                 />
               )}
 
-              {/* 25 Illumination Points */}
+              {/* All Illumination Points */}
               {MEMORIES.map((m, idx) => {
                 const isLit = idx < illuminatedPoints;
                 const isFirst = idx === 0;
                 const isSecond = idx === 1;
+                const isLast = idx === MEMORIES.length - 1;
 
                 if (!isLit) return null;
 
@@ -218,7 +220,7 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
                     <circle
                       cx={posX}
                       cy={posY}
-                      r={isFirst || isSecond || idx === 24 ? 9 : 6}
+                      r={isFirst || isSecond || isLast ? 9 : 6}
                       fill="#D8B46A"
                       opacity="0.3"
                       className="animate-ping"
@@ -227,7 +229,7 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
                     <circle
                       cx={posX}
                       cy={posY}
-                      r={isFirst || isSecond || idx === 24 ? 5 : 3.5}
+                      r={isFirst || isSecond || isLast ? 5 : 3.5}
                       fill="#FFF4F1"
                       stroke="#D8B46A"
                       strokeWidth="1.5"
@@ -242,13 +244,13 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
               {phase < 3
                 ? 'Illuminating memory path…'
                 : phase < 4
-                ? `Tracing 25 Sacred Locations (${illuminatedPoints}/25)`
+                ? `Tracing ${totalPoints} Sacred Locations (${illuminatedPoints}/${totalPoints})`
                 : 'All paths unified · The entire map awakens'}
             </div>
           </motion.div>
         ) : (
           /* ============================================================== */
-          /* PHASES 5+: FINAL ANIME ARTWORK (SCENE 25) & CINEMATIC LINES   */
+          /* PHASES 5+: FINAL ANIME ARTWORK & CINEMATIC LINES               */
           /* ============================================================== */
           <motion.div
             initial={{ opacity: 0, y: 25 }}
@@ -259,13 +261,13 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
             {/* REGAL SEAL */}
             <RoseFinalChapterSeal className="mb-2" />
 
-            {/* MASTERWORK ARTWORK CONTAINER: SCENE 25 */}
+            {/* MASTERWORK ARTWORK CONTAINER */}
             <div className="max-w-2xl mx-auto rounded-3xl overflow-hidden border-2 border-[#D8B46A]/60 shadow-[0_25px_70px_rgba(0,0,0,0.95),0_0_35px_rgba(216,180,106,0.3)] bg-[#120412] p-2.5 sm:p-3 relative group">
               <div className="w-full aspect-[16/10] max-h-[420px] rounded-2xl overflow-hidden bg-[#160618] relative">
-                {!imgError ? (
+                {!imgError && sceneFinal ? (
                   <img
-                    src={scene25.image}
-                    alt="Scene 25 — Our Story Final Masterwork"
+                    src={sceneFinal.image}
+                    alt={`Scene ${sceneFinal.level} — Our Story Final Masterwork`}
                     loading="eager"
                     referrerPolicy="no-referrer"
                     onLoad={() => setArtworkLoaded(true)}
@@ -286,7 +288,7 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
                 <div className="absolute inset-0 bg-gradient-to-t from-[#120412]/80 via-transparent to-transparent pointer-events-none" />
 
                 <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-cinzel text-[#D8B46A]">
-                  <span className="tracking-widest">CHAPTER XXV · THE MASTERWORK</span>
+                  <span className="tracking-widest">CHAPTER XXXII · THE MASTERWORK</span>
                   <span className="text-[#FFF4F1] font-mono">SEPTEMBER 2026</span>
                 </div>
               </div>
@@ -305,57 +307,37 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
             <RoseHeaderFlourish className="my-2" />
 
             {/* ============================================================== */}
-            {/* THE FIVE CINEMATIC LINES DISPLAYED ONE AT A TIME                */}
+            {/* THE CINEMATIC LINES DISPLAYED ONE AT A TIME                     */}
             {/* ============================================================== */}
             <div className="max-w-2xl mx-auto space-y-4 min-h-[190px] flex flex-col items-center justify-center px-4">
-              {/* Line 1: “Every story has a beginning.” */}
+              {/* Line 1: “32 moments.” */}
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: phase >= 6 ? 1 : 0, y: phase >= 6 ? 0 : 12 }}
                 transition={{ duration: 0.9 }}
                 className="font-cormorant italic text-2xl sm:text-3xl text-[#FFF4F1]/90 leading-relaxed font-light"
               >
-                “Every story has a beginning.”
+                “32 moments.”
               </motion.p>
 
-              {/* Line 2: “Some begin with a single moment.” */}
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: phase >= 6 ? 1 : 0, y: phase >= 6 ? 0 : 12 }}
-                transition={{ duration: 0.9, delay: 0.4 }}
-                className="font-cormorant italic text-xl sm:text-2xl text-[#F7D7DF]/85 leading-relaxed font-light"
-              >
-                “Some begin with a single moment.”
-              </motion.p>
-
-              {/* Line 3: “Some grow through ordinary days.” */}
+              {/* Line 2: “Countless little memories.” */}
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: phase >= 7 ? 1 : 0, y: phase >= 7 ? 0 : 12 }}
                 transition={{ duration: 0.9 }}
                 className="font-cormorant italic text-xl sm:text-2xl text-[#E89AAF] leading-relaxed font-light"
               >
-                “Some grow through ordinary days.”
+                “Countless little memories.”
               </motion.p>
 
-              {/* Line 4: “Some survive distance.” */}
-              <motion.p
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: phase >= 7 ? 1 : 0, y: phase >= 7 ? 0 : 12 }}
-                transition={{ duration: 0.9, delay: 0.4 }}
-                className="font-cormorant italic text-xl sm:text-2xl text-[#D8B46A] leading-relaxed font-light"
-              >
-                “Some survive distance.”
-              </motion.p>
-
-              {/* Line 5: “And some are made from hundreds of little memories.” */}
+              {/* Line 3: “One story.” */}
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: phase >= 8 ? 1 : 0, y: phase >= 8 ? 0 : 12 }}
                 transition={{ duration: 0.9 }}
-                className="font-cormorant italic text-2xl sm:text-3xl text-[#FFF4F1] leading-relaxed font-medium"
+                className="font-cormorant italic text-2xl sm:text-3xl text-[#D8B46A] leading-relaxed font-medium"
               >
-                “And some are made from hundreds of little memories.”
+                “One story.”
               </motion.p>
             </div>
 
@@ -403,12 +385,12 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
         )}
 
         {/* ============================================================== */}
-        {/* AT THE VERY BOTTOM: "The map continues…"                        */}
+        {/* AT THE VERY BOTTOM: "THE MAP CONTINUES…"                        */}
         {/* Strictly forward-looking (no implication of ending)             */}
         {/* ============================================================== */}
         <div className="mt-16 sm:mt-24 pt-8 border-t border-[#7A1838]/40 text-center max-w-lg mx-auto z-20">
           <p className="font-cinzel text-sm sm:text-base text-[#D8B46A] tracking-[0.3em] uppercase mb-1 font-bold">
-            The map continues…
+            THE MAP CONTINUES…
           </p>
           <p className="font-cormorant italic text-sm sm:text-base text-[#F7D7DF]/80 leading-relaxed">
             This digital journal preserves our first two canonical years. Every tomorrow remains an open road waiting to be walked together.

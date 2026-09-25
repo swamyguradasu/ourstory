@@ -1,7 +1,7 @@
 import { MEMORIES } from '../data/memories';
 
 const STORAGE_KEY = 'our_story_explored_ids';
-export const TOTAL_MEMORIES = MEMORIES.length; // 25
+export const TOTAL_MEMORIES = MEMORIES.length;
 
 export function getDiscoveredMemoryIds(): string[] {
   try {

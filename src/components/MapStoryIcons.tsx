@@ -166,7 +166,7 @@ export const MapStoryIcon: React.FC<MapStoryIconProps> = ({ type, className = "w
       );
 
     case 'calendar-heart':
-      // February 16 — Our Chosen Day
+      // February 15 — Our Chosen Day
       return (
         <svg viewBox="0 0 24 24" width={size} height={size} className={className} fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="4" width="18" height="18" rx="2" />

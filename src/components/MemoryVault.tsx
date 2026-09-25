@@ -39,12 +39,12 @@ const VERIFIED_TRAVEL_RECORDS = [
   {
     id: 'travel-vijayawada',
     destination: 'Vijayawada',
-    date: 'December 10 – 12, 2025',
+    date: 'December 10, 2025',
     tag: 'Hackathon & Riverside',
-    sceneLevel: 11,
+    sceneLevel: 13,
     image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop',
     excerpt:
-      'Scene 11 & 12: Traveling beyond the college campus for the Vijayawada Hackathon. Three days of building code, riverside conversations by the Krishna, and learning how effortlessly we move together in the world.',
+      'Scene 13 & 14: Traveling beyond the college campus for the Vijayawada Hackathon. Three days of building code, riverside conversations by the Krishna, and learning how effortlessly we move together in the world.',
     route: 'Campus → Vijayawada City → Riverside Corridor',
   },
   {
@@ -52,10 +52,10 @@ const VERIFIED_TRAVEL_RECORDS = [
     destination: 'Train Journeys',
     date: 'December 2025',
     tag: 'The Train Home',
-    sceneLevel: 13,
+    sceneLevel: 15,
     image: 'https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?q=80&w=1200&auto=format&fit=crop',
     excerpt:
-      'Scene 13: The rhythmic clatter of tracks heading home. Misty dawn windows, cold morning air, passing lush green paddy fields, and sharing earphones with head gently resting against the compartment window.',
+      'Scene 15: The rhythmic clatter of tracks heading home. Misty dawn windows, cold morning air, passing lush green paddy fields, and sharing earphones with head gently resting against the compartment window.',
     route: 'Vijayawada Junction → Coastal Route → Home',
   },
   {
@@ -63,22 +63,22 @@ const VERIFIED_TRAVEL_RECORDS = [
     destination: 'Antarvedi',
     date: 'January 31, 2026',
     tag: 'Sagara Sangamam',
-    sceneLevel: 15,
+    sceneLevel: 18,
     image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop',
     excerpt:
-      'Scene 15: Standing at the sacred confluence where the Godavari river merges silently into the Bay of Bengal. Temple bells in the sunset breeze, damp ocean sands, and a silent oath taken facing the horizon.',
+      'Scene 18 & 19: Standing at the sacred confluence where the Godavari river merges silently into the Bay of Bengal. Temple bells in the sunset breeze, damp ocean sands, and seven sacred steps taken facing the horizon.',
     route: 'Delta Highway → Antarvedi Shoreline → Lighthouse Point',
   },
   {
-    id: 'travel-annavaram',
-    destination: 'Annavaram & Family Travel',
-    date: 'February 2025',
-    tag: 'Ratnagiri Temple Darshan',
-    sceneLevel: 9,
-    image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200&auto=format&fit=crop',
+    id: 'travel-drive',
+    destination: 'Open Highway Ride',
+    date: 'March 2, 2026',
+    tag: 'The First Long Drive',
+    sceneLevel: 22,
+    image: '/first long drive.png',
     excerpt:
-      'Scene 9 & 10: Ascending the Ratnagiri hill for temple blessings. Sacred yellow threads, fresh kumkum, the comforting presence of family, and prayers whispered for a bond that outlasts all distance.',
-    route: 'Ratnagiri Hill Steps → Sacred Shrine → Family Gathering',
+      'Scene 22: Our first long motorcycle ride together travelling to college in the fresh morning air, followed by a joyful day walking the campus and giving announcements.',
+    route: 'Highway Corridor → College Main Gate → Campus Quadrangle',
   },
 ];
 

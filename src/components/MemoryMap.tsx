@@ -92,15 +92,15 @@ export const MemoryMap: React.FC<MemoryMapProps> = ({
 
   // Categories filter list
   const categories = [
-    { id: 'all', label: 'All 25 Locations' },
+    { id: 'all', label: `All ${MEMORIES.length} Locations` },
     { id: 'college', label: 'College Days' },
     { id: 'friendship', label: 'Deepening Bond' },
-    { id: 'milestones', label: 'Milestones' },
-    { id: 'journey', label: 'Travel & Hackathon' },
+    { id: 'milestones', label: 'Milestones & Gifts' },
+    { id: 'journey', label: 'Travel & Journeys' },
     { id: 'commitments', label: 'Sacred Vows' },
     { id: 'family', label: 'Family Circle' },
     { id: 'distance', label: 'Distance' },
-    { id: 'reunion', label: 'The Reunion' },
+    { id: 'reunion', label: 'The Reunion & Final' },
   ];
 
   return (
@@ -117,7 +117,7 @@ export const MemoryMap: React.FC<MemoryMapProps> = ({
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#D8B46A]/35 bg-[#241025]/85 backdrop-blur-md mb-4 shadow-[0_0_15px_rgba(216,180,106,0.15)]">
             <Sparkles className="w-3.5 h-3.5 text-[#D8B46A]" />
             <span className="text-[11px] sm:text-xs font-semibold tracking-[0.25em] text-[#D8B46A] uppercase font-cinzel">
-              OUR STORY · 25 memories • one journey
+              OUR STORY · {MEMORIES.length} memories • one journey
             </span>
           </div>
 

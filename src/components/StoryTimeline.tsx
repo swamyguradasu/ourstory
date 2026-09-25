@@ -105,7 +105,7 @@ export const StoryTimeline: React.FC<StoryTimelineProps> = ({ onSelectMemory }) 
       <div className="fixed top-20 right-4 sm:right-8 z-40 hidden md:flex items-center gap-3 px-4 py-2 rounded-full bg-[#1e0a20]/90 border border-[#D8B46A]/50 shadow-[0_10px_30px_rgba(0,0,0,0.8),0_0_15px_rgba(122,24,56,0.3)] backdrop-blur-xl transition-all duration-300">
         <span className="w-2 h-2 rounded-full bg-[#E89AAF] animate-pulse" />
         <span className="text-[11px] font-cinzel font-bold text-[#D8B46A] tracking-[0.2em] uppercase">
-          CHAPTER {activeLevelFormatted} OF 25
+          CHAPTER {activeLevelFormatted} OF {MEMORIES.length}
         </span>
         <span className="text-xs text-[#FFF4F1]/60">·</span>
         <span className="text-xs font-cormorant italic text-[#FFF4F1] truncate max-w-[200px]">
@@ -134,7 +134,7 @@ export const StoryTimeline: React.FC<StoryTimelineProps> = ({ onSelectMemory }) 
           </p>
 
           <div className="mt-3 flex items-center justify-center gap-3 text-xs sm:text-sm font-cinzel tracking-[0.2em] text-[#D8B46A]">
-            <span>25 CANONICAL CHAPTERS</span>
+            <span>{MEMORIES.length} CANONICAL CHAPTERS</span>
             <span className="text-[#E89AAF]">·</span>
             <span>SEPTEMBER 2024 — 2026</span>
           </div>
@@ -301,7 +301,7 @@ export const StoryTimeline: React.FC<StoryTimelineProps> = ({ onSelectMemory }) 
         <div className="mt-20 text-center max-w-xl mx-auto pt-10 border-t border-[#7A1838]/40">
           <RoseHeaderFlourish className="mb-3" />
           <p className="font-cormorant italic text-lg sm:text-xl text-[#F7D7DF]">
-            “25 milestones. Countless whispered words. One unbroken journey.”
+            “{MEMORIES.length} milestones. Countless whispered words. One unbroken journey.”
           </p>
           <div className="text-xs font-cinzel text-[#D8B46A] tracking-[0.25em] mt-2">
             SEPTEMBER 2024 — SEPTEMBER 2026

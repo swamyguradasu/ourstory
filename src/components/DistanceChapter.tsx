@@ -24,19 +24,19 @@ interface DistanceChapterProps {
   onSelectMemory?: (memory: Memory) => void;
 }
 
-// Target reunion memory: Scene 24 (September 19, 2026)
-const REUNION_MEMORY = MEMORIES.find((m) => m.level === 24) || MEMORIES[23];
+// Target reunion memory: September 19, 2026
+const REUNION_MEMORY = MEMORIES.find((m) => m.id === 'september-19-2026') || MEMORIES[29];
 
 // Key anchor memories that kept the bond strong during the silence
 const KEEPSAKE_MEMORIES = [
   { level: 1, label: 'The First Morning', date: 'Sep 2024', image: '/scean 1.png' },
   { level: 4, label: 'Our First Picture', date: 'Oct 2024', image: '/scean 4.png' },
   { level: 8, label: 'The Bangles', date: 'Jan 2025', image: '/scean 8.png' },
-  { level: 11, label: 'Vijayawada Hackathon', date: 'Dec 2025', image: '/scean 11.png' },
-  { level: 13, label: 'Train Home', date: 'Dec 2025', image: '/scean 13.png' },
-  { level: 15, label: 'Antarvedi Shore', date: 'Jan 2026', image: '/scean 15.png' },
-  { level: 17, label: 'Our Chosen Day', date: 'Feb 2026', image: '/scean 17.png' },
-  { level: 22, label: 'Thirty Three Days', date: 'May 2026', image: '/scean 22.png' },
+  { level: 11, label: 'First “I Love You”', date: 'Sep 2025', image: '/the fisrt i love you.png' },
+  { level: 13, label: 'Vijayawada Hackathon', date: 'Dec 2025', image: '/scean 11.png' },
+  { level: 18, label: 'Antarvedi Shore', date: 'Jan 2026', image: '/scean 15.png' },
+  { level: 20, label: 'Our Chosen Day', date: 'Feb 2026', image: '/scean 17.png' },
+  { level: 27, label: 'Thirty Three Days', date: 'May 2026', image: '/scean 22.png' },
 ];
 
 export const DistanceChapter: React.FC<DistanceChapterProps> = ({

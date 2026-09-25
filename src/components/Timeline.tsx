@@ -44,15 +44,15 @@ export const Timeline: React.FC<TimelineProps> = ({ onSelectMemory }) => {
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
 
   const categories = [
-    { id: 'all', label: 'All 25 Scenes' },
+    { id: 'all', label: `All ${MEMORIES.length} Scenes` },
     { id: 'college', label: 'College Days' },
     { id: 'friendship', label: 'Deepening Bond' },
-    { id: 'milestones', label: 'Milestones' },
-    { id: 'journey', label: 'Travel & Hackathon' },
+    { id: 'milestones', label: 'Milestones & Gifts' },
+    { id: 'journey', label: 'Travel & Journeys' },
     { id: 'commitments', label: 'Sacred Vows' },
     { id: 'family', label: 'Family Circle' },
     { id: 'distance', label: 'Distance' },
-    { id: 'reunion', label: 'The Reunion' },
+    { id: 'reunion', label: 'The Reunion & Final' },
   ];
 
   const filteredMemories = selectedFilter === 'all'
