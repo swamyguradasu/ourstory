@@ -10,7 +10,7 @@ import { Sparkles, Compass, Heart, ArrowRight } from 'lucide-react';
 
 interface HomeProps {
   onSelectMemory: (memory: Memory) => void;
-  onNavigateTab: (tab: 'home' | 'map' | 'story' | 'thirtythree' | 'memories' | 'vault') => void;
+  onNavigateTab: (tab: 'home' | 'map' | 'story' | 'memories' | 'vault') => void;
 }
 
 export const Home: React.FC<HomeProps> = ({ onSelectMemory, onNavigateTab }) => {

@@ -23,7 +23,7 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
   // 2: Second point appears
   // 3: All 32 points illuminate sequentially
   // 4: Full map & routes glow, camera zooms out
-  // 5: Crossfade to Scene 32 artwork & Title / Subtitle
+  // 5: Crossfade to Scene 33 artwork & Title / Subtitle
   // 6: Lines 1 & 2 appear
   // 7: Lines 3 & 4 appear
   // 8: Line 5 appears
@@ -33,7 +33,7 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
   const [artworkLoaded, setArtworkLoaded] = useState<boolean>(false);
   const [imgError, setImgError] = useState<boolean>(false);
 
-  const totalPoints = MEMORIES.length; // 32
+  const totalPoints = MEMORIES.length; // 33
   // Master Final Scene
   const sceneFinal = MEMORIES[MEMORIES.length - 1];
 
@@ -288,7 +288,7 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
                 <div className="absolute inset-0 bg-gradient-to-t from-[#120412]/80 via-transparent to-transparent pointer-events-none" />
 
                 <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-cinzel text-[#D8B46A]">
-                  <span className="tracking-widest">CHAPTER XXXII · THE MASTERWORK</span>
+                  <span className="tracking-widest">CHAPTER XXXV · THE MASTERWORK</span>
                   <span className="text-[#FFF4F1] font-mono">SEPTEMBER 2026</span>
                 </div>
               </div>
@@ -310,14 +310,14 @@ export const FinalStoryExperience: React.FC<FinalStoryExperienceProps> = ({
             {/* THE CINEMATIC LINES DISPLAYED ONE AT A TIME                     */}
             {/* ============================================================== */}
             <div className="max-w-2xl mx-auto space-y-4 min-h-[190px] flex flex-col items-center justify-center px-4">
-              {/* Line 1: “32 moments.” */}
+              {/* Line 1: “35 moments.” */}
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: phase >= 6 ? 1 : 0, y: phase >= 6 ? 0 : 12 }}
                 transition={{ duration: 0.9 }}
                 className="font-cormorant italic text-2xl sm:text-3xl text-[#FFF4F1]/90 leading-relaxed font-light"
               >
-                “32 moments.”
+                “{totalPoints} moments.”
               </motion.p>
 
               {/* Line 2: “Countless little memories.” */}

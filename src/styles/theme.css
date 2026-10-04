@@ -111,12 +111,10 @@ textarea {
   background: #7A1838;
 }
 
-/* Custom romantic cursor: only active on fine desktop pointer with no reduced motion */
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  body.custom-cursor-active,
-  body.custom-cursor-active * {
-    cursor: none !important;
-  }
+/* Custom romantic cursor */
+body.custom-cursor-active,
+body.custom-cursor-active * {
+  cursor: none !important;
 }
 
 @keyframes romanticHeartRipple {

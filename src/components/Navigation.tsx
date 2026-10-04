@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Sparkles, Heart } from 'lucide-react';
 
 interface NavigationProps {
-  currentTab: 'home' | 'map' | 'story' | 'thirtythree' | 'distance' | 'memories' | 'vault';
-  onSelectTab: (tab: 'home' | 'map' | 'story' | 'thirtythree' | 'distance' | 'memories' | 'vault') => void;
+  currentTab: 'home' | 'map' | 'story' | 'memories' | 'vault';
+  onSelectTab: (tab: 'home' | 'map' | 'story' | 'memories' | 'vault') => void;
   likesCount: number;
   onHeartClick: () => void;
 }
@@ -37,16 +37,14 @@ export const Navigation: React.FC<NavigationProps> = ({
     };
   }, [mobileMenuOpen]);
 
-  const navItems: { id: 'map' | 'story' | 'thirtythree' | 'distance' | 'memories' | 'vault'; label: string }[] = [
+  const navItems: { id: 'map' | 'story' | 'memories' | 'vault'; label: string }[] = [
     { id: 'map', label: 'MAP' },
     { id: 'story', label: 'STORY' },
-    { id: 'thirtythree', label: '33 DAYS' },
-    { id: 'distance', label: 'DISTANCE' },
     { id: 'memories', label: 'MEMORIES' },
     { id: 'vault', label: 'VAULT' },
   ];
 
-  const handleNavClick = (tab: 'home' | 'map' | 'story' | 'thirtythree' | 'distance' | 'memories' | 'vault') => {
+  const handleNavClick = (tab: 'home' | 'map' | 'story' | 'memories' | 'vault') => {
     onSelectTab(tab);
     setMobileMenuOpen(false);
   };

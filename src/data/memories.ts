@@ -6,6 +6,19 @@ export interface MemoryArtifact {
 
 export type MemoryCategory = 'college' | 'friendship' | 'milestones' | 'journey' | 'commitments' | 'family' | 'distance' | 'reunion';
 
+export interface SadMemory {
+  enabled: boolean;
+  title: string;
+  shortTitle?: string;
+  description: string;
+  caption: string;
+  image: string;
+  date?: string;
+  location?: string;
+  mood?: string;
+  handwrittenNote?: string;
+}
+
 export interface Memory {
   id: string;
   level: number;
@@ -23,6 +36,13 @@ export interface Memory {
   timelineTitle?: string;
   mapLocationName?: string;
   mapIcon?: string;
+  isSpecialMemory?: boolean;
+  secondaryPhotoMemory?: {
+    title: string;
+    description: string;
+    caption?: string;
+  };
+  sadMemory?: SadMemory;
   // Extended fields for rich modal & map rendering
   category: MemoryCategory;
   categoryLabel: string;
@@ -54,23 +74,23 @@ export const MEMORIES: Memory[] = [
     shortTitle: 'A Stolen Glance in Class',
     date: 'September 9, 2024',
     chapter: 'Chapter I: The Beginning',
-    description: 'Morning sunlight poured through the wide classroom windows on September 9, 2024, illuminating the quiet hum of a new semester. As the lecture hall door swung open, she walked in holding her notebooks—calm, studious, wearing glasses and a blue dupatta. Sitting at a front desk, he turned around. That quiet, unintentional first glance was the prologue to our story.',
+    description: 'Morning sunlight poured through the wide classroom windows on September 9, 2024, illuminating the quiet hum of a new semester. As the classroom door swung open, Bhairavi walked in holding her notebooks—calm, studious, wearing glasses and a blue dupatta. Sitting at a front desk, he turned around. That quiet, unintentional first glance was the prologue to our story.',
     caption: '“I didn\'t know it that morning… but somehow, I had just met someone who would become my entire world.”',
     image: '/scean 1.png',
     icon: 'BookOpen',
-    location: 'Engineering College Lecture Hall',
+    location: 'First Year Class Room',
     isUnlocked: true,
     colorAccent: '#D8B46A',
     category: 'college',
     categoryLabel: 'Beginning',
     realm: 'The Scholarly Spires',
-    mapLocationName: 'THE FIRST MORNING',
+    mapLocationName: 'FIRST YEAR CLASS ROOM',
     mapIcon: 'college',
     timelineTitle: 'The First Morning',
     coordinates: { x: 5, y: 24 },
     narrativeParagraphs: [
       'Morning sunlight poured through the wide classroom windows on September 9, 2024, illuminating the quiet hum of a new semester.',
-      'As the lecture hall door swung open, she walked in holding her notebooks—calm, studious, wearing glasses and a blue dupatta. Sitting at a front desk, he turned around.',
+      'As the classroom door swung open, Bhairavi walked in holding her notebooks—calm, studious, wearing glasses and a blue dupatta. Sitting at a front desk, he turned around.',
       'That quiet, unintentional first glance was the unwritten prologue to a lifetime.'
     ],
     handwrittenNote: 'The morning clock read 9:15 AM. You were looking at your notes, and I forgot what lecture I was sitting in.',
@@ -82,7 +102,7 @@ export const MEMORIES: Memory[] = [
     details: [
       { label: 'Date', value: 'September 9, 2024' },
       { label: 'Time of Day', value: '9:15 AM Morning Lecture' },
-      { label: 'Room', value: 'Block C, Hall 103' },
+      { label: 'Location', value: 'First Year Class Room' },
       { label: 'First Impression', value: 'Calm grace and gentle eyes' },
       { label: 'Unspoken Feeling', value: 'A sudden spark of quiet wonder' }
     ],
@@ -103,22 +123,22 @@ export const MEMORIES: Memory[] = [
     shortTitle: 'Corridor Crossroads',
     date: 'Date not specified',
     chapter: 'Chapter I: The Beginning',
-    description: 'Walking through the sunlit college corridor between classes, a mutual friend introduced them. A tentative smile, shy hellos, and identity cards swaying with every step. What seemed like a casual two-minute exchange between lectures soon bloomed into hours of shared laughter along those very arches.',
+    description: 'Walking through the sunlit 1 BTech Block corridor between classes, a mutual friend introduced them. A tentative smile, shy hellos, and identity cards swaying with every step. What seemed like a casual two-minute exchange between lectures soon bloomed into hours of shared laughter along those very arches.',
     caption: '“Two strangers meeting in the middle of a crowded hallway, unaware that destiny had just clicked into place.”',
     image: '/scean 2.png',
     icon: 'MessageSquare',
-    location: 'Main Academic Corridor',
+    location: '1 BTech Block Corridor',
     isUnlocked: true,
     colorAccent: '#E89AAF',
     category: 'college',
     categoryLabel: 'Beginning',
     realm: 'The Scholarly Spires',
-    mapLocationName: 'THE INTRODUCTION',
+    mapLocationName: '1 BTECH BLOCK CORRIDOR',
     mapIcon: 'conversation',
     timelineTitle: 'The Introduction',
     coordinates: { x: 10, y: 15 },
     narrativeParagraphs: [
-      'Walking through the sunlit college corridor between classes, a mutual friend introduced them.',
+      'Walking through the sunlit 1 BTech Block corridor between classes, a mutual friend introduced them.',
       'A tentative smile, shy hellos, and identity cards swaying with every step.',
       'What seemed like a casual two-minute exchange between lectures soon bloomed into hours of shared laughter along those very arches.'
     ],
@@ -129,8 +149,8 @@ export const MEMORIES: Memory[] = [
       mood: 'Warm, hesitant, blossoming'
     },
     details: [
-      { label: 'Location', value: 'Academic Block Corridor' },
-      { label: 'Atmosphere', value: 'Sunlight filtering through stone arches' },
+      { label: 'Location', value: '1 BTech Block Corridor' },
+      { label: 'Atmosphere', value: 'Sunlight filtering through college arches' },
       { label: 'The Greeting', value: 'A polite smile that changed everything' }
     ]
   },
@@ -143,22 +163,22 @@ export const MEMORIES: Memory[] = [
     shortTitle: 'Dust & Laughter',
     date: 'Date not specified',
     chapter: 'Chapter I: The Beginning',
-    description: 'Armed with brooms, duster cloths, and boundless enthusiasm during the college cleaning drive. Sweeping dusty classroom floors quickly turned into playful banter, hiding behind whiteboards, and sharing water bottles amid breathless giggles.',
-    caption: '“Who knew that dusty classroom desks and shared water bottles could make an ordinary chore feel like magic?”',
+    description: 'Armed with brooms, duster cloths, and boundless enthusiasm during the college cleaning drive across the College Ground and halls. Sweeping dusty spaces quickly turned into playful banter, hiding behind whiteboards, and sharing water bottles amid breathless giggles.',
+    caption: '“Who knew that dusty classroom desks and shared water bottles on the college ground could make an ordinary chore feel like magic?”',
     image: '/scean 3.png',
     icon: 'Sparkles',
-    location: 'College Activity Hall',
+    location: 'College Ground',
     isUnlocked: true,
     colorAccent: '#F5C77E',
     category: 'college',
     categoryLabel: 'College Days',
     realm: 'The Scholarly Spires',
-    mapLocationName: 'CLEANING DAY',
+    mapLocationName: 'COLLEGE GROUND',
     mapIcon: 'water',
     timelineTitle: 'Cleaning Day',
     coordinates: { x: 16, y: 22 },
     narrativeParagraphs: [
-      'Armed with brooms, duster cloths, and boundless enthusiasm during the college cleaning drive.',
+      'Armed with brooms, duster cloths, and boundless enthusiasm during the college cleaning drive across the College Ground.',
       'Sweeping dusty classroom floors quickly turned into playful banter, hiding behind whiteboards, and sharing water bottles amid breathless giggles.'
     ],
     handwrittenNote: 'You threw chalk dust at me when I wasn\'t looking. I still owe you for that.',
@@ -168,37 +188,37 @@ export const MEMORIES: Memory[] = [
       mood: 'Playful, cheerful, youthful'
     },
     details: [
+      { label: 'Location', value: 'College Ground' },
       { label: 'Event', value: 'Department Cleaning Drive' },
-      { label: 'Weapon of Choice', value: 'Feather dusters & chalkboard erasers' },
       { label: 'Secret Memory', value: 'Passing the cold steel water flask back and forth' }
     ]
   },
 
-  // 04 — Date not specified: The First Picture
+  // 04 — Date not specified: The First Group Picture
   {
     id: 'first-picture',
     level: 4,
-    title: 'The First Picture',
+    title: 'The First Group Picture',
     shortTitle: 'Captured In Amber',
     date: 'Date not specified',
     chapter: 'Chapter I: The Beginning',
-    description: 'The very first photograph ever taken together. Standing side by side in the college quadrangle under the gentle afternoon sun, slightly awkward yet grinning with genuine delight. That first small photo frame became the anchor of a thousand cherished memories.',
-    caption: '“A shy smile, two people leaning in just a fraction closer, and a shutter click that preserved our youth forever.”',
+    description: 'The very first group photograph ever taken together on the College Ground. Standing side by side in the sunshine, slightly awkward yet grinning with genuine delight. That first small photo frame became the anchor of a thousand cherished memories.',
+    caption: '“A shy smile on the college ground, leaning in just a fraction closer, and a shutter click that preserved our youth forever.”',
     image: '/scean 4.png',
     icon: 'Camera',
-    location: 'College Quadrangle',
+    location: 'College Ground — Group Picture',
     isUnlocked: true,
     colorAccent: '#E89AAF',
     category: 'college',
     categoryLabel: 'College Days',
     realm: 'The Garden of Firsts',
-    mapLocationName: 'THE FIRST PICTURE',
+    mapLocationName: 'COLLEGE GROUND — GROUP PICTURE',
     mapIcon: 'camera',
-    timelineTitle: 'The First Picture',
+    timelineTitle: 'The First Group Picture',
     coordinates: { x: 14, y: 38 },
     narrativeParagraphs: [
-      'The very first photograph ever taken together.',
-      'Standing side by side in the college quadrangle under the gentle afternoon sun, slightly awkward yet grinning with genuine delight.',
+      'The very first photograph ever taken together during a group picture on the College Ground.',
+      'Standing side by side under the gentle afternoon sun, slightly awkward yet grinning with genuine delight.',
       'That first small photo frame became the anchor of a thousand cherished memories.'
     ],
     handwrittenNote: 'Look how far apart we were standing! Neither of us had the courage to put an arm around the other yet.',
@@ -208,13 +228,13 @@ export const MEMORIES: Memory[] = [
       mood: 'Nostalgic, sweet, unforgettable'
     },
     details: [
+      { label: 'Location', value: 'College Ground — Group Picture' },
       { label: 'Camera Used', value: 'Phone Camera (Unfiltered)' },
-      { label: 'Time of Day', value: 'Golden Hour Quadrangle' },
       { label: 'The Photo', value: 'Saved in favorites folder forever' }
     ],
     artifacts: [
       {
-        title: 'Original JPEG Metadata',
+        title: 'Original Group Picture Metadata',
         description: 'Stored in the private favorites album.',
         type: 'photo'
       }
@@ -260,15 +280,15 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 06 — Date not specified: Twenty Days Apart
+  // 06 — Date not specified: Twenty Days Apart (The First Gap)
   {
     id: 'twenty-days-apart',
     level: 6,
     title: 'Twenty Days Apart',
-    shortTitle: 'Quiet Corridors',
+    shortTitle: 'Twenty Days of Silence',
     date: 'Date not specified',
     chapter: 'Chapter II: Deepening Bond',
-    description: 'Twenty long days of college break and physical separation. The familiar corridors felt unusually quiet and grey without her laughter echoing down the hallway. It was during those silent twenty days that both realized how irreplaceable their presence had become.',
+    description: 'Twenty long days of college break and physical separation. The familiar corridors felt unusually quiet and grey without Bhairavi\'s laughter echoing down the hallway. It was during those silent twenty days that both realized how irreplaceable their presence had become.',
     caption: '“Distance is not measured in miles, but in the quiet spaces between conversations where you miss someone dearly.”',
     image: '/scean 6.png',
     icon: 'Moon',
@@ -284,7 +304,7 @@ export const MEMORIES: Memory[] = [
     coordinates: { x: 11, y: 64 },
     narrativeParagraphs: [
       'Twenty long days of college break and physical separation.',
-      'The familiar corridors felt unusually quiet and grey without her laughter echoing down the hallway.',
+      'The familiar corridors felt unusually quiet and grey without Bhairavi\'s laughter echoing down the hallway.',
       'It was during those silent twenty days that both realized how irreplaceable their presence had become.'
     ],
     handwrittenNote: 'I checked my phone every ten minutes. Twenty days had never felt so much like twenty years.',
@@ -297,7 +317,19 @@ export const MEMORIES: Memory[] = [
       { label: 'Duration', value: '20 Complete Days' },
       { label: 'Communication', value: 'Nightly texts and unspoken thoughts' },
       { label: 'Realization', value: 'Some people become essential to your day' }
-    ]
+    ],
+    sadMemory: {
+      enabled: true,
+      title: 'The First Gap: The Silent Corridors',
+      shortTitle: 'Twenty Days of Emptiness',
+      date: 'Winter Break',
+      location: 'Quiet Hallways & Silent Screens',
+      description: 'Twenty endless days of empty lecture rooms and silent evenings. Every chime of the phone carried hope, and every quiet night brought the realization that distance is not measured in miles, but in the ache of missing someone whose presence has become your entire day.',
+      caption: '“I counted the hours not by clocks, but by the quiet spaces where your laugh used to be.”',
+      image: '/chaptre 6 sad image.png',
+      mood: 'melancholic',
+      handwrittenNote: 'The hallways felt so hollow without you. I kept checking my phone every few minutes, typing words I was too shy to send.'
+    }
   },
 
   // 07 — Date not specified: Finding Our Way Back
@@ -347,7 +379,7 @@ export const MEMORIES: Memory[] = [
     shortTitle: 'Glass & Gold',
     date: 'January 29, 2025',
     chapter: 'Chapter III: Gifts & Milestones',
-    description: 'On January 29, 2025, a small velvet box was handed over beside the quiet campus greenery. Delicate glass bangles catching the sunlight, shimmering in hues of rose and gold. As she slipped them over her wrists with a shy, radiant smile, their gentle chime sounded like a melody written just for two.',
+    description: 'On January 29, 2025, a small velvet box was handed over beside the quiet campus greenery. Delicate glass bangles catching the sunlight, shimmering in hues of rose and gold. As Bhairavi slipped them over her wrists with a shy, radiant smile, their gentle chime sounded like a melody written just for two.',
     caption: '“Glass bangles that softly chimed with every step, carrying a warmth that words could not yet speak.”',
     image: '/scean 8.png',
     icon: 'Gift',
@@ -364,7 +396,7 @@ export const MEMORIES: Memory[] = [
     narrativeParagraphs: [
       'On January 29, 2025, a small velvet box was handed over beside the quiet campus greenery.',
       'Delicate glass bangles catching the sunlight, shimmering in hues of rose and gold.',
-      'As she slipped them over her wrists with a shy, radiant smile, their gentle chime sounded like a melody written just for two.'
+      'As Bhairavi slipped them over her wrists with a shy, radiant smile, their gentle chime sounded like a melody written just for two.'
     ],
     handwrittenNote: 'You turned your wrist to hear them chime. That sound will stay with me forever.',
     musicTrack: {
@@ -427,7 +459,7 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 10 — June 9, 2025: The Handmade Shivling (NEW!)
+  // 10 — June 9, 2025: The Handmade Shivling
   {
     id: 'handmade-shivling',
     level: 10,
@@ -435,7 +467,7 @@ export const MEMORIES: Memory[] = [
     shortTitle: 'Folded In Devotion',
     date: 'June 9, 2025',
     chapter: 'Chapter III: Gifts & Milestones',
-    description: 'On June 9, 2025, he crafted a delicate Lord Shiva lingam entirely from paper with quiet patience and devotion, presenting it to Bharavi/Ammu. Seeing the intricate handmade gift, her face lit up with radiant joy and profound happiness, holding it close as a treasure beyond measure.',
+    description: 'On June 9, 2025, he crafted a delicate Lord Shiva lingam entirely from paper with quiet patience and devotion, presenting it to Bhairavi/Ammu. Seeing the intricate handmade gift, her face lit up with radiant joy and profound happiness, holding it close as a treasure beyond measure.',
     caption: '“Crafted gently by hand from paper—a small sacred symbol given with pure reverence and boundless care.”',
     image: '/handmade shivling.png',
     icon: 'Sparkles',
@@ -450,7 +482,7 @@ export const MEMORIES: Memory[] = [
     timelineTitle: 'The Handmade Shivling',
     coordinates: { x: 23, y: 38 },
     narrativeParagraphs: [
-      'On June 9, 2025, he crafted a delicate Lord Shiva lingam entirely from paper with quiet patience and devotion, presenting it to Bharavi/Ammu.',
+      'On June 9, 2025, he crafted a delicate Lord Shiva lingam entirely from paper with quiet patience and devotion, presenting it to Bhairavi/Ammu.',
       'Seeing the intricate handmade gift, her face lit up with radiant joy and profound happiness, holding it close as a treasure beyond measure.',
       'A sacred handmade keepsake expressing pure dedication and spiritual tenderness.'
     ],
@@ -475,16 +507,16 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 11 — September 6, 2025: The First “I Love You” (NEW!)
+  // 11 — September 6, 2025: The Day She Accepted My Love
   {
     id: 'first-i-love-you',
     level: 11,
-    title: 'The First “I Love You”',
-    shortTitle: 'Three Unspoken Words',
+    title: 'The Day She Accepted My Love',
+    shortTitle: 'She Said I Love You',
     date: 'September 6, 2025',
     chapter: 'Chapter IV: Sacred Milestones',
-    description: 'On September 6, 2025, Bharavi/Ammu softly said those three sacred words for the very first time: “I love you.” It was an overwhelmingly joyful, unforgettable day—filled with wide-eyed surprise, pure happiness, playful teasing, and the tender fear of ever becoming distant. Those words echoed again and again in happy whispers moments later, sealing their hearts together.',
-    caption: '“The moment the words finally found their voice: three simple words that changed our whole universe.”',
+    description: 'September 6, 2025 was the day she accepted my love for the first time. I was incredibly happy that day. I teased her a lot about becoming distant, and she reassured me by saying \'I love you\' many times. Those words echoed again and again in happy whispers, sealing our hearts together in pure joy.',
+    caption: '“The day she accepted my love for the first time—pure happiness, playful teasing, and three words that changed our whole universe.”',
     image: '/the fisrt i love you.png',
     icon: 'Heart',
     location: 'Sunlit Campus Walkway',
@@ -493,16 +525,16 @@ export const MEMORIES: Memory[] = [
     category: 'milestones',
     categoryLabel: 'Milestones',
     realm: 'The Garden of Firsts',
-    mapLocationName: 'THE FIRST “I LOVE YOU”',
+    mapLocationName: 'THE DAY SHE ACCEPTED MY LOVE',
     mapIcon: 'heart',
-    timelineTitle: 'The First “I Love You”',
+    timelineTitle: 'The Day She Accepted My Love',
     coordinates: { x: 26, y: 22 },
     narrativeParagraphs: [
-      'On September 6, 2025, Bharavi/Ammu softly said those three sacred words for the very first time: “I love you.”',
-      'It was an overwhelmingly joyful, unforgettable day—filled with wide-eyed surprise, pure happiness, playful teasing, and the tender fear of ever becoming distant.',
-      'Those words echoed again and again in happy whispers moments later, sealing their hearts together in a bond that would never fade.'
+      'September 6, 2025 was the day she accepted my love for the first time. I was incredibly happy that day.',
+      'I teased her a lot about becoming distant, and she reassured me by saying \'I love you\' many times.',
+      'Those sacred words echoed again and again in happy whispers moments later, sealing our hearts together in a bond that would never fade.'
     ],
-    handwrittenNote: 'You paused, teased me gently, and then said it. My heart skipped five beats. And then you said it again.',
+    handwrittenNote: 'You paused, teased me gently, and then said it. My heart skipped five beats. And then you said it again to reassure me.',
     musicTrack: {
       title: 'Three Whispered Words',
       artist: 'Acoustic Piano & Tender Strings',
@@ -510,40 +542,40 @@ export const MEMORIES: Memory[] = [
     },
     details: [
       { label: 'Date', value: 'September 6, 2025' },
-      { label: 'Spoken By', value: 'Bharavi / Ammu' },
+      { label: 'The Milestone', value: 'She accepted my love for the first time' },
       { label: 'The Emotion', value: 'Surprise, pure happiness, playful teasing' },
-      { label: 'Echoes', value: 'Repeated again moments later with gentle laughter' }
+      { label: 'Echoes', value: 'Reassured by saying \'I love you\' many times' }
     ]
   },
 
-  // 12 — October 31, 2025: The Temple Day
+  // 12 — October 31, 2025: Our First Date — Mavullamma Temple
   {
     id: 'the-temple-day',
     level: 12,
-    title: 'The Temple Day',
+    title: 'Our First Date — Mavullamma Temple',
     shortTitle: 'Sacred Prayers & Prasadam',
     date: 'October 31, 2025',
     chapter: 'Chapter IV: Sacred Milestones',
-    description: 'On October 31, 2025, they visited a temple together for the very first time. Surrounded by the gentle glow of brass oil lamps and chanting, he quietly prayed with all his heart that they would walk into this temple together again in the future. With gentle reverence, Bharavi/Ammu placed sacred prasadam into his hands for the first time—a spiritual moment forever etched in eternity.',
-    caption: '“Standing side by side before the deity, quietly praying that we would return to this sacred temple together again in the future.”',
+    description: 'On October 31, 2025, they went on their first date and visited Bhimavaram Mavullamma Temple together for the very first time. Surrounded by the gentle glow of brass oil lamps and sacred bells, he quietly prayed with all his heart that they would return here together again in the future. Bhairavi placed sacred prasadam into his hands for the first time—a spiritual moment forever etched in eternity.',
+    caption: '“Our first date at Bhimavaram Mavullamma Temple—sacred bells, prasadam given for the first time, and a quiet prayer that we would return together for a lifetime.”',
     image: '/temple day.png',
     icon: 'Sparkles',
-    location: 'Ancient Sanctum Shrine',
+    location: 'Bhimavaram Mavullamma Temple',
     isUnlocked: true,
     colorAccent: '#D8B46A',
     category: 'milestones',
     categoryLabel: 'Milestones',
     realm: 'The Waters of Reflection',
-    mapLocationName: 'THE TEMPLE DAY',
+    mapLocationName: 'OUR FIRST DATE — MAVULLAMMA TEMPLE',
     mapIcon: 'temple',
-    timelineTitle: 'The Temple Day',
+    timelineTitle: 'Our First Date — Mavullamma Temple',
     coordinates: { x: 33, y: 16 },
     narrativeParagraphs: [
-      'On October 31, 2025, they visited a temple together for the very first time.',
+      'On October 31, 2025, they went on their first date and visited Bhimavaram Mavullamma Temple together for the very first time.',
       'Surrounded by the gentle glow of brass oil lamps and chanting, he quietly prayed with all his heart that they would walk into this temple together again in the future.',
-      'With gentle reverence, Bharavi/Ammu placed sacred prasadam into his hands for the first time—a spiritual moment forever etched in eternity.'
+      'With gentle reverence, Bhairavi placed sacred prasadam into his hands for the first time—a spiritual moment forever etched in eternity.'
     ],
-    handwrittenNote: 'The temple bells were ringing when you handed me the prasadam. I closed my eyes and prayed we would always walk these steps together.',
+    handwrittenNote: 'The temple bells were ringing when you handed me the prasadam on our first date. I closed my eyes and prayed we would always walk these steps together.',
     musicTrack: {
       title: 'Sanctum Bells & Prayers',
       artist: 'Veena & Temple Bells',
@@ -551,14 +583,15 @@ export const MEMORIES: Memory[] = [
     },
     details: [
       { label: 'Date', value: 'October 31, 2025' },
-      { label: 'First Occurrence', value: 'First time visiting a temple together' },
-      { label: 'The Prasadam', value: 'Given by Bharavi/Ammu for the first time' },
+      { label: 'Milestone', value: 'First date & first temple visit together' },
+      { label: 'Location', value: 'Bhimavaram Mavullamma Temple' },
+      { label: 'The Prasadam', value: 'Given by Bhairavi for the first time' },
       { label: 'Silent Prayer', value: 'To return to this temple together for a lifetime' }
     ],
     artifacts: [
       {
         title: 'Temple Sacred Thread',
-        description: 'Tied on October 31, 2025, carrying a silent prayer for our future.',
+        description: 'Tied on October 31, 2025 at Mavullamma Temple, carrying a silent prayer for our future.',
         type: 'keepsake'
       }
     ]
@@ -651,11 +684,11 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 15 — Date not specified: Train Home
+  // 15 — Date not specified: The Train Home
   {
     id: 'train-home',
     level: 15,
-    title: 'Train Home',
+    title: 'The Train Home',
     shortTitle: 'Rhythmic Rails',
     date: 'Date not specified',
     chapter: 'Chapter V: Journeys & Hackathons',
@@ -669,9 +702,9 @@ export const MEMORIES: Memory[] = [
     category: 'journey',
     categoryLabel: 'Journeys',
     realm: 'The Grand Odyssey',
-    mapLocationName: 'TRAIN HOME',
+    mapLocationName: 'THE TRAIN HOME',
     mapIcon: 'train',
-    timelineTitle: 'Train Home',
+    timelineTitle: 'The Train Home',
     coordinates: { x: 41, y: 58 },
     narrativeParagraphs: [
       'The rhythmic clatter of iron rails heading back home.',
@@ -697,16 +730,16 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 16 — January 5, 2026: A New Chapter
+  // 16 — January 5, 2026: When Our Love Life Truly Began
   {
     id: 'a-new-chapter',
     level: 16,
-    title: 'A New Chapter',
-    shortTitle: 'New Year Threshold',
+    title: 'When Our Love Life Truly Began',
+    shortTitle: 'Our Relationship Established',
     date: 'January 5, 2026',
     chapter: 'Chapter VI: The New Horizon',
-    description: 'Stepping into the new year of 2026 side by side on January 5. A campus banner read “Learn, Build, Grow Together”—they looked at each other and whispered “Together.” A fresh page turned with boundless hope for everything awaiting them.',
-    caption: '“A brand new year, an open journal of possibilities, and the quiet certainty that we would write every page side by side.”',
+    description: 'Stepping into 2026 side by side on January 5, this was the moment when our love life truly began. Our relationship became clear, mutual, and officially established—no longer a question of if, but a shared journey of two devoted hearts stepping forward together with unwavering certainty.',
+    caption: '“The moment our relationship became clear, mutual, and officially established—stepping into a new year as one.”',
     image: '/scean 14.png',
     icon: 'Sparkles',
     location: 'Campus Central Plaza',
@@ -715,16 +748,16 @@ export const MEMORIES: Memory[] = [
     category: 'milestones',
     categoryLabel: 'Milestones',
     realm: 'The Temple of Vows',
-    mapLocationName: 'A NEW CHAPTER',
+    mapLocationName: 'WHEN OUR LOVE LIFE TRULY BEGAN',
     mapIcon: 'ribbon',
-    timelineTitle: 'A New Chapter',
+    timelineTitle: 'When Our Love Life Truly Began',
     coordinates: { x: 47, y: 72 },
     narrativeParagraphs: [
-      'Stepping into the new year of 2026 side by side on January 5.',
-      'A campus banner read “Learn, Build, Grow Together”—they looked at each other and whispered “Together.”',
-      'A fresh page turned with boundless hope for everything awaiting them.'
+      'Stepping into the new year of 2026 side by side on January 5, this was the moment when our love life truly began.',
+      'Our relationship became clear, mutual, and officially established—a bond sealed in trust and open devotion.',
+      'A fresh page turned with boundless clarity and unwavering certainty for everything awaiting us.'
     ],
-    handwrittenNote: 'Banner on the campus read “Learn Build Grow Together”. We looked at each other and said: “Together.”',
+    handwrittenNote: 'Everything became clear. We looked at each other and knew: our love life has truly begun.',
     musicTrack: {
       title: 'Dawn of a New Year',
       artist: 'Orchestral Overture & Celesta',
@@ -732,39 +765,39 @@ export const MEMORIES: Memory[] = [
     },
     details: [
       { label: 'Date', value: 'January 5, 2026' },
-      { label: 'Milestone', value: 'Beginning of the 2026 Academic Year' },
-      { label: 'Campus Motto', value: '“Learn, Build, Grow Together”' }
+      { label: 'Milestone', value: 'Relationship officially established' },
+      { label: 'The Truth', value: 'Clear, mutual, and devoted certainty' }
     ]
   },
 
-  // 17 — January 11, 2026: The CLH Day (NEW!)
+  // 17 — January 11, 2026: Sankranthi Fest Days
   {
     id: 'clh-day',
     level: 17,
-    title: 'The CLH Day',
-    shortTitle: 'Tradition & Photography',
+    title: 'Sankranthi Fest Days',
+    shortTitle: 'Tradition & Photographs',
     date: 'January 11, 2026',
     chapter: 'Chapter VI: The New Horizon',
-    description: 'On January 11, 2026, they spent a magnificent day walking around CLH together. He wore traditional pancha/dhoti attire, while Bharavi/Ammu looked ethereal in her saree. Looking like a proud, radiant young traditional couple enjoying their special day, they took dozens of beautiful photographs with their camera, capturing memories that will shine forever.',
-    caption: '“Dressed in traditional dhoti and elegant saree, walking around CLH like a young couple lost in a picture-perfect dream.”',
+    description: 'On January 11, 2026, during the Sankranthi festival celebrations, they spent a magnificent day walking around the campus grounds together. He wore traditional pancha/dhoti attire, while Bhairavi looked ethereal in her saree. Looking like a proud traditional couple, they walked together and took dozens of beautiful photographs with their camera, capturing memories that will shine forever.',
+    caption: '“Sankranthi celebrations on campus—dressed in traditional dhoti and saree, walking together and capturing countless timeless photographs.”',
     image: '/clh day.png',
     icon: 'Camera',
-    location: 'CLH Campus Grounds',
+    location: 'Sankranthi Fest Time — Campus Grounds',
     isUnlocked: true,
     colorAccent: '#E89AAF',
     category: 'college',
     categoryLabel: 'College Days',
     realm: 'The Temple of Vows',
-    mapLocationName: 'THE CLH DAY',
+    mapLocationName: 'SANKRANTHI FEST DAYS',
     mapIcon: 'camera',
-    timelineTitle: 'The CLH Day',
+    timelineTitle: 'Sankranthi Fest Days',
     coordinates: { x: 54, y: 76 },
     narrativeParagraphs: [
-      'On January 11, 2026, they spent a magnificent day walking around CLH together.',
-      'He wore traditional pancha/dhoti attire, while Bharavi/Ammu looked ethereal in her saree. Looking like a proud, radiant young traditional couple enjoying their special day, they took dozens of beautiful photographs with their camera.',
-      'Every corner of CLH became a stage for laughter, posing, and timeless portraits.'
+      'On January 11, 2026, during the Sankranthi festival celebrations, they spent a magnificent day walking around the campus grounds together.',
+      'He wore traditional pancha/dhoti attire, while Bhairavi looked ethereal in her saree. Looking like a proud traditional couple enjoying their special day, they took dozens of beautiful photographs with their camera.',
+      'Every corner of the campus became a stage for laughter, posing, and timeless portraits.'
     ],
-    handwrittenNote: 'You in your saree and me in my traditional pancha—everyone said we looked like a married couple. We couldn\'t stop smiling.',
+    handwrittenNote: 'You in your saree and me in my traditional pancha during Sankranthi—everyone said we looked like a married couple. We couldn\'t stop smiling.',
     musicTrack: {
       title: 'Traditional Grace & Camera Clicks',
       artist: 'Sitar, Acoustic Guitar & Warm Strings',
@@ -772,14 +805,15 @@ export const MEMORIES: Memory[] = [
     },
     details: [
       { label: 'Date', value: 'January 11, 2026' },
-      { label: 'Location', value: 'CLH Campus Grounds' },
+      { label: 'Festival', value: 'Sankranthi Celebrations' },
+      { label: 'Location', value: 'Sankranthi Fest Time — Campus Grounds' },
       { label: 'Attire', value: 'Traditional Pancha/Dhoti & Elegant Saree' },
       { label: 'Activities', value: 'Campus walk, photo shoot with camera, countless poses' }
     ],
     artifacts: [
       {
-        title: 'CLH Traditional Photo Album',
-        description: 'Camera roll of traditional couple portraits taken across CLH on January 11, 2026.',
+        title: 'Sankranthi Traditional Photo Album',
+        description: 'Camera roll of traditional couple portraits taken across campus on January 11, 2026.',
         type: 'photo'
       }
     ]
@@ -871,16 +905,16 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 20 — February 15, 2026: Our Chosen Day
+  // 20 — February 15, 2026: The Day We Chose
   {
     id: 'our-chosen-day',
     level: 20,
-    title: 'Our Chosen Day',
-    shortTitle: 'The Love Anniversary',
+    title: 'The Day We Chose',
+    shortTitle: 'Our Love Anniversary',
     date: 'February 15, 2026',
     chapter: 'Chapter VII: Chosen Promises',
-    description: 'February 15, 2026: Our chosen love anniversary. Under a sky washed in deep wine and golden twilight, a mutual pledge was reaffirmed. Not a fleeting feeling, but a mature, deeply rooted commitment to stand as one through all seasons of life.',
-    caption: '“February 15, 2026 — The day chosen by our hearts, sanctified by our promises, and cherished for eternity.”',
+    description: 'We wanted our love anniversary to carry a meaning beyond a calendar number. We chose to connect it with Shivaratri — a day that felt spiritually meaningful to us. Under a sky washed in twilight and devotion, our mutual pledge was consecrated forever.',
+    caption: '“February 15, 2026 — We chose to connect our love anniversary with Shivaratri, making our bond sacred beyond simple calendar dates.”',
     image: '/scean 17.png',
     icon: 'Star',
     location: 'Twilight Terrace Horizon',
@@ -889,25 +923,25 @@ export const MEMORIES: Memory[] = [
     category: 'commitments',
     categoryLabel: 'Sacred Vows',
     realm: 'The Sanctuary of Solace',
-    mapLocationName: 'OUR CHOSEN DAY',
+    mapLocationName: 'THE DAY WE CHOSE',
     mapIcon: 'calendar-heart',
-    timelineTitle: 'Our Chosen Day',
+    timelineTitle: 'The Day We Chose',
     coordinates: { x: 52, y: 32 },
     narrativeParagraphs: [
-      'February 15, 2026: Our chosen love anniversary.',
-      'Under a sky washed in deep wine and golden twilight, a mutual pledge was reaffirmed.',
+      'We wanted our love anniversary to carry a meaning beyond a calendar number.',
+      'We chose to connect it with Shivaratri — a day that felt spiritually meaningful to us.',
       'Not a fleeting feeling, but a mature, deeply rooted commitment to stand as one through all seasons of life.'
     ],
-    handwrittenNote: 'February 15th will always be our sacred date. The day our two paths permanently merged into one single line.',
+    handwrittenNote: 'Connecting our anniversary to Shivaratri gave our love a spiritual anchor. The day our two paths permanently became one.',
     musicTrack: {
-      title: 'Covenant of February 15',
+      title: 'Covenant of the Sacred Night',
       artist: 'Acoustic Piano & Golden Strings',
       mood: 'Devotional, golden, unwavering'
     },
     details: [
       { label: 'Anniversary Date', value: 'February 15, 2026' },
-      { label: 'Significance', value: 'Our Chosen Love Anniversary' },
-      { label: 'Vow Sealed', value: 'Mutual pledge of unconditional devotion' }
+      { label: 'Significance', value: 'Connected with Shivaratri Tradition' },
+      { label: 'Vow Sealed', value: 'Spiritual pledge of unconditional devotion' }
     ]
   },
 
@@ -916,14 +950,14 @@ export const MEMORIES: Memory[] = [
     id: 'new-chapter',
     level: 21,
     title: 'New Chapter',
-    shortTitle: 'Turning The Page',
+    shortTitle: 'A Deeply Meaningful Beginning',
     date: 'February 18, 2026',
     chapter: 'Chapter VII: Chosen Promises',
-    description: 'February 18, 2026: Stepping forward into an even deeper chapter of companionship. New routines, shared dreams, studying together for upcoming exams, and supporting each other\'s aspirations with unwavering belief.',
-    caption: '“Every sunrise brings a new page, and every page is sweeter because it is shared with you.”',
+    description: 'February 18, 2026 felt like the beginning of something deeply meaningful in our story. It was a day when everything we had gone through, everything we had understood about each other, and everything we hoped for the future felt closer than ever. This was not just another day in the timeline. It felt like the beginning of a new chapter in our lives together.',
+    caption: '“Some days don\'t just become memories. They become beginnings.”',
     image: '/scean 18.png',
     icon: 'BookOpen',
-    location: 'College Walkway & Study Hall',
+    location: 'A Turning Point in Our Journey',
     isUnlocked: true,
     colorAccent: '#F5C77E',
     category: 'milestones',
@@ -932,34 +966,132 @@ export const MEMORIES: Memory[] = [
     mapLocationName: 'NEW CHAPTER',
     mapIcon: 'ribbon',
     timelineTitle: 'New Chapter',
-    coordinates: { x: 59, y: 18 },
+    coordinates: { x: 57, y: 22 },
     narrativeParagraphs: [
-      'February 18, 2026: Stepping forward into an even deeper chapter of companionship.',
-      'New routines, shared dreams, studying together for upcoming exams, and supporting each other\'s aspirations with unwavering belief.'
+      'February 18, 2026 felt like the beginning of something deeply meaningful in our story.',
+      'It was a day when everything we had gone through, everything we had understood about each other, and everything we hoped for the future felt closer than ever.',
+      'This was not just another day in the timeline. It felt like the beginning of a new chapter in our lives together.'
     ],
-    handwrittenNote: 'We sat in the library making notes for exams, but mostly drawing tiny smiling faces in the margins.',
+    handwrittenNote: 'Some days don’t just become memories. They become beginnings. February 18 was the moment our tomorrow became clear.',
     musicTrack: {
-      title: 'Pages in Motion',
-      artist: 'Light Percussion & Harp Melody',
-      mood: 'Gentle, focused, cheerful'
+      title: 'Pages of a New Beginning',
+      artist: 'Light Percussion, Piano & Harp Melody',
+      mood: 'Hopeful, serene, deeply meaningful'
     },
     details: [
       { label: 'Date', value: 'February 18, 2026' },
-      { label: 'Focus', value: 'Shared academic dreams & daily support' },
-      { label: 'Atmosphere', value: 'Quiet study sessions & shared notes' }
+      { label: 'Significance', value: 'The beginning of a deeply meaningful new chapter' },
+      { label: 'Atmosphere', value: 'Closeness, mutual understanding & shared hopes' }
     ]
   },
 
-  // 22 — March 2, 2026: The First Long Drive (NEW!)
+  // 22 — February 18, 2026: Our Most Precious Promise (SPECIAL CHAPTER!)
+  {
+    id: 'our-most-precious-promise',
+    level: 22,
+    title: 'Our Most Precious Promise',
+    shortTitle: 'The Sacred Thread on the Train',
+    date: 'February 18, 2026',
+    chapter: 'Chapter VII: Chosen Promises',
+    description: 'February 18, 2026: A sacred train journey to Bhimavaram that sealed our most precious promises. Bound by a symbolic sacred thread and quiet, lifelong vows spoken across the rhythmic hum of the rails. A profoundly meaningful sacred moment and private promise held close in our hearts.',
+    caption: '“A train journey to Bhimavaram carrying our most precious promise, a sacred thread, and quiet vows that bound our futures together.”',
+    image: '/february 18 image.png',
+    icon: 'Heart',
+    location: 'Train Journey — Bhimavaram',
+    isUnlocked: true,
+    isSpecialMemory: true,
+    colorAccent: '#D8B46A',
+    category: 'commitments',
+    categoryLabel: 'Sacred Vows',
+    realm: 'The Sanctuary of Solace',
+    mapLocationName: 'OUR MOST PRECIOUS PROMISE',
+    mapIcon: 'heart-star',
+    timelineTitle: 'Our Most Precious Promise',
+    coordinates: { x: 60, y: 16 },
+    narrativeParagraphs: [
+      'February 18, 2026: A train journey to Bhimavaram that became one of the most sacred turning points of our story.',
+      'Sealed by a symbolic sacred thread and unspoken vows that bound our futures together in reverent devotion.',
+      'A private promise and sacred moment held in quiet reverence, marking a lifelong spiritual covenant.'
+    ],
+    handwrittenNote: 'The sacred thread tied on that train to Bhimavaram holds my whole life. I will honor and protect this promise forever.',
+    musicTrack: {
+      title: 'Sacred Thread on the Rails',
+      artist: 'Violin, Veena & Deep Ambient Cello',
+      mood: 'Devotional, monumental, sacred'
+    },
+    details: [
+      { label: 'Date', value: 'February 18, 2026' },
+      { label: 'Location', value: 'Train Journey — Bhimavaram' },
+      { label: 'Sacred Symbol', value: 'Sacred Thread & Lifelong Vow' },
+      { label: 'Significance', value: 'A private promise and sacred moment' }
+    ],
+    artifacts: [
+      {
+        title: 'The Sacred Promise Thread',
+        description: 'Bound on the train journey to Bhimavaram on February 18, 2026.',
+        type: 'keepsake'
+      }
+    ]
+  },
+
+  // 23 — February 18, 2026: A Day We Were Simply Happy
+  {
+    id: 'a-day-we-were-simply-happy',
+    level: 23,
+    title: 'A Day We Were Simply Happy',
+    shortTitle: 'Mirror Reflections & Joy',
+    date: 'February 18, 2026',
+    chapter: 'Chapter VII: Chosen Promises',
+    description: 'On February 18, 2026 in Bhimavaram, they spent a joyful, carefree day full of warmth and laughter. Taking mirror photographs together, capturing funny and sweet poses, and sharing the kind of effortless happiness and emotional closeness that only true companionship brings.',
+    caption: '“Capturing our reflection side by side—simple, pure happiness, joyful laughter, and complete trust.”',
+    image: '/mirror memory.png',
+    icon: 'Camera',
+    location: 'Bhimavaram / Private Memory',
+    isUnlocked: true,
+    colorAccent: '#E89AAF',
+    category: 'milestones',
+    categoryLabel: 'Joyful Moments',
+    realm: 'The Sanctuary of Solace',
+    mapLocationName: 'A DAY WE WERE SIMPLY HAPPY',
+    mapIcon: 'camera',
+    timelineTitle: 'A Day We Were Simply Happy',
+    coordinates: { x: 63, y: 22 },
+    narrativeParagraphs: [
+      'A quiet, treasured moment of pure closeness and trust during their time in Bhimavaram.',
+      'Taking mirror photographs together, laughing without a care in the world, posing for the camera, and enjoying the sweetness of simply being present with each other.',
+      'An effortless peace and joyful companionship that made every second feel light and bright.'
+    ],
+    handwrittenNote: 'Looking at our reflection in the mirror, smiling and laughing together—I just felt so simply, completely happy.',
+    musicTrack: {
+      title: 'Reflections of Joy',
+      artist: 'Acoustic Guitar, Piano & Warm Strings',
+      mood: 'Joyful, warm, lighthearted'
+    },
+    details: [
+      { label: 'Date', value: 'February 18, 2026' },
+      { label: 'Location', value: 'Bhimavaram / Private Memory' },
+      { label: 'Moments', value: 'Mirror photography, camera poses & laughter' },
+      { label: 'The Feeling', value: 'Pure happiness and emotional closeness' }
+    ],
+    artifacts: [
+      {
+        title: 'The Mirror Photograph',
+        description: 'Captured on our happiest day of closeness, laughter, and trust.',
+        type: 'photo'
+      }
+    ]
+  },
+
+  // 24 — March 2, 2026: The First Long Drive
   {
     id: 'first-long-drive',
-    level: 22,
+    level: 24,
     title: 'The First Long Drive',
     shortTitle: 'Two Wheels & Open Roads',
     date: 'March 2, 2026',
     chapter: 'Chapter VII: Chosen Promises',
-    description: 'On March 2, 2026, they took their very first long motorcycle ride together, travelling to college through the refreshing morning air as Bharavi/Ammu sat safely behind him. They spent that entire joyful day together walking around campus, giving college announcements, and sharing nonstop laughter on one of their happiest days.',
-    caption: '“Our first long motorcycle ride together—cool morning breeze, Bharavi sitting safely behind, and a day full of campus announcements and smiles.”',
+    description: 'On March 2, 2026, they took their very first long motorcycle ride together, travelling to college through the refreshing morning air as Bhairavi/Ammu sat safely behind him. They spent that entire joyful day together walking around campus, giving college announcements, and sharing nonstop laughter on one of their happiest days.',
+    caption: '“Our first long motorcycle ride together—cool morning breeze, Bhairavi sitting safely behind, and a day full of campus announcements and smiles.”',
     image: '/first long drive.png',
     icon: 'Compass',
     location: 'Highway to College & Campus Grounds',
@@ -973,7 +1105,7 @@ export const MEMORIES: Memory[] = [
     timelineTitle: 'The First Long Drive',
     coordinates: { x: 66, y: 22 },
     narrativeParagraphs: [
-      'On March 2, 2026, they took their very first long motorcycle ride together, travelling to college through the refreshing morning air as Bharavi/Ammu sat safely behind him.',
+      'On March 2, 2026, they took their very first long motorcycle ride together, travelling to college through the refreshing morning air as Bhairavi/Ammu sat safely behind him.',
       'They spent that entire joyful day together walking around campus, giving college announcements, and sharing nonstop laughter.',
       'A remarkably happy milestone filled with freedom, trust, and shared excitement.'
     ],
@@ -991,10 +1123,10 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 23 — March 2026: Freshers Days (NEW!)
+  // 25 — March 2026: Freshers Days
   {
     id: 'freshers-days',
-    level: 23,
+    level: 25,
     title: 'Freshers Days',
     shortTitle: 'College Festivities & Poses',
     date: 'March 2026',
@@ -1038,10 +1170,10 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 24 — March 26, 2026: The Last Date Before the Gap
+  // 26 — March 26, 2026: The Last Date Before the Gap
   {
     id: 'last-date-before-gap',
-    level: 24,
+    level: 26,
     title: 'The Last Date Before the Gap',
     shortTitle: 'The Quiet Afternoon',
     date: 'March 26, 2026',
@@ -1077,11 +1209,11 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 25 — March 27, 2026: Birthday
+  // 27 — March 27, 2026: Her Birthday
   {
     id: 'birthday',
-    level: 25,
-    title: 'Birthday',
+    level: 27,
+    title: 'Her Birthday',
     shortTitle: 'Candles & Wishes',
     date: 'March 27, 2026',
     chapter: 'Chapter VIII: Trials & Distance',
@@ -1095,9 +1227,9 @@ export const MEMORIES: Memory[] = [
     category: 'milestones',
     categoryLabel: 'Milestones',
     realm: 'The Desert of Patience',
-    mapLocationName: 'BIRTHDAY',
+    mapLocationName: 'HER BIRTHDAY',
     mapIcon: 'cake',
-    timelineTitle: 'Birthday',
+    timelineTitle: 'Her Birthday',
     coordinates: { x: 69, y: 68 },
     narrativeParagraphs: [
       'March 27, 2026: A warm birthday celebration filled with heartfelt wishes, a small glowing cake, and gratitude for another year of life spent in each other\'s warmth.'
@@ -1115,27 +1247,27 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 26 — April 1, 2026: Family Support
+  // 28 — April 1, 2026: When I Was There for Her
   {
-    id: 'family-support',
-    level: 26,
-    title: 'Family Support',
-    shortTitle: 'The Pillars of Home',
+    id: 'there-for-her',
+    level: 28,
+    title: 'When I Was There for Her',
+    shortTitle: 'Standing Strong Beside Her',
     date: 'April 1, 2026',
     chapter: 'Chapter VIII: Trials & Distance',
-    description: 'April 1, 2026: Receiving the quiet blessings, love, and understanding of family. Discovering that love is made stronger when held up by the pillars of home, tradition, and mutual respect.',
-    caption: '“When family stands beside you with warmth and blessing, the path ahead shines with golden confidence.”',
+    description: 'April 1, 2026: Being there for her through every emotion and moment of vulnerability. Offering quiet strength, listening with deep empathy, and reassuring her that no matter what storms arise, she will never have to face anything alone.',
+    caption: '“Standing by her side through every tear and every trial—a promise of quiet strength and unwavering presence.”',
     image: '/scean 21.png',
     icon: 'Shield',
-    location: 'Family Living Room',
+    location: 'Family Living Room & Sanctuary',
     isUnlocked: true,
     colorAccent: '#E89AAF',
     category: 'family',
-    categoryLabel: 'Family',
+    categoryLabel: 'Unwavering Support',
     realm: 'The Desert of Patience',
-    mapLocationName: 'FAMILY SUPPORT',
+    mapLocationName: 'WHEN I WAS THERE FOR HER',
     mapIcon: 'home',
-    timelineTitle: 'Family Support',
+    timelineTitle: 'When I Was There for Her',
     coordinates: { x: 76, y: 76 },
     narrativeParagraphs: [
       'April 1, 2026: Receiving the quiet blessings, love, and understanding of family.',
@@ -1154,10 +1286,10 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 27 — Date not specified: Thirty Three Days
+  // 29 — Date not specified: Thirty Three Days
   {
     id: 'thirty-three-days',
-    level: 27,
+    level: 29,
     title: 'Thirty Three Days',
     shortTitle: 'Thirty-Three Golden Days',
     date: 'Date not specified',
@@ -1193,10 +1325,10 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 28 — Date not specified: Two Months Apart
+  // 30 — Date not specified: Two Months Apart (Two Months of Distance)
   {
     id: 'two-months-apart',
-    level: 28,
+    level: 30,
     title: 'Two Months Apart',
     shortTitle: 'Silence Across The Screen',
     date: 'Date not specified',
@@ -1229,18 +1361,84 @@ export const MEMORIES: Memory[] = [
       { label: 'Duration', value: '60 Long Days of Separation' },
       { label: 'The Test', value: 'Patience, loyalty, unwavering commitment' },
       { label: 'Anchor', value: 'Antarvedi vows & the promise of tomorrow' }
-    ]
+    ],
+    sadMemory: {
+      enabled: true,
+      title: 'Two Months of Distance: Sixty Cold Nights',
+      shortTitle: 'The Long Winter of Silence',
+      date: 'Summer 2026',
+      location: 'Miles of Unspoken Longing',
+      description: 'Sixty long days where time seemed frozen. Staring at the same cold moon night after night, wondering if the heavy silence would fade our memories or make them unbreakable. Holding onto promises across an ocean of longing.',
+      caption: '“Two months of silence, sixty days of waiting, and a heart that never stopped whispering your name into the quiet dark.”',
+      image: '/chapter 28 sad image.png',
+      mood: 'quiet',
+      handwrittenNote: 'Day 43. I listened to our song again under the moonlight. I promised myself I would wait for you no matter how long the winter lasted.'
+    }
   },
 
-  // 29 — September 15, 2026: Flowers, Bangles & That Day (NEW!)
+  // 31 — August 12, 2026: The Day That Hurt
+  {
+    id: 'the-day-that-hurt',
+    level: 31,
+    title: 'The Day That Hurt',
+    shortTitle: 'A Difficult Afternoon',
+    date: 'August 12, 2026',
+    chapter: 'Chapter VIII: Trials & Distance',
+    description: 'On August 12, 2026, he met Bhairavi\'s mother at college, spoke respectfully and apologized with sincere honesty. Because of the delicate family situation, Bhairavi had to introduce him as a friend. Though it was a difficult and painful moment for both, Bhairavi was never at fault, and their quiet understanding and loyalty carried them through.',
+    caption: '“A difficult afternoon where circumstances asked for patience. She had to introduce him as a friend, but our hearts knew the unspoken truth.”',
+    image: '/scean 23.png',
+    icon: 'Shield',
+    location: 'College Campus',
+    isUnlocked: true,
+    colorAccent: '#A37081',
+    category: 'milestones',
+    categoryLabel: 'Trials',
+    realm: 'The Desert of Patience',
+    mapLocationName: 'THE DAY THAT HURT',
+    mapIcon: 'moon',
+    timelineTitle: 'The Day That Hurt',
+    coordinates: { x: 80, y: 38 },
+    narrativeParagraphs: [
+      'On August 12, 2026, he met Bhairavi\'s mother at college, spoke respectfully and apologized with sincere honesty.',
+      'Because of the delicate family situation, Bhairavi had to introduce him as a friend.',
+      'Though it was a painful moment for both, Bhairavi was never at fault, and their quiet understanding and loyalty carried them through the storm.'
+    ],
+    handwrittenNote: 'I saw the pain in your eyes when you had to introduce me as a friend. I never blamed you, not for a single second. I only wanted to protect you.',
+    musicTrack: {
+      title: 'A Difficult Truth & Quiet Loyalty',
+      artist: 'Acoustic Cello & Solitary Piano',
+      mood: 'Poignant, resilient, loyal, quiet'
+    },
+    details: [
+      { label: 'Date', value: 'August 12, 2026' },
+      { label: 'Location', value: 'College Campus' },
+      { label: 'The Meeting', value: 'Spoke respectfully to Bhairavi\'s mother' },
+      { label: 'The Circumstance', value: 'Introduced as a friend due to family situation' },
+      { label: 'Unspoken Truth', value: 'Bhairavi was never at fault; mutual loyalty prevailed' }
+    ],
+    sadMemory: {
+      enabled: true,
+      title: 'The Day That Hurt / A Difficult Truth',
+      shortTitle: 'Unspoken Pain at College',
+      date: 'August 12, 2026',
+      location: 'College Campus Corridor',
+      description: 'Facing Bhairavi’s mother with respectful apologies, while having to stand as just a friend. The ache of holding silence when your heart wants to profess everything, knowing that neither of us was at fault, only weathering the storm together.',
+      caption: '“The heaviest silence is having to be strangers in front of the world while being each other’s entire universe.”',
+      image: '/chapter 29 sad image.png',
+      mood: 'melancholic',
+      handwrittenNote: 'I saw the pain in your eyes when you introduced me as a friend. I never blamed you, not for a single second. I only wanted to protect you.'
+    }
+  },
+
+  // 32 — September 15, 2026: Flowers, Bangles & That Day
   {
     id: 'flowers-bangles-and-that-day',
-    level: 29,
+    level: 32,
     title: 'Flowers, Bangles & That Day',
     shortTitle: 'Surprise & Fragrance',
     date: 'September 15, 2026',
     chapter: 'Chapter IX: The Reunion & Beyond',
-    description: 'On September 15, 2026, he surprised Bharavi/Ammu with fresh fragrant flowers and three sets of gorgeous bangles. She was genuinely overjoyed and deeply touched by the heartfelt gifts. They spent the entire day together, working closely side by side during a hackathon, sharing both productivity and unspoken romance.',
+    description: 'On September 15, 2026, he surprised Bhairavi/Ammu with fresh fragrant flowers and three sets of gorgeous bangles. She was genuinely overjoyed and deeply touched by the heartfelt gifts. They spent the entire day together, working closely side by side during a hackathon, sharing both productivity and unspoken romance.',
     caption: '“A surprise of fresh flowers and three sets of sparkling bangles—her smile outshone everything as we worked side by side.”',
     image: '/flowers bangles and that day.png',
     icon: 'Gift',
@@ -1255,7 +1453,7 @@ export const MEMORIES: Memory[] = [
     timelineTitle: 'Flowers, Bangles & That Day',
     coordinates: { x: 83, y: 30 },
     narrativeParagraphs: [
-      'On September 15, 2026, he surprised Bharavi/Ammu with fresh fragrant flowers and three sets of gorgeous bangles.',
+      'On September 15, 2026, he surprised Bhairavi/Ammu with fresh fragrant flowers and three sets of gorgeous bangles.',
       'She was genuinely overjoyed and deeply touched by the heartfelt gifts. They spent the entire day together, working closely side by side during a hackathon.',
       'The fragrance of flowers mingled with code and shared smiles in one of the most unforgettable days of September.'
     ],
@@ -1280,10 +1478,10 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 30 — September 19, 2026: The Reunion
+  // 33 — September 19, 2026: The Reunion
   {
     id: 'september-19-2026',
-    level: 30,
+    level: 33,
     title: 'The Reunion',
     shortTitle: 'Finding Each Other Again',
     date: 'September 19, 2026',
@@ -1319,16 +1517,16 @@ export const MEMORIES: Memory[] = [
     ]
   },
 
-  // 31 — September 26, 2026: The Gifts for Our Story (NEW!)
+  // 34 — September 28, 2026: The Gifts That Came From the Heart
   {
     id: 'the-gifts-for-our-story',
-    level: 31,
-    title: 'The Gifts for Our Story',
-    shortTitle: 'Three Prepared Treasures',
-    date: 'September 26, 2026',
+    level: 34,
+    title: 'The Gifts That Came From the Heart',
+    shortTitle: 'Treasures Made with Love',
+    date: 'September 28, 2026',
     chapter: 'Chapter IX: The Reunion & Beyond',
-    description: 'Prepared with tender care for September 26, 2026: three special gifts waiting to be given—a pair of elegant earrings, a lovingly handmade flower bouquet, and the interactive OUR STORY website itself. A heartfelt tribute ready to celebrate every step of our journey.',
-    caption: '“Three prepared gifts for tomorrow: delicate earrings, a handmade flower bouquet, and the OUR STORY journal itself.”',
+    description: 'Prepared with tender care for September 28, 2026: gifts from the depths of the heart—a pair of elegant earrings, a lovingly handmade flower bouquet, handwritten memory letters, custom drawings based on their moments, and this very interactive digital journal, OUR STORY. Bhairavi is extremely happy, knowing how much love, effort, and care went into every single detail.',
+    caption: '“Earrings, a handmade flower bouquet, memory letters, drawings, and our website—gifts that carry every beat of my heart.”',
     image: '/the gifts of our story.png',
     icon: 'Gift',
     location: 'The Sanctuary of Tomorrow',
@@ -1337,46 +1535,47 @@ export const MEMORIES: Memory[] = [
     category: 'milestones',
     categoryLabel: 'Gifts',
     realm: 'The Endless Horizon',
-    mapLocationName: 'THE GIFTS FOR OUR STORY',
+    mapLocationName: 'THE GIFTS THAT CAME FROM THE HEART',
     mapIcon: 'gift',
-    timelineTitle: 'The Gifts for Our Story',
+    timelineTitle: 'The Gifts That Came From the Heart',
     coordinates: { x: 91, y: 42 },
     narrativeParagraphs: [
-      'Prepared with tender care for September 26, 2026: three special gifts waiting to be given.',
-      'A pair of sparkling earrings, a lovingly handmade flower bouquet, and this very interactive digital journal—OUR STORY.',
-      'An upcoming milestone prepared from the depths of love to celebrate two unforgettable years.'
+      'Prepared with tender care for September 28, 2026: gifts created from the depths of love.',
+      'A pair of elegant earrings, a lovingly handmade flower bouquet, handwritten memory letters, drawings inspired by our moments, and this very interactive digital journal—OUR STORY.',
+      'Bhairavi was overwhelmed with radiant happiness because the effort and cherished memories meant everything to her.'
     ],
-    handwrittenNote: 'Every petal in the bouquet, every line in this website was made thinking of you. Tomorrow is waiting for us.',
+    handwrittenNote: 'Every petal in the bouquet, every drawing, every letter, and every line of code in this website was made for you. Your happiness is my greatest reward.',
     musicTrack: {
-      title: 'Treasures for Tomorrow',
+      title: 'Treasures from the Heart',
       artist: 'Acoustic Harp & Celesta',
       mood: 'Anticipatory, tender, deeply devoted'
     },
     details: [
-      { label: 'Status', value: 'Upcoming / Prepared with love' },
+      { label: 'Date', value: 'September 28, 2026' },
       { label: 'Gift 01', value: 'Pair of elegant earrings' },
       { label: 'Gift 02', value: 'Handmade flower bouquet' },
-      { label: 'Gift 03', value: 'The OUR STORY interactive website' }
+      { label: 'Gift 03', value: 'Handwritten memory letters & drawings' },
+      { label: 'Gift 04', value: 'The OUR STORY interactive website' }
     ],
     artifacts: [
       {
-        title: 'The Three Prepared Gifts',
-        description: 'Earrings, handmade bouquet, and the digital story journal.',
+        title: 'The Heartfelt Gifts',
+        description: 'Earrings, handmade bouquet, letters, drawings, and the digital story journal.',
         type: 'keepsake'
       }
     ]
   },
 
-  // 32 — Final Chapter: Our Story
+  // 35 — Final Chapter: Our Story
   {
     id: 'our-story',
-    level: 32,
+    level: 35,
     title: 'Our Story',
     shortTitle: 'A Map of Moments',
     date: 'September 2026',
     chapter: 'Chapter X: Our Story',
-    description: '32 moments. Countless little memories. One story. From that accidental glance in the lecture hall on September 9, 2024, to paper shivlings, glass bangles, temple vows, hackathons, motorcycle rides, long separations, and joyful reunions. THIS IS OUR STORY. THE MAP CONTINUES…',
-    caption: '“32 moments. Countless little memories. One story.”',
+    description: '35 moments. Countless little memories. One story. From that accidental glance in the lecture hall on September 9, 2024, to paper shivlings, glass bangles, temple vows, hackathons, motorcycle rides, long separations, and joyful reunions. THIS IS OUR STORY. THE MAP CONTINUES…',
+    caption: '“35 moments. Countless little memories. One story.”',
     image: '/scean 25.png',
     icon: 'Crown',
     location: 'The Entire Tapestry of Us',
@@ -1390,11 +1589,11 @@ export const MEMORIES: Memory[] = [
     timelineTitle: 'Our Story',
     coordinates: { x: 95, y: 62 },
     narrativeParagraphs: [
-      '32 moments. Countless little memories. One story.',
+      '35 moments. Countless little memories. One story.',
       'From that accidental glance in the lecture hall on September 9, 2024, to paper shivlings, glass bangles, temple vows, hackathons, motorcycle rides, long separations, and joyful reunions.',
       'THIS IS OUR STORY. THE MAP CONTINUES…'
     ],
-    handwrittenNote: 'To my best friend, my soulmate, my forever home: here is our story, written in gold. The map continues…',
+    handwrittenNote: 'To Bhairavi—my best friend, my soulmate, my forever home: here is our story, written in gold. The map continues…',
     musicTrack: {
       title: 'Our Story Forever',
       artist: 'Full Cinematic Orchestra & Harp',
@@ -1402,13 +1601,13 @@ export const MEMORIES: Memory[] = [
     },
     details: [
       { label: 'Anniversary Milestone', value: '2 Full Years (September 2024 — 2026)' },
-      { label: 'Total Memories', value: '32 Masterpiece Chapters' },
+      { label: 'Total Memories', value: '35 Masterpiece Chapters' },
       { label: 'Next Destination', value: 'A Lifetime Together' }
     ],
     artifacts: [
       {
         title: 'The Masterpiece Collage',
-        description: 'Framing all 32 moments into one eternal memory.',
+        description: 'Framing all 35 moments into one eternal memory.',
         type: 'photo'
       }
     ]
@@ -1417,7 +1616,7 @@ export const MEMORIES: Memory[] = [
 
 export const TIMELINE_STATS = {
   totalDays: 730,
-  chaptersCount: 32,
+  chaptersCount: 35,
   citiesVisited: 9,
   startDate: 'September 2024',
   currentDate: 'September 2026',
@@ -1443,7 +1642,7 @@ export const VAULT_SECRETS: VaultSecret[] = [
     title: 'The Letter Written at 3:00 AM During the Storm',
     date: 'December 11, 2025',
     unlockedContent: {
-      letter: `My Dearest,\n\nTonight rain is lashing against the hostel window pane, the hackathon hall has gone dark, and everyone else is asleep. I find myself looking at the small paper slip where you scribbled that silly doodle earlier today.\n\nI never believed in fate or pre-written destinies until that first morning you stepped into the lecture hall with that quiet, gentle grace. When I am beside you, the noise of the world softens into harmony. If distance ever tries to test us, remember this letter: no amount of miles or time could ever loosen my grip on your hand.`,
+      letter: `My Dearest Bhairavi,\n\nTonight rain is lashing against the hostel window pane, the hackathon hall has gone dark, and everyone else is asleep. I find myself looking at the small paper slip where you scribbled that silly doodle earlier today.\n\nI never believed in fate or pre-written destinies until that first morning you stepped into the classroom with that quiet, gentle grace. When I am beside you, the noise of the world softens into harmony. If distance ever tries to test us, remember this letter: no amount of miles or time could ever loosen my grip on your hand.`,
       signature: 'Yours across every horizon, Somu',
       hiddenVow: '“I promise that whatever storm comes our way, I will always build a shelter where you feel safe and cherished.”'
     }
@@ -1454,7 +1653,7 @@ export const VAULT_SECRETS: VaultSecret[] = [
     title: 'Vows Whispered Beside the Antarvedi Waves',
     date: 'January 31, 2026',
     unlockedContent: {
-      letter: `To My Heart,\n\nWhen we stood at Antarvedi where the river quietly surrenders to the ocean, you turned to me with salt spray in your hair and smiled that smile that undoes every doubt in my soul.\n\nUnder that vast sanctified sky, seven steps became thirty-two scenes, and thirty-two scenes will become an unbroken lifetime. I will honor you, protect your dreams, celebrate your triumphs as my own, and hold your hand with the exact same reverence fifty years from now.`,
+      letter: `To My Heart, Bhairavi,\n\nWhen we stood at Antarvedi where the river quietly surrenders to the ocean, you turned to me with salt spray in your hair and smiled that smile that undoes every doubt in my soul.\n\nUnder that vast sanctified sky, seven steps became thirty-five scenes, and thirty-five scenes will become an unbroken lifetime. I will honor you, protect your dreams, celebrate your triumphs as my own, and hold your hand with the exact same reverence fifty years from now.`,
       signature: 'Forever your sanctuary',
       hiddenVow: '“Seven steps taken beside the temple bells: one for truth, one for courage, one for laughter, one for devotion, one for family, one for peace, and one for forever.”'
     }

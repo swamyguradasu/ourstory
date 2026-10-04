@@ -5,7 +5,7 @@ import { Memory } from '../data/memories';
 
 interface StoryPageProps {
   onSelectMemory: (memory: Memory) => void;
-  onNavigateTab?: (tab: 'home' | 'map' | 'story' | 'thirtythree' | 'distance' | 'memories' | 'vault') => void;
+  onNavigateTab?: (tab: 'home' | 'map' | 'story' | 'memories' | 'vault') => void;
 }
 
 export const StoryPage: React.FC<StoryPageProps> = ({ onSelectMemory, onNavigateTab }) => {

@@ -173,7 +173,7 @@ export const FinalChapter: React.FC<FinalChapterProps> = ({ onExploreMap, onOpen
             </p>
 
             <p className="font-cormorant text-sm sm:text-base text-[#F7D7DF]/90 max-w-lg mx-auto">
-              All thirty-two moments on our parchment have been unlocked and remembered.
+              All thirty-five moments on our parchment have been unlocked and remembered.
               Yet the true map does not end here—every tomorrow is waiting to be written.
             </p>
 

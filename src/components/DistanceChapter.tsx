@@ -24,8 +24,8 @@ interface DistanceChapterProps {
   onSelectMemory?: (memory: Memory) => void;
 }
 
-// Target reunion memory: September 19, 2026
-const REUNION_MEMORY = MEMORIES.find((m) => m.id === 'september-19-2026') || MEMORIES[29];
+// Target reunion memory: September 19, 2026 (Chapter 33)
+const REUNION_MEMORY = MEMORIES.find((m) => m.id === 'september-19-2026') || MEMORIES[32];
 
 // Key anchor memories that kept the bond strong during the silence
 const KEEPSAKE_MEMORIES = [
@@ -36,7 +36,7 @@ const KEEPSAKE_MEMORIES = [
   { level: 13, label: 'Vijayawada Hackathon', date: 'Dec 2025', image: '/scean 11.png' },
   { level: 18, label: 'Antarvedi Shore', date: 'Jan 2026', image: '/scean 15.png' },
   { level: 20, label: 'Our Chosen Day', date: 'Feb 2026', image: '/scean 17.png' },
-  { level: 27, label: 'Thirty Three Days', date: 'May 2026', image: '/scean 22.png' },
+  { level: 29, label: 'Thirty Three Days', date: 'May 2026', image: '/scean 22.png' },
 ];
 
 export const DistanceChapter: React.FC<DistanceChapterProps> = ({

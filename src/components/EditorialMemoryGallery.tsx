@@ -53,28 +53,28 @@ export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ 
           matchesFilter = lvl >= 1 && lvl <= 5;
           break;
         case 'COLLEGE':
-          matchesFilter = [1, 2, 3, 4, 5, 9, 17, 23].includes(lvl);
+          matchesFilter = [1, 2, 3, 4, 5, 9, 17, 25].includes(lvl);
           break;
         case 'GIFTS':
-          matchesFilter = [8, 10, 29, 31].includes(lvl);
+          matchesFilter = [8, 10, 32, 34].includes(lvl);
           break;
         case 'JOURNEYS':
-          matchesFilter = [13, 14, 15, 18, 22].includes(lvl);
+          matchesFilter = [13, 14, 15, 18, 24].includes(lvl);
           break;
         case 'FAMILY':
-          matchesFilter = [12, 26].includes(lvl);
+          matchesFilter = [12, 28].includes(lvl);
           break;
         case 'MILESTONES':
-          matchesFilter = [8, 10, 11, 12, 16, 19, 20, 21, 25, 27, 29, 31].includes(lvl);
+          matchesFilter = [8, 10, 11, 12, 16, 19, 20, 21, 22, 23, 27, 32, 34, 35].includes(lvl);
           break;
         case 'DISTANCE':
-          matchesFilter = [6, 24, 28].includes(lvl);
+          matchesFilter = [6, 26, 29, 30, 31].includes(lvl);
           break;
         case 'REUNION':
-          matchesFilter = [7, 30, 32].includes(lvl);
+          matchesFilter = [7, 33, 35].includes(lvl);
           break;
         case 'FINAL':
-          matchesFilter = lvl === 32;
+          matchesFilter = lvl === 35;
           break;
         case 'ALL':
         default:
@@ -117,14 +117,14 @@ export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ 
     }
 
     // Key iconic milestones as Grand Feature Cards
-    if (level === 1 || level === 8 || level === 11 || level === 20 || level === 32) {
+    if (level === 1 || level === 8 || level === 11 || level === 20 || level === 22 || level === 35) {
       return 'col-span-1 sm:col-span-2 h-[380px] xs:h-[420px] sm:h-[480px] lg:h-[520px]';
     }
-    if (level === 10 || level === 17 || level === 22 || level === 29 || level === 30 || level === 31) {
+    if (level === 10 || level === 17 || level === 21 || level === 23 || level === 31 || level === 32 || level === 33 || level === 34) {
       return 'col-span-1 sm:col-span-2 h-[360px] xs:h-[400px] sm:h-[460px]';
     }
     // Medium Cards
-    if ([2, 4, 6, 9, 12, 13, 14, 16, 18, 19, 23, 25, 27].includes(level)) {
+    if ([2, 4, 6, 9, 12, 13, 14, 15, 16, 18, 19, 24, 25, 26, 27, 28, 29, 30].includes(level)) {
       return 'col-span-1 h-[360px] xs:h-[390px] sm:h-[440px]';
     }
     // Small Memory Tiles

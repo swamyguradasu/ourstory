@@ -12,7 +12,7 @@ import { triggerRomanticHearts } from './RomanticParticleSystem';
 interface ProgressIndicatorProps {
   currentTab: string;
   onSelectMemory?: (memory: Memory) => void;
-  onNavigateTab?: (tab: 'home' | 'map' | 'story' | 'thirtythree' | 'distance' | 'memories' | 'vault') => void;
+  onNavigateTab?: (tab: 'home' | 'map' | 'story' | 'memories' | 'vault') => void;
 }
 
 export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
@@ -115,7 +115,7 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
 
           {/* 2. Text Stack */}
           <div className="text-left leading-tight">
-            {/* Top Line: 25 MEMORIES · ONE STORY (or THE MAP IS COMPLETE when 25/25) */}
+            {/* Top Line: {total} MEMORIES · ONE STORY (or THE MAP IS COMPLETE when {total}/{total}) */}
             <div className="flex items-center gap-1.5 font-cinzel text-[10px] font-bold tracking-[0.18em] text-[#D8B46A] uppercase">
               {isComplete ? (
                 <span className="text-[#FFF4F1] flex items-center gap-1">
@@ -123,14 +123,14 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
                 </span>
               ) : (
                 <>
-                  <span>25 MEMORIES</span>
+                  <span>{total} MEMORIES</span>
                   <span className="text-[#7A1838]">·</span>
                   <span>ONE STORY</span>
                 </>
               )}
             </div>
 
-            {/* Bottom Line: MEMORIES DISCOVERED X / 25 */}
+            {/* Bottom Line: MEMORIES DISCOVERED X / {total} */}
             <div className="font-cormorant text-xs sm:text-sm text-[#F7D7DF] font-medium tracking-wide flex items-center gap-1.5">
               {isComplete ? (
                 <span className="italic text-[#E89AAF] text-xs">
@@ -185,10 +185,10 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
               </div>
             </div>
 
-            {/* Quick 25-Node Grid of All Memories */}
+            {/* Quick Grid of All Memories */}
             <div className="mb-3">
               <div className="text-[10px] font-cinzel font-bold text-[#E89AAF] uppercase tracking-wider mb-1.5 flex items-center justify-between">
-                <span>The 25 Chapters</span>
+                <span>The {total} Chapters</span>
                 <span className="font-normal text-[9px] lowercase italic text-[#FFF4F1]/60">
                   click any to view
                 </span>
@@ -251,9 +251,9 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
                   <button
                     onClick={() => unlockAllJourneyProgress()}
                     className="text-[#D8B46A]/80 hover:text-[#FFF4F1] text-[10px] underline transition-colors cursor-pointer"
-                    title="Discover all 25 memories for demonstration"
+                    title={`Discover all ${total} memories for demonstration`}
                   >
-                    Discover All (25/25)
+                    Discover All ({total}/{total})
                   </button>
                 )}
               </div>

@@ -24,8 +24,8 @@ interface ThirtyThreeDaysProps {
   onSelectMemory?: (memory: Memory) => void;
 }
 
-// Memory 22 in project data: "Thirty Three Days"
-const MEMORY_22 = MEMORIES.find((m) => m.level === 22) || MEMORIES[21];
+// Memory 29 in project data: "Thirty Three Days"
+const MEMORY_29 = MEMORIES.find((m) => m.id === 'thirty-three-days') || MEMORIES[28];
 
 // Strict data discipline: Only populated days use facts from project data.
 // Days without supplied content strictly display: "A day waiting for its memory."
@@ -151,7 +151,7 @@ export const ThirtyThreeDays: React.FC<ThirtyThreeDaysProps> = ({
           <div className="mt-4 flex items-center justify-center gap-3 text-xs sm:text-sm font-cinzel tracking-[0.25em] text-[#D8B46A]">
             <span>APRIL — MAY 2026</span>
             <span className="text-[#E89AAF]">·</span>
-            <span>CHAPTER XXII CHRONICLE</span>
+            <span>CHAPTER XXIX CHRONICLE</span>
           </div>
         </div>
 
@@ -352,14 +352,14 @@ export const ThirtyThreeDays: React.FC<ThirtyThreeDaysProps> = ({
                       “{currentDayData.detailBullet}”
                     </div>
 
-                    {/* Link to Scene 22 in Memory Modal if available */}
+                    {/* Link to Scene 29 in Memory Modal if available */}
                     {onSelectMemory && (
                       <div className="pt-2">
                         <button
-                          onClick={() => onSelectMemory(MEMORY_22)}
+                          onClick={() => onSelectMemory(MEMORY_29)}
                           className="inline-flex items-center gap-2 text-xs font-cinzel font-bold text-[#D8B46A] hover:text-[#FFF4F1] tracking-widest uppercase transition-colors cursor-pointer"
                         >
-                          <span>Open Chapter XXII Sanctuary</span>
+                          <span>Open Chapter XXIX Sanctuary</span>
                           <ArrowRight className="w-3.5 h-3.5" />
                         </button>
                       </div>
@@ -426,7 +426,7 @@ export const ThirtyThreeDays: React.FC<ThirtyThreeDaysProps> = ({
             “Thirty-three sunrises. One unbroken heartbeat.”
           </p>
           <div className="text-xs font-cinzel text-[#D8B46A] tracking-[0.25em] mt-2">
-            CHAPTER XXII · APRIL — MAY 2026
+            CHAPTER XXIX · APRIL — MAY 2026
           </div>
         </div>
       </div>

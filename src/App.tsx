@@ -14,11 +14,12 @@ import { MemoriesPage } from './pages/Memories';
 import { VaultPage } from './pages/Vault';
 import { ThirtyThreeDaysPage } from './pages/ThirtyThreeDaysPage';
 import { DistancePage } from './pages/DistancePage';
+import { SadModeProvider } from './context/SadModeContext';
 import { Memory } from './data/memories';
 import confetti from 'canvas-confetti';
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState<'home' | 'map' | 'story' | 'thirtythree' | 'distance' | 'memories' | 'vault'>('home');
+  const [currentTab, setCurrentTab] = useState<'home' | 'map' | 'story' | 'memories' | 'vault'>('home');
   const [selectedMemory, setSelectedMemory] = useState<Memory | null>(null);
   const [likesCount, setLikesCount] = useState<number>(() => {
     try {
@@ -46,7 +47,7 @@ export default function App() {
     }
   };
 
-  const handleSelectTab = (tab: 'home' | 'map' | 'story' | 'thirtythree' | 'distance' | 'memories' | 'vault') => {
+  const handleSelectTab = (tab: 'home' | 'map' | 'story' | 'memories' | 'vault') => {
     setCurrentTab(tab);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -70,12 +71,6 @@ export default function App() {
       case 'story':
         // Deep wine-red gradient
         return 'bg-gradient-to-b from-[#220718] via-[#480d24] to-[#120712]';
-      case 'thirtythree':
-        // Warm house-like lighting ambience with burgundy and amber hearth glows
-        return 'bg-gradient-to-b from-[#200a18] via-[#351022] to-[#120512]';
-      case 'distance':
-        // Deep midnight purple, starlight and dark crimson
-        return 'bg-gradient-to-b from-[#180424] via-[#2d0a3c] to-[#0f0216]';
       case 'memories':
         // Dark plum cinematic gallery atmosphere
         return 'bg-gradient-to-b from-[#18061e] via-[#2a0e33] to-[#110515]';
@@ -88,81 +83,69 @@ export default function App() {
   };
 
   return (
-    <div className={`relative min-h-screen ${getTabBackground()} text-[#FFF4F1] overflow-x-hidden selection:bg-[#7A1838] transition-colors duration-700`}>
-      {/* Global Film Grain & Soft Vignette */}
-      <div className="fixed inset-0 pointer-events-none film-grain z-0 opacity-40" />
-      <div className="fixed inset-0 pointer-events-none cinematic-vignette z-0 opacity-60" />
+    <SadModeProvider>
+      <div className={`relative min-h-screen ${getTabBackground()} text-[#FFF4F1] overflow-x-hidden selection:bg-[#7A1838] transition-colors duration-700`}>
+        {/* Global Film Grain & Soft Vignette */}
+        <div className="fixed inset-0 pointer-events-none film-grain z-0 opacity-40" />
+        <div className="fixed inset-0 pointer-events-none cinematic-vignette z-0 opacity-60" />
 
-      {/* Visual Ambiance Particles */}
-      <RomanticParticleSystem />
-      <RomanticCursor />
+        {/* Visual Ambiance Particles */}
+        <RomanticParticleSystem />
+        <RomanticCursor />
 
-      {/* Floating Navigation */}
-      <Navigation
-        currentTab={currentTab}
-        onSelectTab={handleSelectTab}
-        likesCount={likesCount}
-        onHeartClick={handleHeartClick}
-      />
+        {/* Floating Navigation */}
+        <Navigation
+          currentTab={currentTab}
+          onSelectTab={handleSelectTab}
+          likesCount={likesCount}
+          onHeartClick={handleHeartClick}
+        />
 
-      {/* Page Routing */}
-      <main className="w-full relative z-10">
-        {currentTab === 'home' && (
-          <Home
-            onSelectMemory={handleSelectMemory}
-            onNavigateTab={handleSelectTab}
-          />
-        )}
-        {currentTab === 'map' && (
-          <MapPage onSelectMemory={handleSelectMemory} />
-        )}
-        {currentTab === 'story' && (
-          <StoryPage
-            onSelectMemory={handleSelectMemory}
-            onNavigateTab={handleSelectTab}
-          />
-        )}
-        {currentTab === 'thirtythree' && (
-          <ThirtyThreeDaysPage
-            onContinueStory={() => handleSelectTab('distance')}
-            onSelectMemory={handleSelectMemory}
-          />
-        )}
-        {currentTab === 'distance' && (
-          <DistancePage
-            onContinue={(mem) => {
-              handleSelectMemory(mem);
-            }}
-            onSelectMemory={handleSelectMemory}
-          />
-        )}
-        {currentTab === 'memories' && (
-          <MemoriesPage onSelectMemory={handleSelectMemory} />
-        )}
-        {currentTab === 'vault' && (
-          <VaultPage onSelectMemory={handleSelectMemory} />
-        )}
-      </main>
+        {/* Page Routing */}
+        <main className="w-full relative z-10">
+          {currentTab === 'home' && (
+            <Home
+              onSelectMemory={handleSelectMemory}
+              onNavigateTab={handleSelectTab}
+            />
+          )}
+          {currentTab === 'map' && (
+            <MapPage onSelectMemory={handleSelectMemory} />
+          )}
+          {currentTab === 'story' && (
+            <StoryPage
+              onSelectMemory={handleSelectMemory}
+              onNavigateTab={handleSelectTab}
+            />
+          )}
+          {currentTab === 'memories' && (
+            <MemoriesPage onSelectMemory={handleSelectMemory} />
+          )}
+          {currentTab === 'vault' && (
+            <VaultPage onSelectMemory={handleSelectMemory} />
+          )}
+        </main>
 
-      {/* Chapter Memory Modal */}
-      <MemoryModal
-        memory={selectedMemory}
-        onClose={() => setSelectedMemory(null)}
-        onSelectMemory={handleSelectMemory}
-      />
+        {/* Chapter Memory Modal */}
+        <MemoryModal
+          memory={selectedMemory}
+          onClose={() => setSelectedMemory(null)}
+          onSelectMemory={handleSelectMemory}
+        />
 
-      {/* Fixed bottom milestone statistics pill & global journey progress indicator */}
-      <ProgressIndicator
-        currentTab={currentTab}
-        onSelectMemory={handleSelectMemory}
-        onNavigateTab={handleSelectTab}
-      />
+        {/* Fixed bottom milestone statistics pill & global journey progress indicator */}
+        <ProgressIndicator
+          currentTab={currentTab}
+          onSelectMemory={handleSelectMemory}
+          onNavigateTab={handleSelectTab}
+        />
 
-      {/* Floating Ambient Music Controller (Bottom-Right) */}
-      <AmbientMusicPlayer />
+        {/* Floating Ambient Music Controller & Sad Mode Toggle (Bottom-Right) */}
+        <AmbientMusicPlayer />
 
-      {/* Global Secret Discovery Notification Toast */}
-      <SecretDiscoveryToast />
-    </div>
+        {/* Global Secret Discovery Notification Toast */}
+        <SecretDiscoveryToast />
+      </div>
+    </SadModeProvider>
   );
 }

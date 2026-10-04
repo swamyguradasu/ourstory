@@ -26,7 +26,7 @@ export const ThenNowComparison: React.FC<ThenNowComparisonProps> = ({
 
   const scene01Image = scene01?.image || '/scean 1.png';
   const sceneFinalImage = sceneFinal?.image || '/scean 25.png';
-  const finalLevel = sceneFinal?.level || 32;
+  const finalLevel = sceneFinal?.level || 35;
 
   // Calculate position from mouse or touch event
   const updatePosition = useCallback((clientX: number) => {

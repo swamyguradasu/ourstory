@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { SadModeToggle } from './SadModeToggle';
 import {
   Volume2,
   VolumeX,
@@ -383,74 +384,79 @@ export const AmbientMusicPlayer: React.FC = () => {
       )}
 
       {/* ============================================================== */}
-      {/* BOTTOM-RIGHT FLOATING CIRCULAR MUSIC BUTTON                    */}
-      {/* States: "MUSIC ON" & "MUSIC OFF" with animated equalizer       */}
+      {/* BOTTOM-RIGHT FLOATING CONTROLS: MUSIC & SAD MODE               */}
       {/* ============================================================== */}
-      <div className="flex items-center gap-2">
-        {/* Expand / Controls Toggle Pill */}
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-[#1c081e]/85 backdrop-blur-md border border-[#7A1838]/50 hover:border-[#D8B46A]/60 text-[10px] font-cinzel text-[#E89AAF] hover:text-[#FFF4F1] shadow-lg transition-all"
-          aria-expanded={isExpanded}
-          aria-controls="music-panel"
-          aria-label="Toggle music settings panel"
-        >
-          <Sliders className="w-3 h-3 text-[#D8B46A]" />
-          <span>{isExpanded ? 'Hide' : 'Tracks'}</span>
-          {isExpanded ? <ChevronDown className="w-3 h-3" /> : <ChevronUp className="w-3 h-3" />}
-        </button>
+      <div className="flex flex-col sm:flex-row items-end sm:items-center gap-2">
+        {/* SAD MODE FLOATING BUTTON */}
+        <SadModeToggle />
 
-        {/* Circular Floating Action Button */}
-        <button
-          onClick={togglePlay}
-          className={`relative group flex items-center gap-2.5 pl-3 pr-3.5 sm:pr-4 py-2 rounded-full border transition-all duration-300 shadow-xl cursor-pointer ${
-            isPlaying
-              ? 'bg-gradient-to-r from-[#2a0c24]/95 to-[#1c081e]/95 border-[#D8B46A] shadow-[0_0_25px_rgba(216,180,106,0.4),0_0_15px_rgba(122,24,56,0.6)] scale-105'
-              : 'bg-[#1c081e]/90 hover:bg-[#250a22] border-[#7A1838]/60 hover:border-[#D8B46A]/50 text-[#E89AAF] hover:text-[#FFF4F1]'
-          }`}
-          aria-label={isPlaying ? 'Pause ambient music (MUSIC ON)' : 'Play ambient music (MUSIC OFF)'}
-          title={isPlaying ? 'Click to pause music' : 'Click to play ambient music'}
-        >
-          {/* Icon Circle */}
-          <div
-            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all ${
-              isPlaying
-                ? 'bg-[#7A1838] border border-[#D8B46A] text-[#FFF4F1]'
-                : 'bg-[#140614] border border-[#7A1838]/40 text-[#E89AAF]'
-            }`}
+        {/* MUSIC CONTROLS GROUP */}
+        <div className="flex items-center gap-2">
+          {/* Expand / Controls Toggle Pill */}
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-[#1c081e]/85 backdrop-blur-md border border-[#7A1838]/50 hover:border-[#D8B46A]/60 text-[10px] font-cinzel text-[#E89AAF] hover:text-[#FFF4F1] shadow-lg transition-all"
+            aria-expanded={isExpanded}
+            aria-controls="music-panel"
+            aria-label="Toggle music settings panel"
           >
-            {isPlaying ? (
-              <Music className="w-3.5 h-3.5 text-[#D8B46A]" />
-            ) : (
-              <VolumeX className="w-3.5 h-3.5 text-[#E89AAF]" />
-            )}
-          </div>
+            <Sliders className="w-3 h-3 text-[#D8B46A]" />
+            <span>{isExpanded ? 'Hide' : 'Tracks'}</span>
+            {isExpanded ? <ChevronDown className="w-3 h-3" /> : <ChevronUp className="w-3 h-3" />}
+          </button>
 
-          {/* STATE TEXT: "MUSIC ON" or "MUSIC OFF" */}
-          <div className="flex flex-col items-start leading-tight">
-            <span
-              className={`font-cinzel text-[10px] sm:text-[11px] font-bold tracking-wider ${
-                isPlaying ? 'text-[#D8B46A]' : 'text-[#E89AAF]'
+          {/* Circular Floating Action Button */}
+          <button
+            onClick={togglePlay}
+            className={`relative group flex items-center gap-2.5 pl-3 pr-3.5 sm:pr-4 py-2 rounded-full border transition-all duration-300 shadow-xl cursor-pointer ${
+              isPlaying
+                ? 'bg-gradient-to-r from-[#2a0c24]/95 to-[#1c081e]/95 border-[#D8B46A] shadow-[0_0_25px_rgba(216,180,106,0.4),0_0_15px_rgba(122,24,56,0.6)] scale-105'
+                : 'bg-[#1c081e]/90 hover:bg-[#250a22] border-[#7A1838]/60 hover:border-[#D8B46A]/50 text-[#E89AAF] hover:text-[#FFF4F1]'
+            }`}
+            aria-label={isPlaying ? 'Pause ambient music (MUSIC ON)' : 'Play ambient music (MUSIC OFF)'}
+            title={isPlaying ? 'Click to pause music' : 'Click to play ambient music'}
+          >
+            {/* Icon Circle */}
+            <div
+              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all ${
+                isPlaying
+                  ? 'bg-[#7A1838] border border-[#D8B46A] text-[#FFF4F1]'
+                  : 'bg-[#140614] border border-[#7A1838]/40 text-[#E89AAF]'
               }`}
             >
-              {isPlaying ? 'MUSIC ON' : 'MUSIC OFF'}
-            </span>
+              {isPlaying ? (
+                <Music className="w-3.5 h-3.5 text-[#D8B46A]" />
+              ) : (
+                <VolumeX className="w-3.5 h-3.5 text-[#E89AAF]" />
+              )}
+            </div>
 
-            {/* SUBTLE ANIMATED EQUALIZER WHEN MUSIC IS ON */}
-            {isPlaying && (
-              <div
-                className="flex items-end gap-0.5 h-2.5 mt-0.5"
-                aria-hidden="true"
-                title="Audio Equalizer"
+            {/* STATE TEXT: "MUSIC ON" or "MUSIC OFF" */}
+            <div className="flex flex-col items-start leading-tight">
+              <span
+                className={`font-cinzel text-[10px] sm:text-[11px] font-bold tracking-wider ${
+                  isPlaying ? 'text-[#D8B46A]' : 'text-[#E89AAF]'
+                }`}
               >
-                <span className="w-0.5 bg-[#D8B46A] rounded-full animate-[musicBar_0.8s_ease-in-out_infinite]" />
-                <span className="w-0.5 bg-[#E89AAF] rounded-full animate-[musicBar_1.1s_ease-in-out_infinite_0.2s]" />
-                <span className="w-0.5 bg-[#FFF4F1] rounded-full animate-[musicBar_0.6s_ease-in-out_infinite_0.4s]" />
-                <span className="w-0.5 bg-[#D8B46A] rounded-full animate-[musicBar_0.9s_ease-in-out_infinite_0.1s]" />
-              </div>
-            )}
-          </div>
-        </button>
+                {isPlaying ? 'MUSIC ON' : 'MUSIC OFF'}
+              </span>
+
+              {/* SUBTLE ANIMATED EQUALIZER WHEN MUSIC IS ON */}
+              {isPlaying && (
+                <div
+                  className="flex items-end gap-0.5 h-2.5 mt-0.5"
+                  aria-hidden="true"
+                  title="Audio Equalizer"
+                >
+                  <span className="w-0.5 bg-[#D8B46A] rounded-full animate-[musicBar_0.8s_ease-in-out_infinite]" />
+                  <span className="w-0.5 bg-[#E89AAF] rounded-full animate-[musicBar_1.1s_ease-in-out_infinite_0.2s]" />
+                  <span className="w-0.5 bg-[#FFF4F1] rounded-full animate-[musicBar_0.6s_ease-in-out_infinite_0.4s]" />
+                  <span className="w-0.5 bg-[#D8B46A] rounded-full animate-[musicBar_0.9s_ease-in-out_infinite_0.1s]" />
+                </div>
+              )}
+            </div>
+          </button>
+        </div>
       </div>
 
       {/* Keyframe animation for subtle equalizer bars */}

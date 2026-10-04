@@ -9,22 +9,19 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onEnterStory, onExploreMap }) => {
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
-  const handleEnterClick = () => {
-    setIsTransitioning(true);
-    setTimeout(() => {
-      onEnterStory();
-    }, 450);
+  const handleEnterClick = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    onEnterStory();
   };
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#1a081a] via-[#350b1a] to-[#120812] selection:bg-[#7A1838]">
       {/* Dynamic Animated Romantic Backdrop */}
       <div 
-        className={`absolute inset-0 pointer-events-none transition-transform duration-700 ease-out ${
-          isTransitioning ? 'scale-110 filter blur-sm opacity-60' : 'scale-100 filter blur-0 opacity-100'
-        }`}
+        className="absolute inset-0 pointer-events-none transition-transform duration-700 ease-out scale-100 filter blur-0 opacity-100"
       >
         {/* Radial Atmospheric Gradients: Dark Burgundy, Wine, Plum, Deep Purple */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[600px] bg-gradient-to-tr from-[#5B1028]/50 via-[#7A1838]/35 to-[#4B1D5A]/30 rounded-full blur-[130px] animate-pulse-glow" />
@@ -95,9 +92,7 @@ export const Hero: React.FC<HeroProps> = ({ onEnterStory, onExploreMap }) => {
 
       {/* Main Center Content */}
       <div 
-        className={`relative z-20 max-w-4xl mx-auto px-6 text-center transition-all duration-700 ${
-          isTransitioning ? 'opacity-0 scale-95 -translate-y-4' : 'opacity-100 scale-100 translate-y-0'
-        }`}
+        className="relative z-20 max-w-4xl mx-auto px-6 text-center transition-all duration-700 opacity-100 scale-100 translate-y-0"
       >
         {/* Subtle romantic kicker */}
         <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full border border-[#D8B46A]/25 bg-[#241025]/50 backdrop-blur-md">

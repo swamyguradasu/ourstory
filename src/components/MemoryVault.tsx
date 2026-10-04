@@ -74,10 +74,10 @@ const VERIFIED_TRAVEL_RECORDS = [
     destination: 'Open Highway Ride',
     date: 'March 2, 2026',
     tag: 'The First Long Drive',
-    sceneLevel: 22,
+    sceneLevel: 24,
     image: '/first long drive.png',
     excerpt:
-      'Scene 22: Our first long motorcycle ride together travelling to college in the fresh morning air, followed by a joyful day walking the campus and giving announcements.',
+      'Scene 24: Our first long motorcycle ride together travelling to college in the fresh morning air, followed by a joyful day walking the campus and giving announcements.',
     route: 'Highway Corridor → College Main Gate → Campus Quadrangle',
   },
 ];
@@ -240,7 +240,7 @@ export const MemoryVault: React.FC<MemoryVaultProps> = ({ onSelectMemory }) => {
         <div className="mb-8 sm:mb-12 flex items-center gap-2 overflow-x-auto no-scrollbar sm:flex-wrap sm:justify-center max-w-4xl mx-auto py-1 px-1">
           {[
             { id: 'ALL', label: 'ALL SECTIONS', icon: Bookmark },
-            { id: 'PHOTOS', label: 'PHOTOGRAPHS (25)', icon: Camera },
+            { id: 'PHOTOS', label: `PHOTOGRAPHS (${MEMORIES.length})`, icon: Camera },
             { id: 'LETTERS', label: 'LETTERS', icon: Mail },
             { id: 'LITTLE_THINGS', label: 'LITTLE THINGS', icon: Sparkles },
             { id: 'TRAVEL', label: 'TRAVEL ARCHIVE', icon: Compass },
@@ -348,7 +348,7 @@ export const MemoryVault: React.FC<MemoryVaultProps> = ({ onSelectMemory }) => {
                   </h2>
                 </div>
                 <span className="text-xs text-[#E89AAF] font-cormorant italic">
-                  25 Canonical Anime Keepsake Plates
+                  {MEMORIES.length} Canonical Anime Keepsake Plates
                 </span>
               </div>
 
@@ -720,7 +720,7 @@ export const MemoryVault: React.FC<MemoryVaultProps> = ({ onSelectMemory }) => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="p-5 rounded-2xl bg-[#120812]/80 border border-[#7A1838]/40">
                         <div className="text-xs font-cinzel font-bold text-[#D8B46A] tracking-wider mb-1">
-                          CHAPTER 26 · THE FIRST MORNING OF YEAR THREE
+                          CHAPTER 36 · THE FIRST MORNING OF YEAR THREE
                         </div>
                         <p className="font-cormorant italic text-sm text-[#F7D7DF]/90">
                           “Reserved for September 2026. The words we will say when two years become forever.”

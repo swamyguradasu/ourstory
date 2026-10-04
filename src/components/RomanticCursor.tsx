@@ -23,7 +23,7 @@ export const RomanticCursor: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [ripples, setRipples] = useState<ClickRipple[]>([]);
   const [sparkles, setSparkles] = useState<MapSparkle[]>([]);
-  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   // References for high performance RAF lerp without React re-render thrashing
   const mouseCoordsRef = useRef({ x: -100, y: -100 });
@@ -34,23 +34,7 @@ export const RomanticCursor: React.FC = () => {
   const lastSparkleTimeRef = useRef<number>(0);
 
   useEffect(() => {
-    // 1. PERFORMANCE & MOBILE UX: Check if touch device, coarse pointer, screen width under 1024px, or prefers reduced motion
-    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
-    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
-    const isSmallScreen = window.innerWidth < 1024;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Only enable on desktop with fine mouse pointer, wide screen (1024px+), and no reduced motion
-    if (hasTouch || isCoarsePointer || !isFinePointer || isSmallScreen || prefersReducedMotion) {
-      setIsDisabled(true);
-      document.body.classList.remove('custom-cursor-active');
-      return;
-    }
-
     setIsDisabled(false);
-
-    // Apply custom-cursor-active to document body
     document.body.classList.add('custom-cursor-active');
 
     // 2. High-performance trailing follower loop with requestAnimationFrame
@@ -205,7 +189,13 @@ export const RomanticCursor: React.FC = () => {
       }, 600);
     };
 
+    const handleMouseEnter = () => {
+      document.body.classList.add('custom-cursor-active');
+      setIsVisible(true);
+    };
+
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('mousedown', handleMouseDown, { passive: true });
 
@@ -213,6 +203,7 @@ export const RomanticCursor: React.FC = () => {
       isRunning = false;
       document.body.classList.remove('custom-cursor-active');
       window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('mousedown', handleMouseDown);
       if (animFrameRef.current) {
