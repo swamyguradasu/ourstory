@@ -1,181 +1,179 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MEMORIES, Memory } from '../data/memories';
+import {
+  GALLERY_CATEGORIES,
+  MemoryCategorySection,
+  GalleryMediaItem,
+} from '../data/realMemories';
 import { RoseHeaderFlourish, RoseCornerAccent } from './FlowerDecorations';
 import { triggerRomanticHearts } from './RomanticParticleSystem';
 import { RomanticButton } from './RomanticButton';
-import { Search, Sparkles, X, Shuffle, Calendar, ArrowRight, Compass, Heart, Camera } from 'lucide-react';
+import {
+  Search,
+  Sparkles,
+  X,
+  Shuffle,
+  ChevronDown,
+  ChevronUp,
+  Camera,
+  Film,
+  Image as ImageIcon,
+  Compass,
+  Heart,
+  Moon,
+  Maximize2,
+  Play,
+  Layers,
+} from 'lucide-react';
 import { triggerEasterEggDiscovery } from '../utils/easterEggs';
 
 interface EditorialMemoryGalleryProps {
-  onSelectMemory: (memory: Memory) => void;
+  onSelectItem: (item: GalleryMediaItem, categoryItems: GalleryMediaItem[]) => void;
 }
 
-export type GalleryFilterType =
-  | 'ALL'
-  | 'BEGINNING'
-  | 'COLLEGE'
-  | 'GIFTS'
-  | 'JOURNEYS'
-  | 'FAMILY'
-  | 'MILESTONES'
-  | 'DISTANCE'
-  | 'REUNION'
-  | 'FINAL';
+export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ onSelectItem }) => {
+  const [selectedCategoryTab, setSelectedCategoryTab] = useState<string>('ALL');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>({});
 
-const FILTER_TAGS: { id: GalleryFilterType; label: string }[] = [
-  { id: 'ALL', label: 'ALL' },
-  { id: 'BEGINNING', label: 'BEGINNING' },
-  { id: 'COLLEGE', label: 'COLLEGE' },
-  { id: 'GIFTS', label: 'GIFTS' },
-  { id: 'JOURNEYS', label: 'JOURNEYS' },
-  { id: 'FAMILY', label: 'FAMILY' },
-  { id: 'MILESTONES', label: 'MILESTONES' },
-  { id: 'DISTANCE', label: 'DISTANCE' },
-  { id: 'REUNION', label: 'REUNION' },
-  { id: 'FINAL', label: 'FINAL' },
-];
+  // Flatten all items across all categories for global counts and random memory picker
+  const allMediaItems = useMemo(() => {
+    return GALLERY_CATEGORIES.flatMap((c) => c.items);
+  }, []);
 
-export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ onSelectMemory }) => {
-  const [activeFilter, setActiveFilter] = useState<GalleryFilterType>('ALL');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const totalPhotos = useMemo(() => {
+    return allMediaItems.filter((m) => m.type === 'image').length;
+  }, [allMediaItems]);
 
-  // Filter memories matching selected tag & search query
-  const filteredMemories = useMemo(() => {
-    return MEMORIES.filter((mem) => {
-      // 1. Tag filtering
-      let matchesFilter = true;
-      const lvl = mem.level;
+  const totalVideos = useMemo(() => {
+    return allMediaItems.filter((m) => m.type === 'video').length;
+  }, [allMediaItems]);
 
-      switch (activeFilter) {
-        case 'BEGINNING':
-          matchesFilter = lvl >= 1 && lvl <= 5;
-          break;
-        case 'COLLEGE':
-          matchesFilter = [1, 2, 3, 4, 5, 9, 17, 25].includes(lvl);
-          break;
-        case 'GIFTS':
-          matchesFilter = [8, 10, 32, 34].includes(lvl);
-          break;
-        case 'JOURNEYS':
-          matchesFilter = [13, 14, 15, 18, 24].includes(lvl);
-          break;
-        case 'FAMILY':
-          matchesFilter = [12, 28].includes(lvl);
-          break;
-        case 'MILESTONES':
-          matchesFilter = [8, 10, 11, 12, 16, 19, 20, 21, 22, 23, 27, 32, 34, 35].includes(lvl);
-          break;
-        case 'DISTANCE':
-          matchesFilter = [6, 26, 29, 30, 31].includes(lvl);
-          break;
-        case 'REUNION':
-          matchesFilter = [7, 33, 35].includes(lvl);
-          break;
-        case 'FINAL':
-          matchesFilter = lvl === 35;
-          break;
-        case 'ALL':
-        default:
-          matchesFilter = true;
-          break;
-      }
-
-      if (!matchesFilter) return false;
-
-      // 2. Search query filtering
-      if (!searchQuery.trim()) return true;
-
-      const q = searchQuery.toLowerCase().trim();
-      const titleMatch = (mem.timelineTitle || mem.title).toLowerCase().includes(q);
-      const dateMatch = mem.date.toLowerCase().includes(q);
-      const chapterMatch = (mem.chapter || '').toLowerCase().includes(q) || `chapter ${mem.level}`.includes(q);
-      const keywordMatch =
-        mem.shortTitle.toLowerCase().includes(q) ||
-        mem.location.toLowerCase().includes(q) ||
-        mem.description.toLowerCase().includes(q) ||
-        mem.caption.toLowerCase().includes(q) ||
-        mem.handwrittenNote.toLowerCase().includes(q);
-
-      return titleMatch || dateMatch || chapterMatch || keywordMatch;
-    });
-  }, [activeFilter, searchQuery]);
-
-  // Random Memory Selector Action
-  const handleRandomMemory = (e: React.MouseEvent) => {
-    triggerRomanticHearts(e.clientX, e.clientY);
-    const randomIndex = Math.floor(Math.random() * MEMORIES.length);
-    const randomMem = MEMORIES[randomIndex];
-    onSelectMemory(randomMem);
+  // Toggle category collapse/expand
+  const toggleCollapse = (categoryId: string) => {
+    setCollapsedCategories((prev) => ({
+      ...prev,
+      [categoryId]: !prev[categoryId],
+    }));
   };
 
-  // Determine card layout size while maintaining strict chronological order
-  const getCardLayoutClass = (level: number, totalFiltered: number) => {
-    if (totalFiltered <= 4) {
-      return 'col-span-1 h-[360px] xs:h-[400px] sm:h-[440px]';
-    }
+  // Expand all categories
+  const expandAll = () => {
+    setCollapsedCategories({});
+  };
 
-    // Key iconic milestones as Grand Feature Cards
-    if (level === 1 || level === 8 || level === 11 || level === 20 || level === 22 || level === 35) {
-      return 'col-span-1 sm:col-span-2 h-[380px] xs:h-[420px] sm:h-[480px] lg:h-[520px]';
+  // Filtered categories and items based on search and tab selection
+  const visibleCategories = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
+
+    return GALLERY_CATEGORIES.map((cat) => {
+      // If a specific category tab is selected, check if this category matches
+      if (selectedCategoryTab !== 'ALL' && cat.id !== selectedCategoryTab) {
+        return null;
+      }
+
+      // If search query is active, filter items within this category
+      let matchingItems = cat.items;
+      if (q) {
+        matchingItems = cat.items.filter((item) => {
+          return (
+            item.title.toLowerCase().includes(q) ||
+            (item.caption || '').toLowerCase().includes(q) ||
+            item.filename.toLowerCase().includes(q) ||
+            cat.title.toLowerCase().includes(q) ||
+            cat.subtitle.toLowerCase().includes(q) ||
+            cat.description.toLowerCase().includes(q)
+          );
+        });
+      }
+
+      if (matchingItems.length === 0 && q) {
+        return null;
+      }
+
+      return {
+        ...cat,
+        items: matchingItems,
+      };
+    }).filter(Boolean) as MemoryCategorySection[];
+  }, [selectedCategoryTab, searchQuery]);
+
+  // Random Memory Action
+  const handleRandomMemory = (e: React.MouseEvent) => {
+    triggerRomanticHearts(e.clientX, e.clientY);
+    const randomIndex = Math.floor(Math.random() * allMediaItems.length);
+    const randomItem = allMediaItems[randomIndex];
+    // Find category for context
+    const parentCat = GALLERY_CATEGORIES.find((c) => c.items.some((x) => x.id === randomItem.id));
+    onSelectItem(randomItem, parentCat ? parentCat.items : allMediaItems);
+  };
+
+  // Scroll to category smoothly
+  const scrollToCategory = (catId: string) => {
+    setSelectedCategoryTab(catId);
+    if (catId !== 'ALL') {
+      const el = document.getElementById(`category-${catId}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
-    if (level === 10 || level === 17 || level === 21 || level === 23 || level === 31 || level === 32 || level === 33 || level === 34) {
-      return 'col-span-1 sm:col-span-2 h-[360px] xs:h-[400px] sm:h-[460px]';
-    }
-    // Medium Cards
-    if ([2, 4, 6, 9, 12, 13, 14, 15, 16, 18, 19, 24, 25, 26, 27, 28, 29, 30].includes(level)) {
-      return 'col-span-1 h-[360px] xs:h-[390px] sm:h-[440px]';
-    }
-    // Small Memory Tiles
-    return 'col-span-1 h-[340px] xs:h-[370px] sm:h-[400px]';
   };
 
   return (
-    <div className="relative w-full min-h-screen py-12 sm:py-20 lg:py-24 px-3 sm:px-6 lg:px-8 selection:bg-[#7A1838]">
+    <div className="relative w-full min-h-screen py-10 sm:py-16 lg:py-20 px-3 sm:px-6 lg:px-8 selection:bg-[#7A1838]">
+      {/* BACKGROUND AURA (POINTER-EVENTS-NONE) */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/6 w-96 h-96 bg-[#7A1838]/15 rounded-full blur-[140px]" />
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-[#D8B46A]/10 rounded-full blur-[160px]" />
+      </div>
+
       <div className="max-w-7xl mx-auto relative z-20">
-        {/* HEADER SECTION */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#D8B46A]/30 bg-[#241025]/70 backdrop-blur-md mb-3 shadow-[0_0_15px_rgba(216,180,106,0.15)]">
+        {/* PAGE INTRODUCTION */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#D8B46A]/30 bg-[#241025]/80 backdrop-blur-md mb-3.5 shadow-[0_0_15px_rgba(216,180,106,0.15)]">
             <button
               onClick={() => triggerEasterEggDiscovery('camera')}
               className="text-[#D8B46A] hover:text-[#FFF4F1] hover:scale-110 transition-transform cursor-pointer"
-              title="A vintage camera lens"
+              title="A vintage keepsake lens"
               role="button"
               aria-label="Vintage camera"
             >
               <Camera className="w-3.5 h-3.5" />
             </button>
             <span className="text-xs font-semibold tracking-[0.25em] text-[#E89AAF] uppercase font-cinzel">
-              The Keepsake Folio
+              The Complete Photo Album
             </span>
           </div>
 
           <RoseHeaderFlourish className="mb-3" />
 
+          {/* EXACT TITLE */}
           <h1 className="font-cinzel text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-bold tracking-wider text-[#FFF4F1] drop-shadow-[0_8px_30px_rgba(122,24,56,0.6)] mb-3">
-            MEMORIES
+            OUR MEMORIES
           </h1>
 
+          {/* EXACT SUBTITLE */}
           <p className="font-cormorant italic text-xl sm:text-3xl text-[#F7D7DF] font-medium leading-relaxed max-w-2xl mx-auto">
-            “Some moments deserve to be kept forever.”
+            “Every picture holds a little piece of our story.”
           </p>
 
-          <div className="mt-3 flex items-center justify-center gap-3 text-xs sm:text-sm font-cinzel tracking-[0.2em] text-[#D8B46A]">
-            <span>{MEMORIES.length} CANONICAL SCENES</span>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-cinzel tracking-[0.18em] text-[#D8B46A]">
+            <span>{GALLERY_CATEGORIES.length} CATEGORIES</span>
             <span className="text-[#E89AAF]">·</span>
-            <span>CHRONOLOGICAL FOLIO</span>
+            <span>{totalPhotos} PHOTOGRAPHS</span>
+            <span className="text-[#E89AAF]">·</span>
+            <span>{totalVideos} VIDEOS</span>
           </div>
         </div>
 
         {/* SEARCH & "GET LOST IN A MEMORY" ACTION BAR */}
-        <div className="mb-8 sm:mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-5 max-w-5xl mx-auto">
-          {/* Subtle Search Field */}
-          <div className="relative w-full sm:w-80">
+        <div className="mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-5xl mx-auto">
+          {/* Real-time Search Input */}
+          <div className="relative w-full sm:w-84">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#D8B46A]" />
             <input
               type="text"
-              placeholder="Search a memory…"
+              placeholder="Search across all 191 memories…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-9 min-h-[44px] py-2.5 rounded-full bg-[#1e0a20]/90 border border-[#7A1838]/60 focus:border-[#D8B46A] focus:outline-none text-xs sm:text-sm text-[#FFF4F1] placeholder-[#E89AAF]/50 tracking-wider shadow-inner backdrop-blur-md transition-all"
@@ -191,7 +189,7 @@ export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ 
             )}
           </div>
 
-          {/* "GET LOST IN A MEMORY" RANDOM MEMORY BUTTON */}
+          {/* Random Memory Selector */}
           <RomanticButton
             onClick={handleRandomMemory}
             variant="primary"
@@ -203,128 +201,218 @@ export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ 
           </RomanticButton>
         </div>
 
-        {/* SUBTLE CATEGORY FILTER BUTTONS (Swipeable on mobile) */}
-        <div className="mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar sm:flex-wrap sm:justify-center max-w-4xl mx-auto py-1">
-          {FILTER_TAGS.map((tag) => {
-            const isActive = activeFilter === tag.id;
+        {/* CATEGORY JUMP TABS BAR */}
+        <div className="mb-12 flex items-center gap-2 overflow-x-auto no-scrollbar sm:flex-wrap sm:justify-center max-w-6xl mx-auto py-1.5">
+          <button
+            onClick={() => scrollToCategory('ALL')}
+            className={`min-h-[42px] px-4 py-2 rounded-full text-xs font-cinzel tracking-[0.15em] transition-all duration-300 border cursor-pointer shrink-0 flex items-center gap-2 ${
+              selectedCategoryTab === 'ALL'
+                ? 'bg-gradient-to-r from-[#7A1838] to-[#5B1028] text-[#FFF4F1] border-[#D8B46A] shadow-[0_0_15px_rgba(216,180,106,0.45)] scale-105 font-bold'
+                : 'bg-[#1e0a20]/75 text-[#E89AAF]/85 hover:text-[#FFF4F1] border-[#7A1838]/40 hover:border-[#D8B46A]/60'
+            }`}
+          >
+            <span>ALL CATEGORIES</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#7A1838]/40 text-[#D8B46A] font-mono">
+              191
+            </span>
+          </button>
+
+          {GALLERY_CATEGORIES.map((cat) => {
+            const isSelected = selectedCategoryTab === cat.id;
             return (
               <button
-                key={tag.id}
-                onClick={() => setActiveFilter(tag.id)}
-                className={`min-h-[40px] px-4 py-2 rounded-full text-xs font-cinzel tracking-[0.15em] transition-all duration-300 border cursor-pointer shrink-0 ${
-                  isActive
-                    ? 'bg-gradient-to-r from-[#7A1838] to-[#5B1028] text-[#FFF4F1] border-[#D8B46A] shadow-[0_0_15px_rgba(216,180,106,0.4)] scale-105'
-                    : 'bg-[#1e0a20]/70 text-[#E89AAF]/80 hover:text-[#FFF4F1] border-[#7A1838]/40 hover:border-[#D8B46A]/60'
+                key={cat.id}
+                onClick={() => scrollToCategory(cat.id)}
+                className={`min-h-[42px] px-4 py-2 rounded-full text-xs font-cinzel tracking-[0.15em] transition-all duration-300 border cursor-pointer shrink-0 flex items-center gap-2 ${
+                  isSelected
+                    ? 'bg-gradient-to-r from-[#7A1838] to-[#5B1028] text-[#FFF4F1] border-[#D8B46A] shadow-[0_0_15px_rgba(216,180,106,0.45)] scale-105 font-bold'
+                    : 'bg-[#1e0a20]/75 text-[#E89AAF]/85 hover:text-[#FFF4F1] border-[#7A1838]/40 hover:border-[#D8B46A]/60'
                 }`}
               >
-                <span>{tag.label}</span>
+                <span>
+                  {cat.categoryNumber}. {cat.title}
+                </span>
+                <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-[#7A1838]/40 text-[#E89AAF] font-mono">
+                  {cat.items.length}
+                </span>
               </button>
             );
           })}
         </div>
 
-        {/* GALLERY COUNTER STRIP */}
-        <div className="mb-6 sm:mb-8 flex items-center justify-between text-xs text-[#E89AAF] border-b border-[#7A1838]/40 pb-3">
-          <div className="font-cinzel tracking-wider text-[#D8B46A] text-[11px] sm:text-xs">
-            SHOWING <span className="font-bold text-[#FFF4F1]">{filteredMemories.length}</span> OF {MEMORIES.length} CHRONOLOGICAL MEMORIES
-          </div>
-          <div className="font-cormorant italic text-sm text-[#F7D7DF]/70 hidden sm:block">
-            September 2024 — September 2026
-          </div>
-        </div>
-
-        {/* EDITORIAL MASONRY GALLERY (CHRONOLOGICAL PRESERVATION) */}
-        {filteredMemories.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {filteredMemories.map((memory) => {
-              const levelFormatted = memory.level < 10 ? `0${memory.level}` : `${memory.level}`;
-              const displayTitle = memory.timelineTitle || memory.title;
-              const cardClass = getCardLayoutClass(memory.level, filteredMemories.length);
-              const isHovered = hoveredId === memory.id;
+        {/* CATEGORY GALLERY SECTIONS */}
+        {visibleCategories.length > 0 ? (
+          <div className="space-y-16 sm:space-y-24">
+            {visibleCategories.map((category) => {
+              const isCollapsed = Boolean(collapsedCategories[category.id]);
+              const isClosing = Boolean(category.isClosingChapter);
+              const photosCount = category.items.filter((i) => i.type === 'image').length;
+              const videosCount = category.items.filter((i) => i.type === 'video').length;
 
               return (
-                <motion.div
-                  key={memory.id}
-                  layout
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
-                  className={`relative group ${cardClass} rounded-2xl sm:rounded-[28px] overflow-hidden border border-[#7A1838]/40 hover:border-[#D8B46A]/85 bg-[#120812] cursor-pointer shadow-[0_15px_35px_rgba(0,0,0,0.85)] hover:shadow-[0_25px_60px_rgba(122,24,56,0.5),0_0_30px_rgba(216,180,106,0.35)] transition-all duration-500 hover:-translate-y-1`}
-                  onClick={(e) => {
-                    triggerRomanticHearts(e.clientX, e.clientY);
-                    onSelectMemory(memory);
-                  }}
-                  onMouseEnter={() => setHoveredId(memory.id)}
-                  onMouseLeave={() => setHoveredId(null)}
+                <section
+                  key={category.id}
+                  id={`category-${category.id}`}
+                  className={`scroll-mt-24 p-5 sm:p-8 lg:p-10 rounded-3xl sm:rounded-[36px] border transition-all duration-500 ${
+                    isClosing
+                      ? 'bg-gradient-to-br from-[#08101d] via-[#101f35] to-[#070e18] border-[#64B5F6]/45 shadow-[0_25px_70px_rgba(0,0,0,0.95),0_0_40px_rgba(30,58,138,0.35)]'
+                      : 'bg-[#18071a]/90 sm:bg-[#18071a]/80 backdrop-blur-xl border-[#7A1838]/50 shadow-[0_20px_50px_rgba(0,0,0,0.85)]'
+                  }`}
                 >
-                  {/* Subtle Corner Rose Accent appearing on hover */}
-                  <RoseCornerAccent
-                    position="top-right"
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"
-                  />
+                  {/* CATEGORY HEADER */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#7A1838]/40 pb-6 mb-8">
+                    <div className="space-y-2 max-w-3xl">
+                      {/* Badge */}
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`px-3 py-1 rounded-full text-[10px] sm:text-xs font-cinzel font-bold tracking-[0.2em] uppercase border ${
+                            isClosing
+                              ? 'bg-[#0e213d] text-[#64B5F6] border-[#64B5F6]/50 shadow-[0_0_12px_rgba(100,181,246,0.3)]'
+                              : 'bg-[#2a0e28] text-[#D8B46A] border-[#D8B46A]/50 shadow-[0_0_12px_rgba(216,180,106,0.2)]'
+                          }`}
+                        >
+                          {isClosing ? 'FINAL CHAPTER' : `CATEGORY ${category.categoryNumber}`}
+                        </span>
 
-                  {/* BACKGROUND CINEMATIC IMAGE WITH SLOW ZOOM */}
-                  <div className="absolute inset-0 w-full h-full overflow-hidden">
-                    <img
-                      src={memory.image}
-                      alt={displayTitle}
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
-                  </div>
-
-                  {/* DARK CINEMATIC GRADIENT & VIGNETTE OVERLAY */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e040f]/95 via-[#0e040f]/45 to-transparent pointer-events-none transition-opacity duration-500 group-hover:from-[#0e040f]/98 group-hover:via-[#0e040f]/60" />
-
-                  {/* WARM ROSE VIGNETTE ON HOVER */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#7A1838]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                  {/* TOP BADGE: CHAPTER NUMBER & DATE */}
-                  <div className="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-20 flex items-center justify-between pointer-events-none">
-                    <div className="px-2.5 py-1 rounded-full bg-[#120812]/85 backdrop-blur-md border border-[#D8B46A]/50 text-[10px] sm:text-xs font-cinzel font-bold text-[#D8B46A] tracking-[0.18em] shadow-md">
-                      CHAPTER {levelFormatted}
-                    </div>
-
-                    <div className="px-2.5 py-1 rounded-full bg-[#120812]/85 backdrop-blur-md border border-[#E89AAF]/30 text-[10px] sm:text-xs text-[#E89AAF] font-medium tracking-wide flex items-center gap-1 shadow-md">
-                      <Calendar className="w-3 h-3 text-[#D8B46A]" />
-                      <span>{memory.date}</span>
-                    </div>
-                  </div>
-
-                  {/* BOTTOM EDITORIAL OVERLAY CONTENT */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-7 z-20 flex flex-col justify-end space-y-2">
-                    {/* Chapter / Location subtitle */}
-                    <div className="flex items-center gap-1.5 text-xs font-cormorant italic text-[#E89AAF]/90 line-clamp-1">
-                      <Compass className="w-3.5 h-3.5 text-[#D8B46A] shrink-0" />
-                      <span>{memory.location}</span>
-                    </div>
-
-                    {/* Prominent Title */}
-                    <h3 className="font-cinzel text-lg sm:text-2xl lg:text-3xl font-bold tracking-wide text-[#FFF4F1] group-hover:text-[#D8B46A] transition-colors leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-                      {displayTitle}
-                    </h3>
-
-                    {/* Short Story Hook */}
-                    <p className="text-xs sm:text-sm text-[#FFF4F1]/85 font-sans font-light line-clamp-2 leading-relaxed">
-                      {memory.caption.replace(/^“|”$/g, '')}
-                    </p>
-
-                    {/* "OPEN MEMORY" BUTTON (ALWAYS VISIBLE & TAP-FRIENDLY ON MOBILE) */}
-                    <div className="pt-2">
-                      <div className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-full bg-gradient-to-r from-[#7A1838] to-[#5B1028] border border-[#D8B46A]/60 text-xs font-cinzel font-bold tracking-widest text-[#FFF4F1] uppercase shadow-[0_0_15px_rgba(122,24,56,0.6)] group-hover:shadow-[0_0_25px_rgba(216,180,106,0.5)] transition-all duration-300">
-                        <span>OPEN MEMORY</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-[#D8B46A] group-hover:translate-x-1 transition-transform" />
+                        <span className="text-xs font-cinzel text-[#E89AAF]">
+                          {photosCount > 0 && `${photosCount} Photos`}
+                          {photosCount > 0 && videosCount > 0 && ' · '}
+                          {videosCount > 0 && `${videosCount} Videos`}
+                        </span>
                       </div>
+
+                      {/* Title */}
+                      <h2
+                        className={`font-cinzel text-2xl xs:text-3xl sm:text-4xl font-bold tracking-wide ${
+                          isClosing
+                            ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#E0F2FE] via-[#90CAF9] to-[#64B5F6]'
+                            : 'text-[#FFF4F1]'
+                        } drop-shadow-md`}
+                      >
+                        {category.title}
+                      </h2>
+
+                      {/* Subtitle */}
+                      <p
+                        className={`font-cormorant italic text-base sm:text-lg ${
+                          isClosing ? 'text-[#90CAF9]' : 'text-[#E89AAF]'
+                        }`}
+                      >
+                        {category.subtitle}
+                      </p>
+
+                      {/* Description */}
+                      <p className="text-xs sm:text-sm text-[#FFF4F1]/85 font-sans font-light leading-relaxed">
+                        {category.description}
+                      </p>
                     </div>
+
+                    {/* Collapse / Expand Toggle Button */}
+                    <button
+                      onClick={() => toggleCollapse(category.id)}
+                      className="self-start sm:self-center flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-full bg-[#241025] hover:bg-[#7A1838] border border-[#D8B46A]/50 text-xs font-cinzel text-[#FFF4F1] transition-all cursor-pointer shadow-md shrink-0"
+                    >
+                      <span>{isCollapsed ? 'EXPAND GALLERY' : 'COLLAPSE'}</span>
+                      {isCollapsed ? (
+                        <ChevronDown className="w-4 h-4 text-[#D8B46A]" />
+                      ) : (
+                        <ChevronUp className="w-4 h-4 text-[#D8B46A]" />
+                      )}
+                    </button>
                   </div>
-                </motion.div>
+
+                  {/* ALL PHOTOGRAPHS DISPLAYED TOGETHER (MASONRY COLUMNS WITH PRESERVED NATURAL ASPECT RATIO) */}
+                  <AnimatePresence>
+                    {!isCollapsed && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.4, ease: 'easeOut' }}
+                      >
+                        <div className="columns-1 xs:columns-2 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4">
+                          {category.items.map((item, itemIdx) => {
+                            return (
+                              <div
+                                key={item.id + itemIdx}
+                                className="break-inside-avoid mb-4 group relative rounded-2xl overflow-hidden border border-[#7A1838]/40 hover:border-[#D8B46A] bg-[#120812] cursor-pointer shadow-md hover:shadow-[0_15px_35px_rgba(122,24,56,0.6),0_0_25px_rgba(216,180,106,0.35)] transition-all duration-400 hover:-translate-y-1.5"
+                                onClick={(e) => {
+                                  triggerRomanticHearts(e.clientX, e.clientY);
+                                  onSelectItem(item, category.items);
+                                }}
+                              >
+                                {/* Natural Image (Preserves Original Portrait/Landscape Aspect Ratio - No Forced Square Cropping!) */}
+                                {item.type === 'image' ? (
+                                  <img
+                                    src={item.url}
+                                    alt={item.title}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="w-full h-auto object-cover rounded-2xl transition-transform duration-700 ease-out group-hover:scale-104 block"
+                                  />
+                                ) : (
+                                  <div className="relative w-full rounded-2xl overflow-hidden bg-black/80">
+                                    {item.poster ? (
+                                      <img
+                                        src={item.poster}
+                                        alt={item.title}
+                                        loading="lazy"
+                                        className="w-full h-auto object-cover rounded-2xl group-hover:scale-104 transition-transform duration-700 block"
+                                      />
+                                    ) : (
+                                      <div className="w-full py-16 flex flex-col items-center justify-center bg-[#1a081c]">
+                                        <Film className="w-10 h-10 text-[#E89AAF] mb-2" />
+                                        <span className="text-[11px] font-cinzel text-[#D8B46A]">
+                                          VIDEO
+                                        </span>
+                                      </div>
+                                    )}
+                                    {/* Video Play Badge */}
+                                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-colors">
+                                      <div className="w-12 h-12 rounded-full bg-[#120514]/85 border border-[#D8B46A]/80 text-[#D8B46A] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                        <Play className="w-5 h-5 ml-0.5" />
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Hover Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0e040f]/95 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                                {/* Subtle Corner Rose Accent on Hover */}
+                                <RoseCornerAccent
+                                  position="top-right"
+                                  className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                                />
+
+                                {/* Bottom Info Overlay on Hover */}
+                                <div className="absolute bottom-0 left-0 right-0 p-3.5 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                                  <div className="text-xs font-cinzel font-bold text-[#FFF4F1] drop-shadow-md line-clamp-1">
+                                    {item.title}
+                                  </div>
+                                  {item.caption && (
+                                    <div className="text-[11px] font-cormorant italic text-[#E89AAF] line-clamp-1">
+                                      {item.caption.replace(/^“|”$/g, '')}
+                                    </div>
+                                  )}
+                                  <div className="mt-1 flex items-center gap-1 text-[10px] font-cinzel text-[#D8B46A] uppercase tracking-wider">
+                                    <Maximize2 className="w-3 h-3" />
+                                    <span>ENLARGE</span>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </section>
               );
             })}
           </div>
         ) : (
-          /* BEAUTIFUL EMPTY STATE */
+          /* EMPTY SEARCH STATE */
           <div className="text-center py-20 p-8 rounded-3xl bg-[#1e0a20]/60 border border-[#7A1838]/40 max-w-lg mx-auto shadow-2xl backdrop-blur-md">
             <div className="w-16 h-16 rounded-full bg-[#140616] border border-[#D8B46A]/50 flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(216,180,106,0.3)]">
               <span className="text-3xl select-none" role="img" aria-label="rose">
@@ -337,29 +425,29 @@ export const EditorialMemoryGallery: React.FC<EditorialMemoryGalleryProps> = ({ 
             </h3>
 
             <p className="font-cormorant italic text-base text-[#F7D7DF]/85 mb-6 max-w-sm mx-auto leading-relaxed">
-              No moments in our journal match “{searchQuery}” in the {activeFilter} collection.
+              No photographs or videos match “{searchQuery}”.
             </p>
 
             <button
               onClick={() => {
                 setSearchQuery('');
-                setActiveFilter('ALL');
+                setSelectedCategoryTab('ALL');
               }}
               className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#7A1838] to-[#5B1028] hover:from-[#921E44] hover:to-[#7A1838] border border-[#D8B46A]/60 text-xs font-cinzel font-bold text-[#FFF4F1] tracking-widest uppercase transition-all shadow-[0_0_15px_rgba(122,24,56,0.5)] cursor-pointer"
             >
-              SHOW ALL {MEMORIES.length} MEMORIES
+              SHOW ALL 191 MEMORIES
             </button>
           </div>
         )}
 
-        {/* BOTTOM ORNAMENT FOOTNOTE */}
-        <div className="mt-24 text-center max-w-xl mx-auto pt-10 border-t border-[#7A1838]/40">
+        {/* BOTTOM FOOTNOTE FLOURISH */}
+        <div className="mt-20 sm:mt-28 text-center max-w-xl mx-auto pt-10 border-t border-[#7A1838]/40">
           <RoseHeaderFlourish className="mb-3" />
           <p className="font-cormorant italic text-lg sm:text-xl text-[#F7D7DF]">
             “Every frame a breath. Every chapter an eternal promise.”
           </p>
           <div className="text-xs font-cinzel text-[#D8B46A] tracking-[0.25em] mt-2">
-            SEPTEMBER 2024 — SEPTEMBER 2026
+            SEPTEMBER 2024 — FOREVER IN OUR HEARTS
           </div>
         </div>
       </div>

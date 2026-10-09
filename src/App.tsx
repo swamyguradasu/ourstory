@@ -6,6 +6,8 @@ import { ProgressIndicator } from './components/ProgressIndicator';
 import { AmbientMusicPlayer } from './components/AmbientMusicPlayer';
 import { SecretDiscoveryToast } from './components/SecretDiscoveryToast';
 import { MemoryModal } from './components/MemoryModal';
+import { RomanticDateGate } from './components/RomanticDateGate';
+import { isGateUnlocked } from './utils/dateGateUtils';
 import { recordMemoryDiscovery } from './utils/journeyProgress';
 import { Home } from './pages/Home';
 import { MapPage } from './pages/Map';
@@ -19,6 +21,7 @@ import { Memory } from './data/memories';
 import confetti from 'canvas-confetti';
 
 export default function App() {
+  const [isUnlocked, setIsUnlocked] = useState<boolean>(() => isGateUnlocked());
   const [currentTab, setCurrentTab] = useState<'home' | 'map' | 'story' | 'memories' | 'vault'>('home');
   const [selectedMemory, setSelectedMemory] = useState<Memory | null>(null);
   const [likesCount, setLikesCount] = useState<number>(() => {
@@ -81,6 +84,11 @@ export default function App() {
         return 'bg-[#120812]';
     }
   };
+
+  // If gate is locked, render the romantic password entry screen
+  if (!isUnlocked) {
+    return <RomanticDateGate onUnlock={() => setIsUnlocked(true)} />;
+  }
 
   return (
     <SadModeProvider>
